@@ -1,0 +1,21 @@
+{
+  "name": "developersrede/erede",
+  "description": "e.Rede integration SDK",
+  "minimum-stability": "stable",
+  "license": "MIT",
+  "type": "library",
+  "require": {
+    "php": ">=5.4"
+  },
+  "autoload": {
+    "psr-4": {
+      "Rede\\": "src//Rede"
+    }
+  },
+  "authors": [
+    {
+      "name": "João Batista Neto",
+      "email": "neto.joaobatista@gmail.com"
+    }
+  ]
+}

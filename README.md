@@ -6,7 +6,7 @@ SDK de integração eRede
 
 ## Dependências
 
-* PHP >= 5.4
+* PHP >= 5.6
 
 ## Instalando o SDK
 
@@ -14,7 +14,7 @@ Se já possui um arquivo `composer.json`, basta adicionar a seguinte dependênci
 
 ```json
 "require": {
-    "developersrede/erede": "^1.0"
+    "developersrede/erede-php": "^2.0"
 }
 ```
 
@@ -27,7 +27,7 @@ composer install
 Alternativamente, você pode executar diretamente em seu terminal:
 
 ```
-composer require "developersrede/erede"
+composer require "developersrede/erede-php"
 ```
 
 # Utilizando

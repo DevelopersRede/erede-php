@@ -1,4 +1,6 @@
-<?php /** @noinspection MessDetectorValidationInspection */
+<?php /**
+ * @noinspection MessDetectorValidationInspection
+ */
 
 namespace Rede;
 
@@ -36,156 +38,187 @@ class Transaction implements RedeSerializable, RedeUnserializable
     private $authorization;
 
     /**
+     *
      * @var string
      */
     private $authorizationCode;
 
     /**
+     *
      * @var string
      */
     private $cancelId;
 
     /**
+     *
      * @var bool|Capture
      */
     private $capture;
 
     /**
+     *
      * @var string
      */
     private $cardBin;
 
     /**
+     *
      * @var string
      */
     private $cardHolderName;
 
     /**
+     *
      * @var string
      */
     private $cardNumber;
 
     /**
+     *
      * @var Cart
      */
     private $cart;
 
     /**
+     *
      * @var \DateTime
      */
     private $dateTime;
 
     /**
+     *
      * @var int
      */
     private $distributorAffiliation;
 
     /**
+     *
      * @var int
      */
     private $expirationMonth;
 
     /**
+     *
      * @var int
      */
     private $expirationYear;
 
     /**
+     *
      * @var Iata
      */
     private $iata;
 
     /**
+     *
      * @var int
      */
     private $installments;
 
     /**
+     *
      * @var string
      */
     private $kind;
 
     /**
+     *
      * @var string
      */
     private $last4;
 
     /**
+     *
      * @var string
      */
     private $nsu;
 
     /**
+     *
      * @var int
      */
     private $origin;
 
     /**
+     *
      * @var string
      */
     private $reference;
 
     /**
+     *
      * @var string
      */
     private $refundDateTime;
 
     /**
+     *
      * @var string
      */
     private $refundId;
 
     /**
+     *
      * @var array[Refund]
      */
     private $refunds;
 
     /**
+     *
      * @var DateTime
      */
     private $requestDateTime;
 
     /**
+     *
      * @var string
      */
     private $returnCode;
 
     /**
+     *
      * @var string
      */
     private $returnMessage;
 
     /**
+     *
      * @var string
      */
     private $securityCode;
 
     /**
+     *
      * @var string
      */
     private $softDescriptor;
 
     /**
+     *
      * @var int
      */
     private $storageCard;
 
     /**
+     *
      * @var bool
      */
     private $subscription;
 
     /**
+     *
      * @var ThreeDSecure
      */
     private $threeDSecure;
 
     /**
+     *
      * @var string
      */
     private $tid;
 
     /**
+     *
      * @var array
      */
     private $urls;
@@ -193,7 +226,7 @@ class Transaction implements RedeSerializable, RedeUnserializable
     /**
      * Transaction constructor.
      *
-     * @param int $amount
+     * @param int    $amount
      * @param string $reference
      */
     public function __construct($amount = null, $reference = null)
@@ -296,7 +329,7 @@ class Transaction implements RedeSerializable, RedeUnserializable
 
     /**
      * @return array
-     * @see \JsonSerializable::jsonSerialize()
+     * @see    \JsonSerializable::jsonSerialize()
      */
     public function jsonSerialize()
     {
@@ -306,9 +339,10 @@ class Transaction implements RedeSerializable, RedeUnserializable
             $capture = $this->capture ? 'true' : 'false';
         }
 
-        return array_filter([
+        return array_filter(
+            [
             'capture' => $capture,
-            'antifraudRequired' => $this->antifraudRequired,
+                'antifraudRequired' => $this->antifraudRequired,
             'cart' => $this->cart,
             'kind' => $this->kind,
             'threeDSecure' => $this->threeDSecure,
@@ -327,12 +361,14 @@ class Transaction implements RedeSerializable, RedeUnserializable
             'storageCard' => $this->storageCard,
             'urls' => $this->urls,
             'iata' => $this->iata
-        ], function ($value) {
-            return !is_null($value);
-        });
+            ], function ($value) {
+                return !is_null($value);
+        }
+        );
     }
 
     /**
+     *
      * @param string $serialized
      *
      * @return Transaction
@@ -405,6 +441,7 @@ class Transaction implements RedeSerializable, RedeUnserializable
     }
 
     /**
+     *
      * @return int
      */
     public function getAmount()
@@ -413,6 +450,7 @@ class Transaction implements RedeSerializable, RedeUnserializable
     }
 
     /**
+     *
      * @return Antifraud
      */
     public function getAntifraud()
@@ -427,6 +465,7 @@ class Transaction implements RedeSerializable, RedeUnserializable
     }
 
     /**
+     *
      * @return Authorization
      */
     public function getAuthorization()
@@ -435,6 +474,7 @@ class Transaction implements RedeSerializable, RedeUnserializable
     }
 
     /**
+     *
      * @return string
      */
     public function getAuthorizationCode()
@@ -443,6 +483,7 @@ class Transaction implements RedeSerializable, RedeUnserializable
     }
 
     /**
+     *
      * @return string
      */
     public function getCancelId()
@@ -451,6 +492,7 @@ class Transaction implements RedeSerializable, RedeUnserializable
     }
 
     /**
+     *
      * @return bool|Capture
      */
     public function getCapture()
@@ -459,6 +501,7 @@ class Transaction implements RedeSerializable, RedeUnserializable
     }
 
     /**
+     *
      * @return string
      */
     public function getCardBin()
@@ -467,6 +510,7 @@ class Transaction implements RedeSerializable, RedeUnserializable
     }
 
     /**
+     *
      * @return string
      */
     public function getCardHolderName()
@@ -475,6 +519,7 @@ class Transaction implements RedeSerializable, RedeUnserializable
     }
 
     /**
+     *
      * @return string
      */
     public function getCardNumber()
@@ -483,6 +528,7 @@ class Transaction implements RedeSerializable, RedeUnserializable
     }
 
     /**
+     *
      * @return Cart
      */
     public function getCart()
@@ -491,6 +537,7 @@ class Transaction implements RedeSerializable, RedeUnserializable
     }
 
     /**
+     *
      * @return DateTime
      */
     public function getDateTime()
@@ -499,6 +546,7 @@ class Transaction implements RedeSerializable, RedeUnserializable
     }
 
     /**
+     *
      * @return int
      */
     public function getDistributorAffiliation()
@@ -507,6 +555,7 @@ class Transaction implements RedeSerializable, RedeUnserializable
     }
 
     /**
+     *
      * @return int
      */
     public function getExpirationMonth()
@@ -515,6 +564,7 @@ class Transaction implements RedeSerializable, RedeUnserializable
     }
 
     /**
+     *
      * @return int
      */
     public function getExpirationYear()
@@ -523,6 +573,7 @@ class Transaction implements RedeSerializable, RedeUnserializable
     }
 
     /**
+     *
      * @return Iata
      */
     public function getIata()
@@ -531,6 +582,7 @@ class Transaction implements RedeSerializable, RedeUnserializable
     }
 
     /**
+     *
      * @return int
      */
     public function getInstallments()
@@ -539,6 +591,7 @@ class Transaction implements RedeSerializable, RedeUnserializable
     }
 
     /**
+     *
      * @return string
      */
     public function getKind()
@@ -547,6 +600,7 @@ class Transaction implements RedeSerializable, RedeUnserializable
     }
 
     /**
+     *
      * @return string
      */
     public function getLast4()
@@ -555,6 +609,7 @@ class Transaction implements RedeSerializable, RedeUnserializable
     }
 
     /**
+     *
      * @return string
      */
     public function getNsu()
@@ -563,6 +618,7 @@ class Transaction implements RedeSerializable, RedeUnserializable
     }
 
     /**
+     *
      * @return int
      */
     public function getOrigin()
@@ -571,6 +627,7 @@ class Transaction implements RedeSerializable, RedeUnserializable
     }
 
     /**
+     *
      * @return string
      */
     public function getReference()
@@ -579,6 +636,7 @@ class Transaction implements RedeSerializable, RedeUnserializable
     }
 
     /**
+     *
      * @return string
      */
     public function getRefundDateTime()
@@ -587,6 +645,7 @@ class Transaction implements RedeSerializable, RedeUnserializable
     }
 
     /**
+     *
      * @return string
      */
     public function getRefundId()
@@ -595,6 +654,7 @@ class Transaction implements RedeSerializable, RedeUnserializable
     }
 
     /**
+     *
      * @return array
      */
     public function getRefunds()
@@ -603,6 +663,7 @@ class Transaction implements RedeSerializable, RedeUnserializable
     }
 
     /**
+     *
      * @return DateTime
      */
     public function getRequestDateTime()
@@ -611,6 +672,7 @@ class Transaction implements RedeSerializable, RedeUnserializable
     }
 
     /**
+     *
      * @return string
      */
     public function getReturnCode()
@@ -619,6 +681,7 @@ class Transaction implements RedeSerializable, RedeUnserializable
     }
 
     /**
+     *
      * @return string
      */
     public function getReturnMessage()
@@ -627,6 +690,7 @@ class Transaction implements RedeSerializable, RedeUnserializable
     }
 
     /**
+     *
      * @return string
      */
     public function getSecurityCode()
@@ -635,6 +699,7 @@ class Transaction implements RedeSerializable, RedeUnserializable
     }
 
     /**
+     *
      * @return string
      */
     public function getSoftDescriptor()
@@ -643,6 +708,7 @@ class Transaction implements RedeSerializable, RedeUnserializable
     }
 
     /**
+     *
      * @return int
      */
     public function getStorageCard()
@@ -651,6 +717,7 @@ class Transaction implements RedeSerializable, RedeUnserializable
     }
 
     /**
+     *
      * @return bool
      */
     public function isAntifraudRequired()
@@ -670,6 +737,7 @@ class Transaction implements RedeSerializable, RedeUnserializable
     }
 
     /**
+     *
      * @return bool
      */
     public function isSubscription()
@@ -678,6 +746,7 @@ class Transaction implements RedeSerializable, RedeUnserializable
     }
 
     /**
+     *
      * @return ThreeDSecure
      */
     public function getThreeDSecure()
@@ -692,6 +761,7 @@ class Transaction implements RedeSerializable, RedeUnserializable
     }
 
     /**
+     *
      * @return string
      */
     public function getTid()
@@ -700,6 +770,7 @@ class Transaction implements RedeSerializable, RedeUnserializable
     }
 
     /**
+     *
      * @return \ArrayIterator
      */
     public function getUrlsIterator()
@@ -723,6 +794,7 @@ class Transaction implements RedeSerializable, RedeUnserializable
     }
 
     /**
+     *
      * @param int $amount
      *
      * @return Transaction
@@ -734,6 +806,7 @@ class Transaction implements RedeSerializable, RedeUnserializable
     }
 
     /**
+     *
      * @param bool $antifraudRequired
      *
      * @return Transaction
@@ -767,6 +840,7 @@ class Transaction implements RedeSerializable, RedeUnserializable
     }
 
     /**
+     *
      * @param string $cardHolderName
      *
      * @return Transaction
@@ -778,6 +852,7 @@ class Transaction implements RedeSerializable, RedeUnserializable
     }
 
     /**
+     *
      * @param string $cardNumber
      *
      * @return Transaction
@@ -789,6 +864,7 @@ class Transaction implements RedeSerializable, RedeUnserializable
     }
 
     /**
+     *
      * @param Cart $cart
      *
      * @return Transaction
@@ -800,6 +876,7 @@ class Transaction implements RedeSerializable, RedeUnserializable
     }
 
     /**
+     *
      * @param int $distributorAffiliation
      *
      * @return Transaction
@@ -811,6 +888,7 @@ class Transaction implements RedeSerializable, RedeUnserializable
     }
 
     /**
+     *
      * @param int $expirationMonth
      *
      * @return Transaction
@@ -822,6 +900,7 @@ class Transaction implements RedeSerializable, RedeUnserializable
     }
 
     /**
+     *
      * @param int $expirationYear
      *
      * @return Transaction
@@ -833,6 +912,7 @@ class Transaction implements RedeSerializable, RedeUnserializable
     }
 
     /**
+     *
      * @param int $installments
      *
      * @return Transaction
@@ -844,6 +924,7 @@ class Transaction implements RedeSerializable, RedeUnserializable
     }
 
     /**
+     *
      * @param string $kind
      *
      * @return Transaction
@@ -855,6 +936,7 @@ class Transaction implements RedeSerializable, RedeUnserializable
     }
 
     /**
+     *
      * @param int $origin
      *
      * @return Transaction
@@ -866,6 +948,7 @@ class Transaction implements RedeSerializable, RedeUnserializable
     }
 
     /**
+     *
      * @param string $reference
      *
      * @return Transaction
@@ -877,6 +960,7 @@ class Transaction implements RedeSerializable, RedeUnserializable
     }
 
     /**
+     *
      * @param string $securityCode
      *
      * @return Transaction
@@ -888,6 +972,7 @@ class Transaction implements RedeSerializable, RedeUnserializable
     }
 
     /**
+     *
      * @param string $softDescriptor
      *
      * @return Transaction
@@ -899,6 +984,7 @@ class Transaction implements RedeSerializable, RedeUnserializable
     }
 
     /**
+     *
      * @param int $storageCard
      *
      * @return Transaction
@@ -910,6 +996,7 @@ class Transaction implements RedeSerializable, RedeUnserializable
     }
 
     /**
+     *
      * @param bool $subscription
      *
      * @return Transaction
@@ -921,6 +1008,7 @@ class Transaction implements RedeSerializable, RedeUnserializable
     }
 
     /**
+     *
      * @param string $tid
      *
      * @return Transaction
@@ -933,7 +1021,7 @@ class Transaction implements RedeSerializable, RedeUnserializable
 
     /**
      * @param string $onFailure
-     * @param bool $embed
+     * @param bool   $embed
      *
      * @return Transaction
      */

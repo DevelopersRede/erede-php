@@ -81,8 +81,8 @@ abstract class AbstractService
         curl_setopt($this->curl, CURLOPT_SSL_VERIFYPEER, true);
 
         switch ($method) {
-            case 'GET':
-                break;
+        case 'GET':
+            break;
             case 'POST':
                 curl_setopt($this->curl, CURLOPT_POST, true);
                 break;

@@ -42,7 +42,7 @@ abstract class AbstractTransactionsService extends AbstractService
     }
 
     /**
-     * @see AbstractService::getService()
+     * @see    AbstractService::getService()
      * @return string
      */
     protected function getService()
@@ -63,7 +63,7 @@ abstract class AbstractTransactionsService extends AbstractService
      * @param string $statusCode
      *
      * @return Transaction
-     * @see AbstractService::parseResponse()
+     * @see    AbstractService::parseResponse()
      * @throws RedeException, \InvalidArgumentException
      */
     protected function parseResponse($response, $statusCode)
@@ -92,6 +92,7 @@ abstract class AbstractTransactionsService extends AbstractService
     }
 
     /**
+     *
      * @param string $tid
      */
     public function setTid($tid)

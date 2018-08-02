@@ -31,16 +31,19 @@ class ThreeDSecure implements RedeSerializable
     private $onFailure;
 
     /**
+     *
      * @var string
      */
     private $url;
 
     /**
+     *
      * @var string
      */
     private $userAgent;
 
     /**
+     *
      * @var string
      */
     private $xid;
@@ -79,6 +82,7 @@ class ThreeDSecure implements RedeSerializable
     }
 
     /**
+     *
      * @return string
      */
     public function getEci()
@@ -98,6 +102,7 @@ class ThreeDSecure implements RedeSerializable
     }
 
     /**
+     *
      * @return string
      */
     public function getOnFailure()
@@ -117,6 +122,7 @@ class ThreeDSecure implements RedeSerializable
     }
 
     /**
+     *
      * @return string
      */
     public function getUrl()
@@ -136,6 +142,7 @@ class ThreeDSecure implements RedeSerializable
     }
 
     /**
+     *
      * @return string
      */
     public function getUserAgent()
@@ -155,6 +162,7 @@ class ThreeDSecure implements RedeSerializable
     }
 
     /**
+     *
      * @return string
      */
     public function getXid()
@@ -163,6 +171,7 @@ class ThreeDSecure implements RedeSerializable
     }
 
     /**
+     *
      * @param string $xid
      *
      * @return ThreeDSecure
@@ -174,6 +183,7 @@ class ThreeDSecure implements RedeSerializable
     }
 
     /**
+     *
      * @return bool
      */
     public function isEmbedded()

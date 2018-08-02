@@ -29,7 +29,7 @@ class eRede
      * @param Transaction $transaction
      *
      * @return Transaction
-     * @see eRede::create()
+     * @see    eRede::create()
      */
     public function authorize(Transaction $transaction)
     {
@@ -89,7 +89,7 @@ class eRede
      * @param $tid
      *
      * @return Transaction
-     * @see eRede::get()
+     * @see    eRede::get()
      */
     public function getById($tid)
     {

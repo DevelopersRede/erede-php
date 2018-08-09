@@ -20,7 +20,7 @@ class Consumer implements RedeSerializable
     /**
      * @var array
      */
-    private $documents = [];
+    private $documents;
 
     /**
      * @var string
@@ -66,6 +66,10 @@ class Consumer implements RedeSerializable
      */
     public function addDocument($type, $number)
     {
+        if ($this->documents === null) {
+            $this->documents = [];
+        }
+
         $document = new stdClass();
         $document->type = $type;
         $document->number = $number;
@@ -89,6 +93,10 @@ class Consumer implements RedeSerializable
      */
     public function getDocumentsIterator()
     {
+        if ($this->documents === null) {
+            $this->documents = [];
+        }
+
         return new ArrayIterator($this->documents);
     }
 

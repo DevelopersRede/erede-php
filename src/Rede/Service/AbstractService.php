@@ -77,6 +77,13 @@ abstract class AbstractService
             CURLOPT_USERPWD,
             sprintf('%s:%s', $this->store->getFiliation(), $this->store->getToken())
         );
+
+        if (!defined('CURL_SSLVERSION_TLSv1_2')) {
+            define('CURL_SSLVERSION_TLSv1_2', 6);
+
+            error_log('Rede: Atenção, por motivos de segurança, recomendamos fortemente que você atualize a versão do seu PHP.');
+        }
+
         curl_setopt($this->curl, CURLOPT_SSLVERSION, CURL_SSLVERSION_TLSv1_2);
         curl_setopt($this->curl, CURLOPT_SSL_VERIFYPEER, true);
 

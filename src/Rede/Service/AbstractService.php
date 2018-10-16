@@ -111,23 +111,27 @@ abstract class AbstractService
         $response = curl_exec($this->curl);
         $statusCode = curl_getinfo($this->curl, CURLINFO_HTTP_CODE);
 
-        \Mage::log(
-            trim(
-                sprintf("Request Rede\n%s %s\n%s\n\n%s",
-                    $method,
-                    $this->store->getEnvironment()->getEndpoint($this->getService()),
-                    implode("\n", $headers),
-                    preg_replace('/"(cardnumber|securitycode)":"[^"]+"/i', '"\1":"***"', $body)
-                )
-            )
-        );
+        if(class_exists('\Mage', false)) {
 
-        \Mage::log(
-            sprintf("Response Rede\nStatus Code: %s\n\n%s",
-                $statusCode,
-                $response
-            )
-        );
+            \Mage::log(
+                trim(
+                    sprintf("Request Rede\n%s %s\n%s\n\n%s",
+                        $method,
+                        $this->store->getEnvironment()->getEndpoint($this->getService()),
+                        implode("\n", $headers),
+                        preg_replace('/"(cardnumber|securitycode)":"[^"]+"/i', '"\1":"***"', $body)
+                    )
+                )
+            );
+
+            \Mage::log(
+                sprintf("Response Rede\nStatus Code: %s\n\n%s",
+                    $statusCode,
+                    $response
+                )
+            );
+
+        }
 
         if (curl_errno($this->curl)) {
             throw new RuntimeException('Curl error: ' . curl_error($this->curl));

@@ -3,6 +3,7 @@
 namespace Rede\Service;
 
 use InvalidArgumentException;
+use Psr\Log\LoggerInterface;
 use Rede\Exception\RedeException;
 use Rede\Store;
 use Rede\Transaction;
@@ -24,10 +25,11 @@ abstract class AbstractTransactionsService extends AbstractService
      *
      * @param Store $store
      * @param Transaction $transaction
+     * @param LoggerInterface $logger
      */
-    public function __construct(Store $store, Transaction $transaction = null)
+    public function __construct(Store $store, Transaction $transaction = null, LoggerInterface $logger)
     {
-        parent::__construct($store);
+        parent::__construct($store, $logger);
 
         $this->transaction = $transaction;
     }

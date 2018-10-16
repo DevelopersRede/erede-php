@@ -2,6 +2,7 @@
 
 namespace Rede\Service;
 
+use Psr\Log\LoggerInterface;
 use Rede\eRede;
 use Rede\Store;
 use Rede\Transaction;
@@ -24,13 +25,20 @@ abstract class AbstractService
     protected $store;
 
     /**
+     * @var LoggerInterface
+     */
+    private $logger;
+
+    /**
      * AbstractService constructor.
      *
      * @param Store $store
+     * @param LoggerInterface $logger
      */
-    public function __construct(Store $store)
+    public function __construct(Store $store, LoggerInterface $logger)
     {
         $this->store = $store;
+        $this->logger = $logger;
     }
 
     /**
@@ -38,19 +46,6 @@ abstract class AbstractService
      * @throws \InvalidArgumentException, \RuntimeException, RedeException
      */
     abstract public function execute();
-
-    /**
-     * @return string Gets the service that will be used on the request
-     */
-    abstract protected function getService();
-
-    /**
-     * @param string $response Parses the HTTP response from Rede
-     * @param string $statusCode The HTTP status code
-     *
-     * @return mixed
-     */
-    abstract protected function parseResponse($response, $statusCode);
 
     /**
      * @param string $body
@@ -81,15 +76,15 @@ abstract class AbstractService
         if (!defined('CURL_SSLVERSION_TLSv1_2')) {
             define('CURL_SSLVERSION_TLSv1_2', 6);
 
-            error_log('Rede: Atenção, por motivos de segurança, recomendamos fortemente que você atualize a versão do seu PHP.');
+            $this->logger->alert('Atenção, por motivos de segurança, recomendamos fortemente que você atualize a versão do seu PHP.');
         }
 
         curl_setopt($this->curl, CURLOPT_SSLVERSION, CURL_SSLVERSION_TLSv1_2);
         curl_setopt($this->curl, CURLOPT_SSL_VERIFYPEER, true);
 
         switch ($method) {
-        case 'GET':
-            break;
+            case 'GET':
+                break;
             case 'POST':
                 curl_setopt($this->curl, CURLOPT_POST, true);
                 break;
@@ -111,6 +106,24 @@ abstract class AbstractService
         $response = curl_exec($this->curl);
         $statusCode = curl_getinfo($this->curl, CURLINFO_HTTP_CODE);
 
+        $this->logger->debug(
+            trim(
+                sprintf("Request Rede\n%s %s\n%s\n\n%s",
+                    $method,
+                    $this->store->getEnvironment()->getEndpoint($this->getService()),
+                    implode("\n", $headers),
+                    preg_replace('/"(cardnumber|securitycode)":"[^"]+"/i', '"\1":"***"', $body)
+                )
+            )
+        );
+
+        $this->logger->debug(
+            sprintf("Response Rede\nStatus Code: %s\n\n%s",
+                $statusCode,
+                $response
+            )
+        );
+
         if (curl_errno($this->curl)) {
             throw new RuntimeException('Curl error: ' . curl_error($this->curl));
         }
@@ -121,4 +134,17 @@ abstract class AbstractService
 
         return $this->parseResponse($response, $statusCode);
     }
+
+    /**
+     * @return string Gets the service that will be used on the request
+     */
+    abstract protected function getService();
+
+    /**
+     * @param string $response Parses the HTTP response from Rede
+     * @param string $statusCode The HTTP status code
+     *
+     * @return mixed
+     */
+    abstract protected function parseResponse($response, $statusCode);
 }

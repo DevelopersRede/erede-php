@@ -1,6 +1,10 @@
 <?php
+
 namespace Rede;
 
+use Monolog\Handler\ErrorLogHandler;
+use Monolog\Logger;
+use Psr\Log\LoggerInterface;
 use Rede\Service\CancelTransactionService;
 use Rede\Service\CaptureTransactionService;
 use Rede\Service\CreateTransactionService;
@@ -16,13 +20,25 @@ class eRede
     private $store;
 
     /**
+     * @var LoggerInterface
+     */
+    private $logger;
+
+    /**
      * eRede constructor.
      *
      * @param Store $store
+     * @param LoggerInterface $logger
      */
-    public function __construct(Store $store)
+    public function __construct(Store $store, LoggerInterface $logger = null)
     {
+        if ($logger === null) {
+            $logger = new Logger('eRede');
+            $logger->pushHandler(new ErrorLogHandler());
+        }
+
         $this->store = $store;
+        $this->logger = $logger;
     }
 
     /**
@@ -41,9 +57,21 @@ class eRede
      *
      * @return Transaction
      */
+    public function create(Transaction $transaction)
+    {
+        $createTransactionService = new CreateTransactionService($this->store, $transaction, $this->logger);
+
+        return $createTransactionService->execute();
+    }
+
+    /**
+     * @param Transaction $transaction
+     *
+     * @return Transaction
+     */
     public function cancel(Transaction $transaction)
     {
-        $cancelTransactionService = new CancelTransactionService($this->store, $transaction);
+        $cancelTransactionService = new CancelTransactionService($this->store, $transaction, $this->logger);
 
         return $cancelTransactionService->execute();
     }
@@ -55,34 +83,9 @@ class eRede
      */
     public function capture(Transaction $transaction)
     {
-        $captureTransactionService = new CaptureTransactionService($this->store, $transaction);
+        $captureTransactionService = new CaptureTransactionService($this->store, $transaction, $this->logger);
 
         return $captureTransactionService->execute();
-    }
-
-    /**
-     * @param Transaction $transaction
-     *
-     * @return Transaction
-     */
-    public function create(Transaction $transaction)
-    {
-        $createTransactionService = new CreateTransactionService($this->store, $transaction);
-
-        return $createTransactionService->execute();
-    }
-
-    /**
-     * @param string $tid
-     *
-     * @return Transaction
-     */
-    public function get($tid)
-    {
-        $getTransactionService = new GetTransactionService($this->store);
-        $getTransactionService->setTid($tid);
-
-        return $getTransactionService->execute();
     }
 
     /**
@@ -97,13 +100,26 @@ class eRede
     }
 
     /**
+     * @param string $tid
+     *
+     * @return Transaction
+     */
+    public function get($tid)
+    {
+        $getTransactionService = new GetTransactionService($this->store, null, $this->logger);
+        $getTransactionService->setTid($tid);
+
+        return $getTransactionService->execute();
+    }
+
+    /**
      * @param $reference
      *
      * @return Transaction
      */
     public function getByReference($reference)
     {
-        $getTransactionService = new GetTransactionService($this->store);
+        $getTransactionService = new GetTransactionService($this->store, null, $this->logger);
         $getTransactionService->setReference($reference);
 
         return $getTransactionService->execute();
@@ -116,7 +132,7 @@ class eRede
      */
     public function getRefunds($tid)
     {
-        $getTransactionService = new GetTransactionService($this->store);
+        $getTransactionService = new GetTransactionService($this->store, null, $this->logger);
         $getTransactionService->setTid($tid);
         $getTransactionService->setRefund(true);
 

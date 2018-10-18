@@ -14,7 +14,7 @@ Se já possui um arquivo `composer.json`, basta adicionar a seguinte dependênci
 
 ```json
 "require": {
-    "developersrede/erede-php": "^2.0"
+    "developersrede/erede-php": "*"
 }
 ```
 

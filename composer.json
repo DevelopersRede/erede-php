@@ -7,8 +7,10 @@
   "require": {
     "php": ">=5.6",
     "ext-curl": "*",
-    "psr/log":">=1.0",
-    "monolog/monolog": ">=1.2"
+    "psr/log":">=1.0"
+  },
+  "suggest": {
+    "monolog/monolog": "Allows more advanced logging of the application flow"
   },
   "autoload": {
     "psr-4": {

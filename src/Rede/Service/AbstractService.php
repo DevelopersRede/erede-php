@@ -35,7 +35,7 @@ abstract class AbstractService
      * @param Store $store
      * @param LoggerInterface $logger
      */
-    public function __construct(Store $store, LoggerInterface $logger)
+    public function __construct(Store $store, LoggerInterface $logger = null)
     {
         $this->store = $store;
         $this->logger = $logger;
@@ -76,7 +76,9 @@ abstract class AbstractService
         if (!defined('CURL_SSLVERSION_TLSv1_2')) {
             define('CURL_SSLVERSION_TLSv1_2', 6);
 
-            $this->logger->alert('Atenção, por motivos de segurança, recomendamos fortemente que você atualize a versão do seu PHP.');
+            if ($this->logger !== null) {
+                $this->logger->alert('Atenção, por motivos de segurança, recomendamos fortemente que você atualize a versão do seu PHP.');
+            }
         }
 
         curl_setopt($this->curl, CURLOPT_SSLVERSION, CURL_SSLVERSION_TLSv1_2);
@@ -103,26 +105,30 @@ abstract class AbstractService
         curl_setopt($this->curl, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($this->curl, CURLOPT_HTTPHEADER, $headers);
 
+        if ($this->logger !== null) {
+            $this->logger->debug(
+                trim(
+                    sprintf("Request Rede\n%s %s\n%s\n\n%s",
+                        $method,
+                        $this->store->getEnvironment()->getEndpoint($this->getService()),
+                        implode("\n", $headers),
+                        preg_replace('/"(cardnumber|securitycode)":"[^"]+"/i', '"\1":"***"', $body)
+                    )
+                )
+            );
+        }
+
         $response = curl_exec($this->curl);
         $statusCode = curl_getinfo($this->curl, CURLINFO_HTTP_CODE);
 
-        $this->logger->debug(
-            trim(
-                sprintf("Request Rede\n%s %s\n%s\n\n%s",
-                    $method,
-                    $this->store->getEnvironment()->getEndpoint($this->getService()),
-                    implode("\n", $headers),
-                    preg_replace('/"(cardnumber|securitycode)":"[^"]+"/i', '"\1":"***"', $body)
+        if ($this->logger !== null) {
+            $this->logger->debug(
+                sprintf("Response Rede\nStatus Code: %s\n\n%s",
+                    $statusCode,
+                    $response
                 )
-            )
-        );
-
-        $this->logger->debug(
-            sprintf("Response Rede\nStatus Code: %s\n\n%s",
-                $statusCode,
-                $response
-            )
-        );
+            );
+        }
 
         if (curl_errno($this->curl)) {
             throw new RuntimeException('Curl error: ' . curl_error($this->curl));

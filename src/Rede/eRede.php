@@ -2,8 +2,6 @@
 
 namespace Rede;
 
-use Monolog\Handler\ErrorLogHandler;
-use Monolog\Logger;
 use Psr\Log\LoggerInterface;
 use Rede\Service\CancelTransactionService;
 use Rede\Service\CaptureTransactionService;
@@ -32,11 +30,6 @@ class eRede
      */
     public function __construct(Store $store, LoggerInterface $logger = null)
     {
-        if ($logger === null) {
-            $logger = new Logger('eRede');
-            $logger->pushHandler(new ErrorLogHandler());
-        }
-
         $this->store = $store;
         $this->logger = $logger;
     }

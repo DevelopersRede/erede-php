@@ -377,8 +377,8 @@ class Transaction implements RedeSerializable, RedeUnserializable
     {
         $properties = json_decode($serialized);
 
-        if ($properties === false) {
-            throw new InvalidArgumentException('Invalid json');
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            throw new InvalidArgumentException(sprintf('JSON: %s', json_last_error_msg()));
         }
 
         foreach (get_object_vars($properties) as $property => $value) {

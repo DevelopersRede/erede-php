@@ -1,4 +1,5 @@
 <?php
+
 namespace Rede;
 
 class Item implements RedeSerializable
@@ -59,7 +60,7 @@ class Item implements RedeSerializable
      *
      * @param $id
      * @param $quantity
-     * @param int      $type
+     * @param int $type
      */
     public function __construct($id, $quantity, $type = Item::PHYSICAL)
     {
@@ -78,68 +79,6 @@ class Item implements RedeSerializable
     }
 
     /**
-     * @return string
-     */
-    public function getDescription()
-    {
-        return $this->description;
-    }
-
-    /**
-     *
-     * @return int
-     */
-    public function getDiscount()
-    {
-        return $this->discount;
-    }
-
-    /**
-     *
-     * @return int
-     */
-    public function getFreight()
-    {
-        return $this->freight;
-    }
-
-    /**
-     *
-     * @return string
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     *
-     * @return int
-     */
-    public function getQuantity()
-    {
-        return $this->quantity;
-    }
-
-    /**
-     *
-     * @return string
-     */
-    public function getShippingType()
-    {
-        return $this->shippingType;
-    }
-
-    /**
-     *
-     * @return int
-     */
-    public function getType()
-    {
-        return $this->type;
-    }
-
-    /**
      * @param int $amount
      *
      * @return Item
@@ -148,6 +87,14 @@ class Item implements RedeSerializable
     {
         $this->amount = $amount;
         return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
     }
 
     /**
@@ -162,6 +109,15 @@ class Item implements RedeSerializable
     }
 
     /**
+     *
+     * @return int
+     */
+    public function getDiscount()
+    {
+        return $this->discount;
+    }
+
+    /**
      * @param int $discount
      *
      * @return Item
@@ -170,6 +126,15 @@ class Item implements RedeSerializable
     {
         $this->discount = $discount;
         return $this;
+    }
+
+    /**
+     *
+     * @return int
+     */
+    public function getFreight()
+    {
+        return $this->freight;
     }
 
     /**
@@ -185,6 +150,15 @@ class Item implements RedeSerializable
 
     /**
      *
+     * @return string
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     *
      * @param string $id
      *
      * @return Item
@@ -193,6 +167,15 @@ class Item implements RedeSerializable
     {
         $this->id = $id;
         return $this;
+    }
+
+    /**
+     *
+     * @return int
+     */
+    public function getQuantity()
+    {
+        return $this->quantity;
     }
 
     /**
@@ -207,6 +190,15 @@ class Item implements RedeSerializable
     }
 
     /**
+     *
+     * @return string
+     */
+    public function getShippingType()
+    {
+        return $this->shippingType;
+    }
+
+    /**
      * @param string $shippingType
      *
      * @return Item
@@ -215,6 +207,15 @@ class Item implements RedeSerializable
     {
         $this->shippingType = $shippingType;
         return $this;
+    }
+
+    /**
+     *
+     * @return int
+     */
+    public function getType()
+    {
+        return $this->type;
     }
 
     /**

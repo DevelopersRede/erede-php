@@ -58,8 +58,31 @@ class Cart implements RedeSerializable
     }
 
     /**
+     * @param Address $address
+     *
+     * @return Cart
+     */
+    public function setBillingAddress(Address $address)
+    {
+        $this->billing = $address;
+        return $this;
+    }
+
+    /**
+     *
+     * @param Address $address
+     *
+     * @return Cart
+     */
+    public function setShippingAddress(Address $address)
+    {
+        $this->shipping = [$address];
+        return $this;
+    }
+
+    /**
      * @param Item $item
-     *  
+     *
      * @return Cart
      */
     public function addItem(Item $item)
@@ -125,35 +148,6 @@ class Cart implements RedeSerializable
 
     /**
      *
-     * @return Iata
-     */
-    public function getIata()
-    {
-        return $this->iata;
-    }
-
-    /**
-     *
-     * @return Address
-     */
-    public function getShippingAddress()
-    {
-        return $this->shipping;
-    }
-
-    /**
-     * @param Address $address
-     *
-     * @return Cart
-     */
-    public function setBillingAddress(Address $address)
-    {
-        $this->billing = $address;
-        return $this;
-    }
-
-    /**
-     *
      * @param Consumer $consumer
      *
      * @return Cart
@@ -162,6 +156,15 @@ class Cart implements RedeSerializable
     {
         $this->consumer = $consumer;
         return $this;
+    }
+
+    /**
+     *
+     * @return Iata
+     */
+    public function getIata()
+    {
+        return $this->iata;
     }
 
     /**
@@ -178,6 +181,15 @@ class Cart implements RedeSerializable
     }
 
     /**
+     *
+     * @return Address
+     */
+    public function getShippingAddress()
+    {
+        return $this->shipping;
+    }
+
+    /**
      * @param Environment $environment
      *
      * @return Cart
@@ -185,18 +197,6 @@ class Cart implements RedeSerializable
     public function setEnvironment(Environment $environment)
     {
         $this->environment = $environment;
-        return $this;
-    }
-
-    /**
-     *
-     * @param Address $address
-     *
-     * @return Cart
-     */
-    public function setShippingAddress(Address $address)
-    {
-        $this->shipping = [$address];
         return $this;
     }
 

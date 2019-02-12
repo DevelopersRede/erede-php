@@ -18,27 +18,13 @@ class GetTransactionService extends AbstractTransactionsService
 
     /**
      * @return Transaction
-     * @throws \InvalidArgumentException, \RuntimeException, RedeException
+     * @throws \InvalidArgumentException
+     * @throws \RuntimeException
+     * @throws \Rede\Exception\RedeException
      */
     public function execute()
     {
         return $this->sendRequest(null, AbstractService::GET);
-    }
-
-    /**
-     * @return string
-     */
-    protected function getService()
-    {
-        if ($this->reference !== null) {
-            return sprintf('%s?reference=%s', parent::getService(), $this->reference);
-        }
-
-        if ($this->refund) {
-            return sprintf('%s/%s/refunds', parent::getService(), $this->getTid());
-        }
-
-        return sprintf('%s/%s', parent::getService(), $this->getTid());
     }
 
     /**
@@ -62,5 +48,21 @@ class GetTransactionService extends AbstractTransactionsService
         $this->refund = $refund;
 
         return $this;
+    }
+
+    /**
+     * @return string
+     */
+    protected function getService()
+    {
+        if ($this->reference !== null) {
+            return sprintf('%s?reference=%s', parent::getService(), $this->reference);
+        }
+
+        if ($this->refund) {
+            return sprintf('%s/%s/refunds', parent::getService(), $this->getTid());
+        }
+
+        return sprintf('%s/%s', parent::getService(), $this->getTid());
     }
 }

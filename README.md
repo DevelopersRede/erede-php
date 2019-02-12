@@ -13,9 +13,12 @@ SDK de integração eRede
 Se já possui um arquivo `composer.json`, basta adicionar a seguinte dependência ao seu projeto:
 
 ```json
+{
 "require": {
     "developersrede/erede-php": "*"
 }
+}
+
 ```
 
 Com a dependência adicionada ao `composer.json`, basta executar:

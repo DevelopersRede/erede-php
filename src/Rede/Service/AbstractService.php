@@ -43,7 +43,9 @@ abstract class AbstractService
 
     /**
      * @return Transaction
-     * @throws \InvalidArgumentException, \RuntimeException, RedeException
+     * @throws \InvalidArgumentException
+     * @throws \RuntimeException
+     * @throws \Rede\Exception\RedeException
      */
     abstract public function execute();
 

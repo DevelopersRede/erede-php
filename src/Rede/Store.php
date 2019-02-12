@@ -47,23 +47,6 @@ class Store
     }
 
     /**
-     * @return string
-     */
-    public function getFiliation()
-    {
-        return $this->filiation;
-    }
-
-    /**
-     *
-     * @return string
-     */
-    public function getToken()
-    {
-        return $this->token;
-    }
-
-    /**
      * @param Environment $environment
      *
      * @return Store
@@ -75,6 +58,14 @@ class Store
     }
 
     /**
+     * @return string
+     */
+    public function getFiliation()
+    {
+        return $this->filiation;
+    }
+
+    /**
      * @param string $filiation
      *
      * @return Store
@@ -83,6 +74,15 @@ class Store
     {
         $this->filiation = $filiation;
         return $this;
+    }
+
+    /**
+     *
+     * @return string
+     */
+    public function getToken()
+    {
+        return $this->token;
     }
 
     /**

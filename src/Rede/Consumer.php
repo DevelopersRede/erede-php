@@ -89,6 +89,17 @@ class Consumer implements RedeSerializable
     }
 
     /**
+     * @param string $cpf
+     *
+     * @return Consumer
+     */
+    public function setCpf($cpf)
+    {
+        $this->cpf = $cpf;
+        return $this;
+    }
+
+    /**
      * @return \ArrayIterator
      */
     public function getDocumentsIterator()
@@ -110,56 +121,6 @@ class Consumer implements RedeSerializable
     }
 
     /**
-     *
-     * @return string
-     */
-    public function getGender()
-    {
-        return $this->gender;
-    }
-
-    /**
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     *
-     * @return Phone
-     */
-    public function getPhone()
-    {
-        return $this->phone;
-    }
-
-    /**
-     * @param string $ddd
-     * @param string $number
-     * @param int    $type
-     *
-     * @return Consumer
-     */
-    public function phone($ddd, $number, $type = Phone::CELLPHONE)
-    {
-        return $this->setPhone(new Phone($ddd, $number, $type));
-    }
-
-    /**
-     * @param string $cpf
-     *
-     * @return Consumer
-     */
-    public function setCpf($cpf)
-    {
-        $this->cpf = $cpf;
-        return $this;
-    }
-
-    /**
      * @param string $email
      *
      * @return Consumer
@@ -171,6 +132,15 @@ class Consumer implements RedeSerializable
     }
 
     /**
+     *
+     * @return string
+     */
+    public function getGender()
+    {
+        return $this->gender;
+    }
+
+    /**
      * @param string $gender
      *
      * @return Consumer
@@ -179,6 +149,15 @@ class Consumer implements RedeSerializable
     {
         $this->gender = $gender;
         return $this;
+    }
+
+    /**
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
     }
 
     /**
@@ -195,6 +174,15 @@ class Consumer implements RedeSerializable
 
     /**
      *
+     * @return Phone
+     */
+    public function getPhone()
+    {
+        return $this->phone;
+    }
+
+    /**
+     *
      * @param Phone $phone
      *
      * @return Consumer
@@ -203,5 +191,17 @@ class Consumer implements RedeSerializable
     {
         $this->phone = $phone;
         return $this;
+    }
+
+    /**
+     * @param string $ddd
+     * @param string $number
+     * @param int $type
+     *
+     * @return Consumer
+     */
+    public function phone($ddd, $number, $type = Phone::CELLPHONE)
+    {
+        return $this->setPhone(new Phone($ddd, $number, $type));
     }
 }

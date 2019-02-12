@@ -1,4 +1,5 @@
 <?php
+
 namespace Rede;
 
 class Phone implements RedeSerializable
@@ -48,23 +49,6 @@ class Phone implements RedeSerializable
     }
 
     /**
-     * @return string
-     */
-    public function getNumber()
-    {
-        return $this->number;
-    }
-
-    /**
-     *
-     * @return string
-     */
-    public function getType()
-    {
-        return $this->type;
-    }
-
-    /**
      * @param string $ddd
      *
      * @return Phone
@@ -76,6 +60,14 @@ class Phone implements RedeSerializable
     }
 
     /**
+     * @return string
+     */
+    public function getNumber()
+    {
+        return $this->number;
+    }
+
+    /**
      * @param string $number
      *
      * @return Phone
@@ -84,6 +76,15 @@ class Phone implements RedeSerializable
     {
         $this->number = $number;
         return $this;
+    }
+
+    /**
+     *
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
     }
 
     /**

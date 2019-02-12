@@ -38,11 +38,34 @@ class Refund
     }
 
     /**
+     * @param int $amount
+     *
+     * @return Refund
+     */
+    public function setAmount($amount)
+    {
+        $this->amount = $amount;
+        return $this;
+    }
+
+    /**
      * @return \DateTime
      */
     public function getRefundDateTime()
     {
         return $this->refundDateTime;
+    }
+
+    /**
+     * @param string $refundDateTime
+     *
+     * @return Refund
+     * @throws \Exception
+     */
+    public function setRefundDateTime($refundDateTime)
+    {
+        $this->refundDateTime = new DateTime($refundDateTime);
+        return $this;
     }
 
     /**
@@ -55,37 +78,6 @@ class Refund
     }
 
     /**
-     *
-     * @return string
-     */
-    public function getStatus()
-    {
-        return $this->status;
-    }
-
-    /**
-     * @param int $amount
-     *
-     * @return Refund
-     */
-    public function setAmount($amount)
-    {
-        $this->amount = $amount;
-        return $this;
-    }
-
-    /**
-     * @param string $refundDateTime
-     *
-     * @return Refund
-     */
-    public function setRefundDateTime($refundDateTime)
-    {
-        $this->refundDateTime = new DateTime($refundDateTime);
-        return $this;
-    }
-
-    /**
      * @param string $refundId
      *
      * @return Refund
@@ -94,6 +86,15 @@ class Refund
     {
         $this->refundId = $refundId;
         return $this;
+    }
+
+    /**
+     *
+     * @return string
+     */
+    public function getStatus()
+    {
+        return $this->status;
     }
 
     /**

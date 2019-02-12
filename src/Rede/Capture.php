@@ -32,23 +32,6 @@ class Capture
     }
 
     /**
-     * @return \DateTime
-     */
-    public function getDateTime()
-    {
-        return $this->dateTime;
-    }
-
-    /**
-     *
-     * @return string
-     */
-    public function getNsu()
-    {
-        return $this->nsu;
-    }
-
-    /**
      * @param int $amount
      *
      * @return Capture
@@ -60,14 +43,32 @@ class Capture
     }
 
     /**
+     * @return \DateTime
+     */
+    public function getDateTime()
+    {
+        return $this->dateTime;
+    }
+
+    /**
      * @param string $dateTime
      *
      * @return Capture
+     * @throws \Exception
      */
     public function setDateTime($dateTime)
     {
         $this->dateTime = new DateTime($dateTime);
         return $this;
+    }
+
+    /**
+     *
+     * @return string
+     */
+    public function getNsu()
+    {
+        return $this->nsu;
     }
 
     /**

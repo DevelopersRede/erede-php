@@ -115,150 +115,6 @@ class Authorization
     }
 
     /**
-     *
-     * @return int
-     */
-    public function getAmount()
-    {
-        return $this->amount;
-    }
-
-    /**
-     *
-     * @return string
-     */
-    public function getAuthorizationCode()
-    {
-        return $this->authorizationCode;
-    }
-
-    /**
-     *
-     * @return string
-     */
-    public function getCardBin()
-    {
-        return $this->cardBin;
-    }
-
-    /**
-     *
-     * @return string
-     */
-    public function getCardHolderName()
-    {
-        return $this->cardHolderName;
-    }
-
-    /**
-     *
-     * @return \DateTime
-     */
-    public function getDateTime()
-    {
-        return $this->dateTime;
-    }
-
-    /**
-     *
-     * @return int
-     */
-    public function getInstallments()
-    {
-        return $this->installments;
-    }
-
-    /**
-     *
-     * @return string
-     */
-    public function getKind()
-    {
-        return $this->kind;
-    }
-
-    /**
-     *
-     * @return string
-     */
-    public function getLast4()
-    {
-        return $this->last4;
-    }
-
-    /**
-     *
-     * @return string
-     */
-    public function getNsu()
-    {
-        return $this->nsu;
-    }
-
-    /**
-     *
-     * @return string
-     */
-    public function getOrigin()
-    {
-        return $this->origin;
-    }
-
-    /**
-     *
-     * @return string
-     */
-    public function getReference()
-    {
-        return $this->reference;
-    }
-
-    /**
-     *
-     * @return string
-     */
-    public function getReturnCode()
-    {
-        return $this->returnCode;
-    }
-
-    /**
-     *
-     * @return string
-     */
-    public function getReturnMessage()
-    {
-        return $this->returnMessage;
-    }
-
-    /**
-     *
-     * @return string
-     */
-    public function getStatus()
-    {
-        return $this->status;
-    }
-
-    /**
-     *
-     * @return string
-     */
-    public function getSubscription()
-    {
-        return $this->subscription;
-    }
-
-    /**
-     *
-     * @return string
-     */
-    public function getTid()
-    {
-        return $this->tid;
-    }
-
-    /**
      * @param string $affiliation
      *
      * @return Authorization
@@ -267,6 +123,15 @@ class Authorization
     {
         $this->affiliation = $affiliation;
         return $this;
+    }
+
+    /**
+     *
+     * @return int
+     */
+    public function getAmount()
+    {
+        return $this->amount;
     }
 
     /**
@@ -281,6 +146,15 @@ class Authorization
     }
 
     /**
+     *
+     * @return string
+     */
+    public function getAuthorizationCode()
+    {
+        return $this->authorizationCode;
+    }
+
+    /**
      * @param string $authorizationCode
      *
      * @return Authorization
@@ -289,6 +163,15 @@ class Authorization
     {
         $this->authorizationCode = $authorizationCode;
         return $this;
+    }
+
+    /**
+     *
+     * @return string
+     */
+    public function getCardBin()
+    {
+        return $this->cardBin;
     }
 
     /**
@@ -303,6 +186,15 @@ class Authorization
     }
 
     /**
+     *
+     * @return string
+     */
+    public function getCardHolderName()
+    {
+        return $this->cardHolderName;
+    }
+
+    /**
      * @param string $cardHolderName
      *
      * @return Authorization
@@ -314,14 +206,33 @@ class Authorization
     }
 
     /**
+     *
+     * @return \DateTime
+     */
+    public function getDateTime()
+    {
+        return $this->dateTime;
+    }
+
+    /**
      * @param string $dateTime
      *
      * @return Authorization
+     * @throws \Exception
      */
     public function setDateTime($dateTime)
     {
         $this->dateTime = new DateTime($dateTime);
         return $this;
+    }
+
+    /**
+     *
+     * @return int
+     */
+    public function getInstallments()
+    {
+        return $this->installments;
     }
 
     /**
@@ -338,6 +249,15 @@ class Authorization
 
     /**
      *
+     * @return string
+     */
+    public function getKind()
+    {
+        return $this->kind;
+    }
+
+    /**
+     *
      * @param string $kind
      *
      * @return Authorization
@@ -346,6 +266,15 @@ class Authorization
     {
         $this->kind = $kind;
         return $this;
+    }
+
+    /**
+     *
+     * @return string
+     */
+    public function getLast4()
+    {
+        return $this->last4;
     }
 
     /**
@@ -362,6 +291,15 @@ class Authorization
 
     /**
      *
+     * @return string
+     */
+    public function getNsu()
+    {
+        return $this->nsu;
+    }
+
+    /**
+     *
      * @param string $nsu
      *
      * @return Authorization
@@ -370,6 +308,15 @@ class Authorization
     {
         $this->nsu = $nsu;
         return $this;
+    }
+
+    /**
+     *
+     * @return string
+     */
+    public function getOrigin()
+    {
+        return $this->origin;
     }
 
     /**
@@ -386,6 +333,15 @@ class Authorization
 
     /**
      *
+     * @return string
+     */
+    public function getReference()
+    {
+        return $this->reference;
+    }
+
+    /**
+     *
      * @param string $reference
      *
      * @return Authorization
@@ -397,6 +353,15 @@ class Authorization
     }
 
     /**
+     *
+     * @return string
+     */
+    public function getReturnCode()
+    {
+        return $this->returnCode;
+    }
+
+    /**
      * @param string $returnCode
      *
      * @return Authorization
@@ -405,6 +370,15 @@ class Authorization
     {
         $this->returnCode = $returnCode;
         return $this;
+    }
+
+    /**
+     *
+     * @return string
+     */
+    public function getReturnMessage()
+    {
+        return $this->returnMessage;
     }
 
     /**
@@ -421,6 +395,15 @@ class Authorization
 
     /**
      *
+     * @return string
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     *
      * @param string $status
      *
      * @return Authorization
@@ -433,6 +416,15 @@ class Authorization
 
     /**
      *
+     * @return string
+     */
+    public function getSubscription()
+    {
+        return $this->subscription;
+    }
+
+    /**
+     *
      * @param string $subscription
      *
      * @return Authorization
@@ -441,6 +433,15 @@ class Authorization
     {
         $this->subscription = $subscription;
         return $this;
+    }
+
+    /**
+     *
+     * @return string
+     */
+    public function getTid()
+    {
+        return $this->tid;
     }
 
     /**

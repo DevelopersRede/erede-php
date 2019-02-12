@@ -36,11 +36,30 @@ abstract class AbstractTransactionsService extends AbstractService
 
     /**
      * @return Transaction
-     * @throws \InvalidArgumentException, \RuntimeException, RedeException
+     * @throws \InvalidArgumentException
+     * @throws \RuntimeException
+     * @throws \Rede\Exception\RedeException
      */
     public function execute()
     {
         return $this->sendRequest(json_encode($this->transaction), AbstractService::POST);
+    }
+
+    /**
+     * @return string
+     */
+    public function getTid()
+    {
+        return $this->tid;
+    }
+
+    /**
+     *
+     * @param string $tid
+     */
+    public function setTid($tid)
+    {
+        $this->tid = $tid;
     }
 
     /**
@@ -53,20 +72,14 @@ abstract class AbstractTransactionsService extends AbstractService
     }
 
     /**
-     * @return string
-     */
-    public function getTid()
-    {
-        return $this->tid;
-    }
-
-    /**
      * @param string $response
      * @param string $statusCode
      *
      * @return Transaction
      * @see    AbstractService::parseResponse()
-     * @throws RedeException, \InvalidArgumentException
+     * @throws \Rede\Exception\RedeException
+     * @throws \InvalidArgumentException
+     * @throws \Exception
      */
     protected function parseResponse($response, $statusCode)
     {
@@ -91,14 +104,5 @@ abstract class AbstractTransactionsService extends AbstractService
         }
 
         return $this->transaction;
-    }
-
-    /**
-     *
-     * @param string $tid
-     */
-    public function setTid($tid)
-    {
-        $this->tid = $tid;
     }
 }

@@ -37,6 +37,23 @@ class Environment implements RedeSerializable
     }
 
     /**
+     * @return Environment A preconfigured production environment
+     */
+
+    public static function production()
+    {
+        return new Environment(Environment::PRODUCTION);
+    }
+
+    /**
+     * @return Environment A preconfigured sandbox environment
+     */
+    public static function sandbox()
+    {
+        return new Environment(Environment::SANDBOX);
+    }
+
+    /**
      * @param string $service
      *
      * @return string Gets the environment endpoint
@@ -55,12 +72,34 @@ class Environment implements RedeSerializable
     }
 
     /**
+     * @param string $ip
+     *
+     * @return Environment
+     */
+    public function setIp($ip)
+    {
+        $this->ip = $ip;
+        return $this;
+    }
+
+    /**
      *
      * @return string
      */
     public function getSessionId()
     {
         return $this->sessionId;
+    }
+
+    /**
+     * @param $sessionId
+     *
+     * @return Environment
+     */
+    public function setSessionId($sessionId)
+    {
+        $this->sessionId = $sessionId;
+        return $this;
     }
 
     /**
@@ -74,44 +113,5 @@ class Environment implements RedeSerializable
         $consumer->sessionId = $this->sessionId;
 
         return ['consumer' => $consumer];
-    }
-
-    /**
-     * @return Environment A preconfigured production environment
-     */
-
-    public static function production()
-    {
-        return new Environment(Environment::PRODUCTION);
-    }
-
-    /**
-     * @return Environment A preconfigured sandbox environment
-     */
-    public static function sandbox()
-    {
-        return new Environment(Environment::SANDBOX);
-    }
-
-    /**
-     * @param string $ip
-     *
-     * @return Environment
-     */
-    public function setIp($ip)
-    {
-        $this->ip = $ip;
-        return $this;
-    }
-
-    /**
-     * @param $sessionId
-     *
-     * @return Environment
-     */
-    public function setSessionId($sessionId)
-    {
-        $this->sessionId = $sessionId;
-        return $this;
     }
 }

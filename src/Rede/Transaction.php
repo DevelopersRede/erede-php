@@ -236,7 +236,7 @@ class Transaction implements RedeSerializable, RedeUnserializable
     /**
      * Transaction constructor.
      *
-     * @param int    $amount
+     * @param int $amount
      * @param string $reference
      */
     public function __construct($amount = null, $reference = null)
@@ -279,21 +279,6 @@ class Transaction implements RedeSerializable, RedeUnserializable
     }
 
     /**
-     * @param bool $capture
-     *
-     * @return Transaction
-     */
-    public function capture($capture = true)
-    {
-        if (!$capture && $this->kind === Transaction::DEBIT) {
-            throw new InvalidArgumentException('Debit transactions will always be captured');
-        }
-
-        $this->capture = $capture;
-        return $this;
-    }
-
-    /**
      * @param $cardNumber
      * @param $cardCvv
      * @param $expirationYear
@@ -312,6 +297,28 @@ class Transaction implements RedeSerializable, RedeUnserializable
             $holderName,
             Transaction::CREDIT
         );
+    }
+
+    /**
+     * @param $cardNumber
+     * @param $securityCode
+     * @param $expirationMonth
+     * @param $expirationYear
+     * @param $cardHolderName
+     * @param $kind
+     *
+     * @return Transaction this transaction
+     */
+    public function setCard($cardNumber, $securityCode, $expirationMonth, $expirationYear, $cardHolderName, $kind)
+    {
+        $this->setCardNumber($cardNumber);
+        $this->setSecurityCode($securityCode);
+        $this->setExpirationMonth($expirationMonth);
+        $this->setExpirationYear($expirationYear);
+        $this->setCardHolderName($cardHolderName);
+        $this->setKind($kind);
+
+        return $this;
     }
 
     /**
@@ -338,6 +345,21 @@ class Transaction implements RedeSerializable, RedeUnserializable
     }
 
     /**
+     * @param bool $capture
+     *
+     * @return Transaction
+     */
+    public function capture($capture = true)
+    {
+        if (!$capture && $this->kind === Transaction::DEBIT) {
+            throw new InvalidArgumentException('Debit transactions will always be captured');
+        }
+
+        $this->capture = $capture;
+        return $this;
+    }
+
+    /**
      * @return array
      * @see    \JsonSerializable::jsonSerialize()
      */
@@ -351,28 +373,28 @@ class Transaction implements RedeSerializable, RedeUnserializable
 
         return array_filter(
             [
-            'capture' => $capture,
+                'capture' => $capture,
                 'antifraudRequired' => $this->antifraudRequired,
-            'cart' => $this->cart,
-            'kind' => $this->kind,
-            'threeDSecure' => $this->threeDSecure,
-            'reference' => $this->reference,
-            'amount' => $this->amount,
-            'installments' => $this->installments,
-            'cardHolderName' => $this->cardHolderName,
-            'cardNumber' => $this->cardNumber,
-            'expirationMonth' => $this->expirationMonth,
-            'expirationYear' => $this->expirationYear,
-            'securityCode' => $this->securityCode,
-            'softDescriptor' => $this->softDescriptor,
-            'subscription' => $this->subscription,
-            'origin' => $this->origin,
-            'distributorAffiliation' => $this->distributorAffiliation,
-            'storageCard' => $this->storageCard,
-            'urls' => $this->urls,
-            'iata' => $this->iata
+                'cart' => $this->cart,
+                'kind' => $this->kind,
+                'threeDSecure' => $this->threeDSecure,
+                'reference' => $this->reference,
+                'amount' => $this->amount,
+                'installments' => $this->installments,
+                'cardHolderName' => $this->cardHolderName,
+                'cardNumber' => $this->cardNumber,
+                'expirationMonth' => $this->expirationMonth,
+                'expirationYear' => $this->expirationYear,
+                'securityCode' => $this->securityCode,
+                'softDescriptor' => $this->softDescriptor,
+                'subscription' => $this->subscription,
+                'origin' => $this->origin,
+                'distributorAffiliation' => $this->distributorAffiliation,
+                'storageCard' => $this->storageCard,
+                'urls' => $this->urls,
+                'iata' => $this->iata
             ], function ($value) {
-                return !is_null($value);
+            return !is_null($value);
         }
         );
     }
@@ -382,6 +404,7 @@ class Transaction implements RedeSerializable, RedeUnserializable
      * @param string $serialized
      *
      * @return Transaction
+     * @throws \Exception
      */
     public function jsonUnserialize($serialized)
     {
@@ -461,6 +484,18 @@ class Transaction implements RedeSerializable, RedeUnserializable
 
     /**
      *
+     * @param int $amount
+     *
+     * @return Transaction
+     */
+    public function setAmount($amount)
+    {
+        $this->amount = (int)($amount * 100);
+        return $this;
+    }
+
+    /**
+     *
      * @return Antifraud
      */
     public function getAntifraud()
@@ -530,6 +565,18 @@ class Transaction implements RedeSerializable, RedeUnserializable
 
     /**
      *
+     * @param string $cardHolderName
+     *
+     * @return Transaction
+     */
+    public function setCardHolderName($cardHolderName)
+    {
+        $this->cardHolderName = $cardHolderName;
+        return $this;
+    }
+
+    /**
+     *
      * @return string
      */
     public function getCardNumber()
@@ -539,11 +586,35 @@ class Transaction implements RedeSerializable, RedeUnserializable
 
     /**
      *
+     * @param string $cardNumber
+     *
+     * @return Transaction
+     */
+    public function setCardNumber($cardNumber)
+    {
+        $this->cardNumber = $cardNumber;
+        return $this;
+    }
+
+    /**
+     *
      * @return Cart
      */
     public function getCart()
     {
         return $this->cart;
+    }
+
+    /**
+     *
+     * @param Cart $cart
+     *
+     * @return Transaction
+     */
+    public function setCart(Cart $cart)
+    {
+        $this->cart = $cart;
+        return $this;
     }
 
     /**
@@ -566,11 +637,35 @@ class Transaction implements RedeSerializable, RedeUnserializable
 
     /**
      *
+     * @param int $distributorAffiliation
+     *
+     * @return Transaction
+     */
+    public function setDistributorAffiliation($distributorAffiliation)
+    {
+        $this->distributorAffiliation = $distributorAffiliation;
+        return $this;
+    }
+
+    /**
+     *
      * @return int
      */
     public function getExpirationMonth()
     {
         return $this->expirationMonth;
+    }
+
+    /**
+     *
+     * @param int $expirationMonth
+     *
+     * @return Transaction
+     */
+    public function setExpirationMonth($expirationMonth)
+    {
+        $this->expirationMonth = $expirationMonth;
+        return $this;
     }
 
     /**
@@ -584,11 +679,38 @@ class Transaction implements RedeSerializable, RedeUnserializable
 
     /**
      *
+     * @param int $expirationYear
+     *
+     * @return Transaction
+     */
+    public function setExpirationYear($expirationYear)
+    {
+        $this->expirationYear = $expirationYear;
+        return $this;
+    }
+
+    /**
+     *
      * @return Iata
      */
     public function getIata()
     {
         return $this->iata;
+    }
+
+    /**
+     * @param string $code
+     * @param string $departureTax
+     *
+     * @return Transaction
+     */
+    public function setIata($code, $departureTax)
+    {
+        $this->iata = new Iata();
+        $this->iata->setCode($code);
+        $this->iata->setDepartureTax($departureTax);
+
+        return $this;
     }
 
     /**
@@ -602,11 +724,35 @@ class Transaction implements RedeSerializable, RedeUnserializable
 
     /**
      *
+     * @param int $installments
+     *
+     * @return Transaction
+     */
+    public function setInstallments($installments)
+    {
+        $this->installments = $installments;
+        return $this;
+    }
+
+    /**
+     *
      * @return string
      */
     public function getKind()
     {
         return $this->kind;
+    }
+
+    /**
+     *
+     * @param string $kind
+     *
+     * @return Transaction
+     */
+    public function setKind($kind)
+    {
+        $this->kind = $kind;
+        return $this;
     }
 
     /**
@@ -638,11 +784,35 @@ class Transaction implements RedeSerializable, RedeUnserializable
 
     /**
      *
+     * @param int $origin
+     *
+     * @return Transaction
+     */
+    public function setOrigin($origin)
+    {
+        $this->origin = $origin;
+        return $this;
+    }
+
+    /**
+     *
      * @return string
      */
     public function getReference()
     {
         return $this->reference;
+    }
+
+    /**
+     *
+     * @param string $reference
+     *
+     * @return Transaction
+     */
+    public function setReference($reference)
+    {
+        $this->reference = $reference;
+        return $this;
     }
 
     /**
@@ -710,11 +880,35 @@ class Transaction implements RedeSerializable, RedeUnserializable
 
     /**
      *
+     * @param string $securityCode
+     *
+     * @return Transaction
+     */
+    public function setSecurityCode($securityCode)
+    {
+        $this->securityCode = $securityCode;
+        return $this;
+    }
+
+    /**
+     *
      * @return string
      */
     public function getSoftDescriptor()
     {
         return $this->softDescriptor;
+    }
+
+    /**
+     *
+     * @param string $softDescriptor
+     *
+     * @return Transaction
+     */
+    public function setSoftDescriptor($softDescriptor)
+    {
+        $this->softDescriptor = $softDescriptor;
+        return $this;
     }
 
     /**
@@ -728,11 +922,35 @@ class Transaction implements RedeSerializable, RedeUnserializable
 
     /**
      *
+     * @param int $storageCard
+     *
+     * @return Transaction
+     */
+    public function setStorageCard($storageCard)
+    {
+        $this->storageCard = $storageCard;
+        return $this;
+    }
+
+    /**
+     *
      * @return bool
      */
     public function isAntifraudRequired()
     {
         return $this->antifraudRequired;
+    }
+
+    /**
+     *
+     * @param bool $antifraudRequired
+     *
+     * @return Transaction
+     */
+    public function setAntifraudRequired($antifraudRequired)
+    {
+        $this->antifraudRequired = $antifraudRequired;
+        return $this;
     }
 
     /**
@@ -753,6 +971,18 @@ class Transaction implements RedeSerializable, RedeUnserializable
     public function isSubscription()
     {
         return $this->subscription;
+    }
+
+    /**
+     *
+     * @param bool $subscription
+     *
+     * @return Transaction
+     */
+    public function setSubscription($subscription)
+    {
+        $this->subscription = $subscription;
+        return $this;
     }
 
     /**
@@ -781,244 +1011,6 @@ class Transaction implements RedeSerializable, RedeUnserializable
 
     /**
      *
-     * @return \ArrayIterator
-     */
-    public function getUrlsIterator()
-    {
-        return new ArrayIterator($this->urls);
-    }
-
-    /**
-     * @param string $code
-     * @param string $departureTax
-     *
-     * @return Transaction
-     */
-    public function setIata($code, $departureTax)
-    {
-        $this->iata = new Iata();
-        $this->iata->setCode($code);
-        $this->iata->setDepartureTax($departureTax);
-
-        return $this;
-    }
-
-    /**
-     *
-     * @param int $amount
-     *
-     * @return Transaction
-     */
-    public function setAmount($amount)
-    {
-        $this->amount = (int)($amount * 100);
-        return $this;
-    }
-
-    /**
-     *
-     * @param bool $antifraudRequired
-     *
-     * @return Transaction
-     */
-    public function setAntifraudRequired($antifraudRequired)
-    {
-        $this->antifraudRequired = $antifraudRequired;
-        return $this;
-    }
-
-    /**
-     * @param $cardNumber
-     * @param $securityCode
-     * @param $expirationMonth
-     * @param $expirationYear
-     * @param $cardHolderName
-     * @param $kind
-     *
-     * @return Transaction this transaction
-     */
-    public function setCard($cardNumber, $securityCode, $expirationMonth, $expirationYear, $cardHolderName, $kind)
-    {
-        $this->setCardNumber($cardNumber);
-        $this->setSecurityCode($securityCode);
-        $this->setExpirationMonth($expirationMonth);
-        $this->setExpirationYear($expirationYear);
-        $this->setCardHolderName($cardHolderName);
-        $this->setKind($kind);
-
-        return $this;
-    }
-
-    /**
-     *
-     * @param string $cardHolderName
-     *
-     * @return Transaction
-     */
-    public function setCardHolderName($cardHolderName)
-    {
-        $this->cardHolderName = $cardHolderName;
-        return $this;
-    }
-
-    /**
-     *
-     * @param string $cardNumber
-     *
-     * @return Transaction
-     */
-    public function setCardNumber($cardNumber)
-    {
-        $this->cardNumber = $cardNumber;
-        return $this;
-    }
-
-    /**
-     *
-     * @param Cart $cart
-     *
-     * @return Transaction
-     */
-    public function setCart(Cart $cart)
-    {
-        $this->cart = $cart;
-        return $this;
-    }
-
-    /**
-     *
-     * @param int $distributorAffiliation
-     *
-     * @return Transaction
-     */
-    public function setDistributorAffiliation($distributorAffiliation)
-    {
-        $this->distributorAffiliation = $distributorAffiliation;
-        return $this;
-    }
-
-    /**
-     *
-     * @param int $expirationMonth
-     *
-     * @return Transaction
-     */
-    public function setExpirationMonth($expirationMonth)
-    {
-        $this->expirationMonth = $expirationMonth;
-        return $this;
-    }
-
-    /**
-     *
-     * @param int $expirationYear
-     *
-     * @return Transaction
-     */
-    public function setExpirationYear($expirationYear)
-    {
-        $this->expirationYear = $expirationYear;
-        return $this;
-    }
-
-    /**
-     *
-     * @param int $installments
-     *
-     * @return Transaction
-     */
-    public function setInstallments($installments)
-    {
-        $this->installments = $installments;
-        return $this;
-    }
-
-    /**
-     *
-     * @param string $kind
-     *
-     * @return Transaction
-     */
-    public function setKind($kind)
-    {
-        $this->kind = $kind;
-        return $this;
-    }
-
-    /**
-     *
-     * @param int $origin
-     *
-     * @return Transaction
-     */
-    public function setOrigin($origin)
-    {
-        $this->origin = $origin;
-        return $this;
-    }
-
-    /**
-     *
-     * @param string $reference
-     *
-     * @return Transaction
-     */
-    public function setReference($reference)
-    {
-        $this->reference = $reference;
-        return $this;
-    }
-
-    /**
-     *
-     * @param string $securityCode
-     *
-     * @return Transaction
-     */
-    public function setSecurityCode($securityCode)
-    {
-        $this->securityCode = $securityCode;
-        return $this;
-    }
-
-    /**
-     *
-     * @param string $softDescriptor
-     *
-     * @return Transaction
-     */
-    public function setSoftDescriptor($softDescriptor)
-    {
-        $this->softDescriptor = $softDescriptor;
-        return $this;
-    }
-
-    /**
-     *
-     * @param int $storageCard
-     *
-     * @return Transaction
-     */
-    public function setStorageCard($storageCard)
-    {
-        $this->storageCard = $storageCard;
-        return $this;
-    }
-
-    /**
-     *
-     * @param bool $subscription
-     *
-     * @return Transaction
-     */
-    public function setSubscription($subscription)
-    {
-        $this->subscription = $subscription;
-        return $this;
-    }
-
-    /**
-     *
      * @param string $tid
      *
      * @return Transaction
@@ -1027,6 +1019,15 @@ class Transaction implements RedeSerializable, RedeUnserializable
     {
         $this->tid = $tid;
         return $this;
+    }
+
+    /**
+     *
+     * @return \ArrayIterator
+     */
+    public function getUrlsIterator()
+    {
+        return new ArrayIterator($this->urls);
     }
 
     /**

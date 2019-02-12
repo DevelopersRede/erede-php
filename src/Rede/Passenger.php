@@ -5,7 +5,7 @@ namespace Rede;
 class Passenger implements RedeSerializable
 {
     use SerializeTrait;
-    
+
     /**
      * @var string
      */

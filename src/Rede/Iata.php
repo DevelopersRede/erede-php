@@ -24,22 +24,6 @@ class Iata implements RedeSerializable
     private $flight;
 
     /**
-     * @param Flight $flight
-     *
-     * @return Iata
-     */
-    public function addFlight(Flight $flight)
-    {
-        if ($this->flight === null) {
-            $this->flight = [];
-        }
-
-        $this->flight[] = $flight;
-
-        return $this;
-    }
-
-    /**
      * @return string
      */
     public function getCode()
@@ -96,6 +80,22 @@ class Iata implements RedeSerializable
     {
         $this->flight = [];
         $this->addFlight($flight);
+
+        return $this;
+    }
+
+    /**
+     * @param Flight $flight
+     *
+     * @return Iata
+     */
+    public function addFlight(Flight $flight)
+    {
+        if ($this->flight === null) {
+            $this->flight = [];
+        }
+
+        $this->flight[] = $flight;
 
         return $this;
     }

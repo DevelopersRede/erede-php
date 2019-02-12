@@ -74,78 +74,6 @@ class Address implements RedeSerializable
     }
 
     /**
-     *
-     * @return string
-     */
-    public function getAddresseeName()
-    {
-        return $this->addresseeName;
-    }
-
-    /**
-     *
-     * @return string
-     */
-    public function getCity()
-    {
-        return $this->city;
-    }
-
-    /**
-     *
-     * @return string
-     */
-    public function getComplement()
-    {
-        return $this->complement;
-    }
-
-    /**
-     *
-     * @return string
-     */
-    public function getNeighbourhood()
-    {
-        return $this->neighbourhood;
-    }
-
-    /**
-     *
-     * @return string
-     */
-    public function getNumber()
-    {
-        return $this->number;
-    }
-
-    /**
-     *
-     * @return string
-     */
-    public function getState()
-    {
-        return $this->state;
-    }
-
-    /**
-     *
-     * @return int
-     */
-    public function getType()
-    {
-        return $this->type;
-    }
-
-    /**
-     *
-     * @return string
-     */
-    public function getZipCode()
-    {
-        return $this->zipCode;
-    }
-
-    /**
      * @param string $address
      *
      * @return Address
@@ -154,6 +82,15 @@ class Address implements RedeSerializable
     {
         $this->address = $address;
         return $this;
+    }
+
+    /**
+     *
+     * @return string
+     */
+    public function getAddresseeName()
+    {
+        return $this->addresseeName;
     }
 
     /**
@@ -168,6 +105,15 @@ class Address implements RedeSerializable
     }
 
     /**
+     *
+     * @return string
+     */
+    public function getCity()
+    {
+        return $this->city;
+    }
+
+    /**
      * @param string $city
      *
      * @return Address
@@ -176,6 +122,15 @@ class Address implements RedeSerializable
     {
         $this->city = $city;
         return $this;
+    }
+
+    /**
+     *
+     * @return string
+     */
+    public function getComplement()
+    {
+        return $this->complement;
     }
 
     /**
@@ -190,6 +145,15 @@ class Address implements RedeSerializable
     }
 
     /**
+     *
+     * @return string
+     */
+    public function getNeighbourhood()
+    {
+        return $this->neighbourhood;
+    }
+
+    /**
      * @param string $neighbourhood
      *
      * @return Address
@@ -198,6 +162,15 @@ class Address implements RedeSerializable
     {
         $this->neighbourhood = $neighbourhood;
         return $this;
+    }
+
+    /**
+     *
+     * @return string
+     */
+    public function getNumber()
+    {
+        return $this->number;
     }
 
     /**
@@ -214,6 +187,15 @@ class Address implements RedeSerializable
 
     /**
      *
+     * @return string
+     */
+    public function getState()
+    {
+        return $this->state;
+    }
+
+    /**
+     *
      * @param string $state
      *
      * @return Address
@@ -226,6 +208,15 @@ class Address implements RedeSerializable
 
     /**
      *
+     * @return int
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     *
      * @param int $type
      *
      * @return Address
@@ -234,6 +225,15 @@ class Address implements RedeSerializable
     {
         $this->type = $type;
         return $this;
+    }
+
+    /**
+     *
+     * @return string
+     */
+    public function getZipCode()
+    {
+        return $this->zipCode;
     }
 
     /**

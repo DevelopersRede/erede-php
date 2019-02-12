@@ -9,7 +9,7 @@ trait SerializeTrait
      */
     public function jsonSerialize()
     {
-        return array_filter(get_object_vars($this), function($v) {
+        return array_filter(get_object_vars($this), function ($v) {
             return $v !== null;
         });
     }

@@ -31,22 +31,29 @@ class ThreeDSecure implements RedeSerializable
     private $onFailure;
 
     /**
-     *
      * @var string
      */
     private $url;
 
     /**
-     *
      * @var string
      */
     private $userAgent;
 
     /**
-     *
      * @var string
      */
     private $xid;
+
+    /**
+     * @var string
+     */
+    private $threeDIndicator = "1";
+
+    /**
+     * @var string
+     */
+    private $DirectoryServerTransactionId;
 
     /**
      * ThreeDSecure constructor.
@@ -60,6 +67,42 @@ class ThreeDSecure implements RedeSerializable
         }
 
         $this->setUserAgent($userAgent);
+    }
+
+    /**
+     * @return string
+     */
+    public function getThreeDIndicator()
+    {
+        return $this->threeDIndicator;
+    }
+
+    /**
+     * @param string $threeDIndicator
+     * @return ThreeDSecure
+     */
+    public function setThreeDIndicator($threeDIndicator)
+    {
+        $this->threeDIndicator = $threeDIndicator;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDirectoryServerTransactionId()
+    {
+        return $this->DirectoryServerTransactionId;
+    }
+
+    /**
+     * @param string $DirectoryServerTransactionId
+     * @return ThreeDSecure
+     */
+    public function setDirectoryServerTransactionId($DirectoryServerTransactionId)
+    {
+        $this->DirectoryServerTransactionId = $DirectoryServerTransactionId;
+        return $this;
     }
 
     /**

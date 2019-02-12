@@ -1021,15 +1021,19 @@ class Transaction implements RedeSerializable, RedeUnserializable
 
     /**
      * @param string $onFailure
-     * @param bool   $embed
+     * @param bool $embed
+     * @param string $directoryServerTransactionId
+     * @param string $threeDIndicator
      *
      * @return Transaction
      */
-    public function threeDSecure($onFailure = ThreeDSecure::DECLINE_ON_FAILURE, $embed = true)
+    public function threeDSecure($onFailure = ThreeDSecure::DECLINE_ON_FAILURE, $embed = true, $directoryServerTransactionId = "", $threeDIndicator = "1")
     {
         $threeDSecure = new ThreeDSecure();
         $threeDSecure->setOnFailure($onFailure);
         $threeDSecure->setEmbedded($embed);
+        $threeDSecure->setThreeDIndicator($threeDIndicator);
+        $threeDSecure->setDirectoryServerTransactionId($directoryServerTransactionId);
 
         $this->threeDSecure = $threeDSecure;
 

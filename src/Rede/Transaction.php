@@ -224,6 +224,16 @@ class Transaction implements RedeSerializable, RedeUnserializable
     private $urls;
 
     /**
+     * @var SubMerchant
+     */
+    private $subMerchant;
+
+    /**
+     * @var string
+     */
+    private $paymentFacilitatorID;
+
+    /**
      * Transaction constructor.
      *
      * @param int    $amount
@@ -1016,6 +1026,58 @@ class Transaction implements RedeSerializable, RedeUnserializable
     public function setTid($tid)
     {
         $this->tid = $tid;
+        return $this;
+    }
+
+    /**
+     * @param $softDescriptor
+     * @param $paymentFacilitatorID
+     * @param SubMerchant $subMerchant
+     *
+     * @return $this
+     */
+    public function mcc($softDescriptor, $paymentFacilitatorID, SubMerchant $subMerchant)
+    {
+        $this->setSoftDescriptor($softDescriptor);
+        $this->setPaymentFacilitatorID($paymentFacilitatorID);
+        $this->setSubMerchant($subMerchant);
+
+        return $this;
+    }
+
+    /**
+     * @return SubMerchant
+     */
+    public function getSubMerchant()
+    {
+        return $this->subMerchant;
+    }
+
+    /**
+     * @param SubMerchant $subMerchant
+     * @return Transaction
+     */
+    public function setSubMerchant($subMerchant)
+    {
+        $this->subMerchant = $subMerchant;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPaymentFacilitatorID()
+    {
+        return $this->paymentFacilitatorID;
+    }
+
+    /**
+     * @param string $paymentFacilitatorID
+     * @return Transaction
+     */
+    public function setPaymentFacilitatorID($paymentFacilitatorID)
+    {
+        $this->paymentFacilitatorID = $paymentFacilitatorID;
         return $this;
     }
 

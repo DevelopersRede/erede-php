@@ -81,6 +81,39 @@ if ($transaction->getReturnCode() == '00') {
 //...
 ```
 
+## Autorizando uma transação com MCC dinâmico
+
+```php
+<?php
+// Configuração da loja
+$store = new \Rede\Store('PV', 'TOKEN');
+
+// Transação que será autorizada
+$transaction = (new \Rede\Transaction(20.99, 'pedido' . time()))->creditCard(
+    '5448280000000007',
+    '235',
+    '12',
+    '2020',
+    'John Snow'
+)->mcc(
+    'LOJADOZE',
+    '22349202212',
+    new \Rede\SubMerchant(
+       '1234',
+       'São Paulo',
+       'Brasil'
+    )
+);
+
+// Autoriza a transação
+$transaction = (new \Rede\eRede($store))->create($transaction);
+
+if ($transaction->getReturnCode() == '00') {
+    printf("Transação autorizada com sucesso; tid=%s\n", $transaction->getTid());
+}
+//...
+```
+
 ## Autorizando uma transação IATA
 
 ```php

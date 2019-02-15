@@ -27,11 +27,11 @@ class Store
      *
      * @param string $filiation
      * @param string $token
-     * @param Environment $environment if none provided, production will be used.
+     * @param Environment $environment if none provided, sandbox will be used.
      */
     public function __construct($filiation, $token, Environment $environment = null)
     {
-        $environment = $environment != null ? $environment : Environment::production();
+        $environment = $environment != null ? $environment : Environment::sandbox();
 
         $this->setFiliation($filiation);
         $this->setToken($token);

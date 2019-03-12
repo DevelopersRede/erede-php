@@ -8,7 +8,7 @@
     "php": ">=5.6",
     "ext-curl": "*",
     "ext-json": "*",
-    "psr/log":"1.0.2"
+    "psr/log":"^1.1"
   },
   "suggest": {
     "monolog/monolog": "Allows more advanced logging of the application flow"

@@ -23,6 +23,11 @@ class Transaction implements RedeSerializable, RedeUnserializable
     private $amount;
 
     /**
+     * @var Additional
+     */
+    private $additional;
+
+    /**
      * @var Antifraud
      */
     private $antifraud;
@@ -279,6 +284,21 @@ class Transaction implements RedeSerializable, RedeUnserializable
     }
 
     /**
+     * @param integer $gateway
+     * @param integer $module
+     *
+     * @return Transaction
+     */
+    public function additional($gateway = null, $module = null)
+    {
+        $this->additional = new Additional();
+        $this->additional->setGateway($gateway);
+        $this->additional->setModule($module);
+
+        return $this;
+    }
+
+    /**
      * @param $cardNumber
      * @param $cardCvv
      * @param $expirationYear
@@ -392,7 +412,8 @@ class Transaction implements RedeSerializable, RedeUnserializable
                 'distributorAffiliation' => $this->distributorAffiliation,
                 'storageCard' => $this->storageCard,
                 'urls' => $this->urls,
-                'iata' => $this->iata
+                'iata' => $this->iata,
+                'additional' => $this->additional
             ], function ($value) {
             return !is_null($value);
         }
@@ -447,6 +468,12 @@ class Transaction implements RedeSerializable, RedeUnserializable
 
             if ($property == 'authorization' && is_object($value)) {
                 $this->authorization = Authorization::create($value);
+
+                continue;
+            }
+
+            if ($property == 'additional' && is_object($value)) {
+                $this->additional = Additional::create($value);
 
                 continue;
             }

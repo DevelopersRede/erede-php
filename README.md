@@ -90,6 +90,33 @@ if ($transaction->getReturnCode() == '00') {
 //...
 ```
 
+## Adiciona informação adicional de gateway e módulo
+
+```php
+<?php
+// Configuração da loja em modo produção
+$store = new \Rede\Store('PV', 'TOKEN', \Rede\Environment::production());
+
+// Configuração da loja em modo sandbox
+// $store = new \Rede\Store('PV', 'TOKEN', \Rede\Environment::sandbox());
+
+// Transação que será autorizada
+$transaction = (new \Rede\Transaction(20.99, 'pedido' . time()))->creditCard(
+    '5448280000000007',
+    '235',
+    '12',
+    '2020',
+    'John Snow'
+)->additional(1234, 56);
+
+// Autoriza a transação
+$transaction = (new \Rede\eRede($store))->create($transaction);
+
+if ($transaction->getReturnCode() == '00') {
+    printf("Transação autorizada com sucesso; tid=%s\n", $transaction->getTid());
+}
+```
+
 ## Autorizando uma transação com MCC dinâmico
 
 ```php

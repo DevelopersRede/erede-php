@@ -58,12 +58,27 @@ abstract class AbstractService
      */
     protected function sendRequest($body = null, $method = 'GET')
     {
+        $userAgent = sprintf('User-Agent: %s',
+            sprintf(eRede::USER_AGENT, $this->store->getFiliation(), php_uname('s'), php_uname('r'), php_uname('m'))
+        );
+
         if (is_resource($this->curl)) {
             curl_close($this->curl);
         }
 
+        $curlVersion = curl_version();
+
+        if (is_array($curlVersion)) {
+            $userAgent .= sprintf(' curl/%s %s',
+                isset($curlVersion['version']) ? $curlVersion['version'] : '',
+                isset($curlVersion['ssl_version']) ? $curlVersion['ssl_version'] : ''
+            );
+        }
+
         $headers = [
-            'User-Agent: ' . eRede::USER_AGENT . ' ' . php_uname(),
+            str_replace('  ', ' ',
+                $userAgent
+            ),
             'Accept: application/json'
         ];
 

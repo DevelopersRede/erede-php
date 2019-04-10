@@ -7,6 +7,7 @@ use Rede\eRede;
 use Rede\Store;
 use Rede\Transaction;
 use RuntimeException;
+use function Sodium\version_string;
 
 abstract class AbstractService
 {
@@ -82,7 +83,7 @@ abstract class AbstractService
     protected function sendRequest($body = null, $method = 'GET')
     {
         $userAgent = sprintf('User-Agent: %s',
-            sprintf(eRede::USER_AGENT, $this->store->getFiliation(), php_uname('s'), php_uname('r'), php_uname('m'))
+            sprintf(eRede::USER_AGENT, phpversion(), $this->store->getFiliation(), php_uname('s'), php_uname('r'), php_uname('m'))
         );
 
         if (!empty($this->platform) && !empty($this->platformVersion)) {

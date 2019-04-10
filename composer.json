@@ -1,5 +1,6 @@
 {
   "name": "developersrede/erede-php",
+  "version": "4.2.1",
   "description": "e.Rede integration SDK",
   "minimum-stability": "stable",
   "license": "MIT",

@@ -30,6 +30,16 @@ abstract class AbstractService
     private $logger;
 
     /**
+     * @var string
+     */
+    private $platform;
+
+    /**
+     * @var string
+     */
+    private $platformVersion;
+
+    /**
      * AbstractService constructor.
      *
      * @param Store $store
@@ -39,6 +49,19 @@ abstract class AbstractService
     {
         $this->store = $store;
         $this->logger = $logger;
+    }
+
+    /**
+     * @param string $platform
+     * @param string $platformVersion
+     * @return $this
+     */
+    public function platform($platform, $platformVersion)
+    {
+        $this->platform = $platform;
+        $this->platformVersion = $platformVersion;
+
+        return $this;
     }
 
     /**
@@ -62,6 +85,10 @@ abstract class AbstractService
             sprintf(eRede::USER_AGENT, $this->store->getFiliation(), php_uname('s'), php_uname('r'), php_uname('m'))
         );
 
+        if (!empty($this->platform) && !empty($this->platformVersion)) {
+            $userAgent .= sprintf(' %s/%s', $this->platform, $this->platformVersion);
+        }
+
         if (is_resource($this->curl)) {
             curl_close($this->curl);
         }
@@ -81,6 +108,8 @@ abstract class AbstractService
             ),
             'Accept: application/json'
         ];
+
+        print_r($headers);
 
         $this->curl = curl_init($this->store->getEnvironment()->getEndpoint($this->getService()));
 

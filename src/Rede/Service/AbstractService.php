@@ -110,8 +110,6 @@ abstract class AbstractService
             'Accept: application/json'
         ];
 
-        print_r($headers);
-
         $this->curl = curl_init($this->store->getEnvironment()->getEndpoint($this->getService()));
 
         curl_setopt(

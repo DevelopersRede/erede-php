@@ -54,6 +54,9 @@ $transaction = (new \Rede\Transaction(20.99, 'pedido' . time()))->creditCard(
     'John Snow'
 );
 
+// Configuração de parcelamento
+// $transaction->setInstallments(3);
+
 // Autoriza a transação
 $transaction = (new \Rede\eRede($store))->create($transaction);
 

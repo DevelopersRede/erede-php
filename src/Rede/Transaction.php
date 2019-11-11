@@ -517,7 +517,7 @@ class Transaction implements RedeSerializable, RedeUnserializable
      */
     public function setAmount($amount)
     {
-        $this->amount = (int)($amount * 100);
+        $this->amount = ceil($amount * 100);
         return $this;
     }
 

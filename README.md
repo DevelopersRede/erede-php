@@ -370,7 +370,7 @@ $store = new \Rede\Store('PV', 'TOKEN', \Rede\Environment::production());
 // Configuração da loja em modo sandbox
 // $store = new \Rede\Store('PV', 'TOKEN', \Rede\Environment::sandbox());
 
-// Transação que será canelada
+// Transação que será cancelada
 $transaction = (new \Rede\eRede($store))->cancel((new \Rede\Transaction(20.99))->setTid('TID123'));
 
 if ($transaction->getReturnCode() == '359') {

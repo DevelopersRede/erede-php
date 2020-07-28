@@ -1,5 +1,5 @@
 {
-  "name": "developersrede/erede-php",
+  "name": "filipeaugusto/erede-php",
   "version": "4.2.1",
   "description": "e.Rede integration SDK",
   "minimum-stability": "stable",
@@ -21,8 +21,8 @@
   },
   "authors": [
     {
-      "name": "João Batista Neto",
-      "email": "neto.joaobatista@gmail.com"
+      "name": "Filipe Augusto Magalhães",
+      "email": "filipeaugustomagalhaes@gmail.com"
     }
   ]
 }

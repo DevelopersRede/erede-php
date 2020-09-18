@@ -236,7 +236,7 @@ $transaction = (new Transaction(20.99, 'pedido' . time()))->creditCard(
 );
 
 //Dados do antifraude
-$antifraud = $transaction->antifraud($environment);
+$antifraud = $transaction->antifraud();
 $antifraud->consumer('Fulano', 'fulano@de.tal', '11111111111')
     ->setGender(Consumer::MALE)
     ->setPhone(new Phone('011', '999999999'))
@@ -303,7 +303,7 @@ $transaction = (new Transaction(20.99, 'pedido' . time()))->creditCard(
 );
 
 //Dados do antifraude
-$antifraud = $transaction->antifraud($environment);
+$antifraud = $transaction->antifraud();
 $antifraud->consumer('Guilherme', 'lorem@ipsum.com', '15153855406')
     ->setGender(Consumer::MALE)
     ->setPhone(new Phone('011', '912341234'))

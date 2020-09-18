@@ -45,7 +45,7 @@ abstract class AbstractService
      * AbstractService constructor.
      *
      * @param Store $store
-     * @param LoggerInterface $logger
+     * @param LoggerInterface|null $logger
      */
     public function __construct(Store $store, LoggerInterface $logger = null)
     {
@@ -82,7 +82,7 @@ abstract class AbstractService
      * @return mixed
      * @throws RuntimeException
      */
-    protected function sendRequest($body = null, $method = 'GET')
+    protected function sendRequest($body = '', $method = 'GET')
     {
         $userAgent = sprintf('User-Agent: %s',
             sprintf(eRede::USER_AGENT, phpversion(), $this->store->getFiliation(), php_uname('s'), php_uname('r'),
@@ -142,7 +142,7 @@ abstract class AbstractService
                 curl_setopt($this->curl, CURLOPT_CUSTOMREQUEST, $method);
         }
 
-        if ($body !== null) {
+        if (!empty($body)) {
             curl_setopt($this->curl, CURLOPT_POSTFIELDS, $body);
 
             $headers[] = 'Content-Type: application/json; charset=utf8';

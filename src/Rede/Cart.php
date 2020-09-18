@@ -17,11 +17,6 @@ class Cart implements RedeSerializable
     private $consumer;
 
     /**
-     * @var Environment
-     */
-    private $environment;
-
-    /**
      * @var Iata
      */
     private $iata;
@@ -45,11 +40,11 @@ class Cart implements RedeSerializable
     {
         $address = new Address();
 
-        if ($type & Address::BILLING == Address::BILLING) {
+        if (($type & Address::BILLING) == Address::BILLING) {
             $this->setBillingAddress($address);
         }
 
-        if ($type & Address::SHIPPING == Address::SHIPPING) {
+        if (($type & Address::SHIPPING) == Address::SHIPPING) {
             $this->setShippingAddress($address);
         }
 
@@ -180,16 +175,4 @@ class Cart implements RedeSerializable
     {
         return $this->shipping;
     }
-
-    /**
-     * @param Environment $environment
-     *
-     * @return Cart
-     */
-    public function setEnvironment(Environment $environment)
-    {
-        $this->environment = $environment;
-        return $this;
-    }
-
 }

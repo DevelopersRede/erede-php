@@ -238,14 +238,11 @@ class Transaction implements RedeSerializable, RedeUnserializable
     }
 
     /**
-     * @param Environment $environment
-     *
      * @return Cart
      */
-    public function antifraud(Environment $environment)
+    public function antifraud()
     {
         $cart = new Cart();
-        $cart->setEnvironment($environment);
 
         $this->setAntifraudRequired(true);
         $this->setCart($cart);

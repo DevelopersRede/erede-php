@@ -26,8 +26,8 @@ abstract class AbstractTransactionsService extends AbstractService
      * AbstractTransactionsService constructor.
      *
      * @param Store $store
-     * @param Transaction $transaction
-     * @param LoggerInterface $logger
+     * @param Transaction|null $transaction
+     * @param LoggerInterface|null $logger
      */
     public function __construct(Store $store, Transaction $transaction = null, LoggerInterface $logger = null)
     {

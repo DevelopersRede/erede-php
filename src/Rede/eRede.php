@@ -37,7 +37,7 @@ class eRede
      * eRede constructor.
      *
      * @param Store $store
-     * @param LoggerInterface $logger
+     * @param LoggerInterface|null $logger
      */
     public function __construct(Store $store, LoggerInterface $logger = null)
     {
@@ -47,6 +47,7 @@ class eRede
 
     /**
      * @param string $platform
+     * @param $platformVersion
      *
      * @return eRede
      */

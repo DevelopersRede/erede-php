@@ -14,7 +14,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Rede\\": "src//Rede"
+      "Rede\\": "src/Rede"
     }
   },
   "authors": [

@@ -8,8 +8,8 @@ SDK de integração eRede
 
 * PHP >= 7.2
 
-**Atenção:** o PHP 7.2 tem atualizações por apenas mais 2 meses. Por motivos de segurança, recomendamos que atualize a versão
-seu PHP para, pelo menos, a versão 7.3. Veja mais sobre as versões suportadas em [Suportted Versions](https://www.php.net/supported-versions.php).
+**Atenção:** o PHP 7.2 tem atualizações de segurança apenas até 30 de Novembro de 2020. Por motivos de segurança, recomendamos que atualize a versão
+seu PHP para a versão mais recente disponível. Veja mais sobre as versões suportadas em [Suportted Versions](https://www.php.net/supported-versions.php).
 
 ## Instalando o SDK
 

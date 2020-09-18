@@ -100,7 +100,7 @@ class Consumer implements RedeSerializable
     }
 
     /**
-     * @return \ArrayIterator
+     * @return ArrayIterator
      */
     public function getDocumentsIterator()
     {

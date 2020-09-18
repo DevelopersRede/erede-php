@@ -6,6 +6,7 @@ namespace Rede;
 
 use ArrayIterator;
 use DateTime;
+use Exception;
 use InvalidArgumentException;
 
 class Transaction implements RedeSerializable, RedeUnserializable
@@ -86,7 +87,7 @@ class Transaction implements RedeSerializable, RedeUnserializable
 
     /**
      *
-     * @var \DateTime
+     * @var DateTime
      */
     private $dateTime;
 
@@ -425,7 +426,7 @@ class Transaction implements RedeSerializable, RedeUnserializable
      * @param string $serialized
      *
      * @return Transaction
-     * @throws \Exception
+     * @throws Exception
      */
     public function jsonUnserialize($serialized)
     {
@@ -1050,7 +1051,7 @@ class Transaction implements RedeSerializable, RedeUnserializable
 
     /**
      *
-     * @return \ArrayIterator
+     * @return ArrayIterator
      */
     public function getUrlsIterator()
     {

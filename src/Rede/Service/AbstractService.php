@@ -2,8 +2,10 @@
 
 namespace Rede\Service;
 
+use InvalidArgumentException;
 use Psr\Log\LoggerInterface;
 use Rede\eRede;
+use Rede\Exception\RedeException;
 use Rede\Store;
 use Rede\Transaction;
 use RuntimeException;
@@ -67,9 +69,9 @@ abstract class AbstractService
 
     /**
      * @return Transaction
-     * @throws \InvalidArgumentException
-     * @throws \RuntimeException
-     * @throws \Rede\Exception\RedeException
+     * @throws InvalidArgumentException
+     * @throws RuntimeException
+     * @throws RedeException
      */
     abstract public function execute();
 
@@ -78,7 +80,7 @@ abstract class AbstractService
      * @param string $method
      *
      * @return mixed
-     * @throws \RuntimeException
+     * @throws RuntimeException
      */
     protected function sendRequest($body = null, $method = 'GET')
     {

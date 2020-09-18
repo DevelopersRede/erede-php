@@ -3,6 +3,7 @@
 namespace Rede;
 
 use DateTime;
+use Exception;
 
 class Capture
 {
@@ -14,7 +15,7 @@ class Capture
     private $amount;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      */
     private $dateTime;
 
@@ -43,7 +44,7 @@ class Capture
     }
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
     public function getDateTime()
     {
@@ -54,7 +55,7 @@ class Capture
      * @param string $dateTime
      *
      * @return Capture
-     * @throws \Exception
+     * @throws Exception
      */
     public function setDateTime($dateTime)
     {

@@ -3,6 +3,7 @@
 namespace Rede;
 
 use DateTime;
+use Exception;
 
 class Refund
 {
@@ -14,7 +15,7 @@ class Refund
     private $amount;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      */
     private $refundDateTime;
 
@@ -49,7 +50,7 @@ class Refund
     }
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
     public function getRefundDateTime()
     {
@@ -60,7 +61,7 @@ class Refund
      * @param string $refundDateTime
      *
      * @return Refund
-     * @throws \Exception
+     * @throws Exception
      */
     public function setRefundDateTime($refundDateTime)
     {

@@ -3,6 +3,7 @@
 namespace Rede;
 
 use DateTime;
+use Exception;
 
 class Authorization
 {
@@ -35,7 +36,7 @@ class Authorization
     private $cardHolderName;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      */
     private $dateTime;
 
@@ -206,8 +207,7 @@ class Authorization
     }
 
     /**
-     *
-     * @return \DateTime
+     * @return DateTime
      */
     public function getDateTime()
     {
@@ -218,7 +218,7 @@ class Authorization
      * @param string $dateTime
      *
      * @return Authorization
-     * @throws \Exception
+     * @throws Exception
      */
     public function setDateTime($dateTime)
     {

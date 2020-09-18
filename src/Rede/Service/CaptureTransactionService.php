@@ -2,15 +2,18 @@
 
 namespace Rede\Service;
 
+use InvalidArgumentException;
+use Rede\Exception\RedeException;
 use Rede\Transaction;
+use RuntimeException;
 
 class CaptureTransactionService extends AbstractTransactionsService
 {
     /**
      * @return Transaction
-     * @throws \InvalidArgumentException
-     * @throws \RuntimeException
-     * @throws \Rede\Exception\RedeException
+     * @throws InvalidArgumentException
+     * @throws RuntimeException
+     * @throws RedeException
      */
     public function execute()
     {

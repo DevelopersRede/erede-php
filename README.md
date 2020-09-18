@@ -63,7 +63,7 @@ docker run -e REDE_PV='1234' -e REDE_TOKEN='5678' erede-docker
 ```php
 <?php
 // Configuração da loja em modo produção
-use Rede\Environment;use Rede\eRede;use Rede\Store;use Rede\Transaction;$store = new Store('PV', 'TOKEN', Environment::production());
+$store = new Store('PV', 'TOKEN', Environment::production());
 
 // Configuração da loja em modo sandbox
 // $store = new \Rede\Store('PV', 'TOKEN', \Rede\Environment::sandbox());
@@ -90,7 +90,7 @@ Por padrão, a transação é capturada automaticamente; caso seja necessário a
 ```php
 <?php
 // Configuração da loja em modo produção
-use Rede\Environment;use Rede\eRede;use Rede\Store;use Rede\Transaction;$store = new Store('PV', 'TOKEN', Environment::production());
+$store = new Store('PV', 'TOKEN', Environment::production());
 
 // Configuração da loja em modo sandbox
 // $store = new \Rede\Store('PV', 'TOKEN', \Rede\Environment::sandbox());
@@ -117,7 +117,7 @@ if ($transaction->getReturnCode() == '00') {
 ```php
 <?php
 // Configuração da loja em modo produção
-use Rede\Environment;use Rede\eRede;use Rede\Store;use Rede\Transaction;$store = new Store('PV', 'TOKEN', Environment::production());
+$store = new Store('PV', 'TOKEN', Environment::production());
 
 // Configuração da loja em modo sandbox
 // $store = new \Rede\Store('PV', 'TOKEN', \Rede\Environment::sandbox());
@@ -147,7 +147,7 @@ if ($transaction->getReturnCode() == '00') {
 ```php
 <?php
 // Configuração da loja em modo produção
-use Rede\Environment;use Rede\eRede;use Rede\Store;use Rede\Transaction;$store = new Store('PV', 'TOKEN', Environment::production());
+$store = new Store('PV', 'TOKEN', Environment::production());
 
 // Configuração da loja em modo sandbox
 // $store = new \Rede\Store('PV', 'TOKEN', \Rede\Environment::sandbox());
@@ -174,7 +174,7 @@ if ($transaction->getReturnCode() == '00') {
 ```php
 <?php
 // Configuração da loja em modo produção
-use Rede\Environment;use Rede\eRede;use Rede\Store;use Rede\SubMerchant;use Rede\Transaction;$store = new Store('PV', 'TOKEN', Environment::production());
+$store = new Store('PV', 'TOKEN', Environment::production());
 
 // Configuração da loja em modo sandbox
 // $store = new \Rede\Store('PV', 'TOKEN', \Rede\Environment::sandbox());
@@ -210,7 +210,7 @@ if ($transaction->getReturnCode() == '00') {
 ```php
 <?php
 // Configuração da loja em modo produção
-use Rede\Environment;use Rede\eRede;use Rede\Store;use Rede\Transaction;$store = new Store('PV', 'TOKEN', Environment::production());
+$store = new Store('PV', 'TOKEN', Environment::production());
 
 // Configuração da loja em modo sandbox
 // $store = new \Rede\Store('PV', 'TOKEN', \Rede\Environment::sandbox());
@@ -237,7 +237,7 @@ if ($transaction->getReturnCode() == '00') {
 ```php
 <?php
 // Configuração da loja em modo produção
-use Rede\Environment;use Rede\eRede;use Rede\Store;use Rede\Transaction;$store = new Store('PV', 'TOKEN', Environment::production());
+$store = new Store('PV', 'TOKEN', Environment::production());
 
 // Configuração da loja em modo sandbox
 // $store = new \Rede\Store('PV', 'TOKEN', \Rede\Environment::sandbox());
@@ -255,7 +255,7 @@ if ($transaction->getReturnCode() == '00') {
 ```php
 <?php
 // Configuração da loja em modo produção
-use Rede\Environment;use Rede\eRede;use Rede\Store;use Rede\Transaction;$store = new Store('PV', 'TOKEN', Environment::production());
+$store = new Store('PV', 'TOKEN', Environment::production());
 
 // Configuração da loja em modo sandbox
 // $store = new \Rede\Store('PV', 'TOKEN', \Rede\Environment::sandbox());
@@ -273,7 +273,7 @@ if ($transaction->getReturnCode() == '359') {
 ```php
 <?php
 // Configuração da loja em modo produção
-use Rede\Environment;use Rede\eRede;use Rede\Store;$store = new Store('PV', 'TOKEN', Environment::production());
+$store = new Store('PV', 'TOKEN', Environment::production());
 
 // Configuração da loja em modo sandbox
 // $store = new \Rede\Store('PV', 'TOKEN', \Rede\Environment::sandbox());
@@ -288,7 +288,7 @@ printf("O status atual da autorização é %s\n", $transaction->getAuthorization
 ```php
 <?php
 // Configuração da loja em modo produção
-use Rede\Environment;use Rede\eRede;use Rede\Store;$store = new Store('PV', 'TOKEN', Environment::production());
+$store = new Store('PV', 'TOKEN', Environment::production());
 
 // Configuração da loja em modo sandbox
 // $store = new \Rede\Store('PV', 'TOKEN', \Rede\Environment::sandbox());
@@ -303,7 +303,7 @@ printf("O status atual da autorização é %s\n", $transaction->getAuthorization
 ```php
 <?php
 // Configuração da loja em modo produção
-use Rede\Environment;use Rede\eRede;use Rede\Store;$store = new Store('PV', 'TOKEN', Environment::production());
+$store = new Store('PV', 'TOKEN', Environment::production());
 
 // Configuração da loja em modo sandbox
 // $store = new \Rede\Store('PV', 'TOKEN', \Rede\Environment::sandbox());
@@ -318,7 +318,7 @@ printf("O status atual da autorização é %s\n", $transaction->getAuthorization
 ```php
 <?php
 // Configuração da loja em modo produção
-use Rede\Environment;use Rede\eRede;use Rede\Store;use Rede\ThreeDSecure;use Rede\Transaction;use Rede\Url;$store = new Store('PV', 'TOKEN', Environment::production());
+$store = new Store('PV', 'TOKEN', Environment::production());
 
 // Configuração da loja em modo sandbox
 // $store = new \Rede\Store('PV', 'TOKEN', \Rede\Environment::sandbox());

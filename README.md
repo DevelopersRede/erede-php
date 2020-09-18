@@ -33,6 +33,26 @@ Alternativamente, você pode executar diretamente em seu terminal:
 composer require "developersrede/erede-php"
 ```
 
+# Testes
+
+O SDK utiliza PHPUnit com TestDox para os testes. Para executá-los em ambiente local, você precisa exportar
+as variáveis de ambiente `REDE_PV` e `REDE_TOKEN` com suas credenciais da API. Feito isso, basta rodar:
+
+```
+export REDE_PV=1234
+export REDE_TOKEN=5678
+
+vendor/bin/phpunit --testdox --colors='always' test
+```
+
+Os testes também podem ser executados através de um container com a configuração ideal para o projeto. Para isso, basta
+fazer:
+
+```
+docker build . -t erede-docker
+docker run -e REDE_PV='1234' -e REDE_TOKEN='5678' erede-docker
+```
+
 # Utilizando
 
 ## Autorizando uma transação

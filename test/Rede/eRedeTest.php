@@ -3,6 +3,7 @@
 namespace Rede;
 
 // Configuração da loja em modo produção
+use http\Exception\RuntimeException;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 
@@ -13,9 +14,6 @@ use Psr\Log\LoggerInterface;
  */
 class eRedeTest extends TestCase
 {
-    const FILIATION = '10000850';
-    const TOKEN = 'eb3c322b84ff475c95abb16673659664';
-
     /**
      * @var Store
      */
@@ -33,7 +31,16 @@ class eRedeTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->store = new Store(eRedeTest::FILIATION, eRedeTest::TOKEN, Environment::sandbox());
+        $filiation = getenv('REDE_PV');
+        $token = getenv('REDE_TOKEN');
+
+        if (empty($filiation) || empty($token)) {
+            echo "Você precisa informar seu PV e Token para rodar os testes.\n";
+
+            die;
+        }
+
+        $this->store = new Store($filiation, $token, Environment::sandbox());
     }
 
     private function generateReferenceNumber()

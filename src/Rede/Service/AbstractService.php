@@ -122,11 +122,8 @@ abstract class AbstractService
         );
 
         if (!defined('CURL_SSLVERSION_TLSv1_2')) {
-            define('CURL_SSLVERSION_TLSv1_2', 6);
-
-            if ($this->logger !== null) {
-                $this->logger->alert('Atenção, por motivos de segurança, recomendamos fortemente que você atualize a versão do seu PHP.');
-            }
+            throw new RuntimeException(sprintf('Atenção, sua versão da curl não suporta TLS 1.2 e precisa ser atualizada. Sua versão atual da curl é %s',
+                $curlVersion));
         }
 
         curl_setopt($this->curl, CURLOPT_SSLVERSION, CURL_SSLVERSION_TLSv1_2);
@@ -167,26 +164,38 @@ abstract class AbstractService
         }
 
         $response = curl_exec($this->curl);
-        $statusCode = curl_getinfo($this->curl, CURLINFO_HTTP_CODE);
+        $httpInfo = curl_getinfo($this->curl);
 
         if ($this->logger !== null) {
             $this->logger->debug(
                 sprintf("Response Rede\nStatus Code: %s\n\n%s",
-                    $statusCode,
+                    $httpInfo['http_code'],
                     $response
                 )
             );
+
+            foreach ($httpInfo as $key => $info) {
+                if (is_array($info)) {
+                    foreach ($info as $infoKey => $infoValue) {
+                        $this->logger->debug(sprintf('Curl[%s][%s]: %s', $key, $infoKey, $infoValue));
+                    }
+
+                    continue;
+                }
+
+                $this->logger->debug(sprintf('Curl[%s]: %s', $key, $info));
+            }
         }
 
         if (curl_errno($this->curl)) {
-            throw new RuntimeException('Curl error: ' . curl_error($this->curl));
+            throw new RuntimeException(sprintf('Curl error[%s]: %s', curl_errno($this->curl), curl_error($this->curl)));
         }
 
         curl_close($this->curl);
 
         $this->curl = null;
 
-        return $this->parseResponse($response, $statusCode);
+        return $this->parseResponse($response, $httpInfo['http_code']);
     }
 
     /**

@@ -79,6 +79,7 @@ class ThreeDSecure implements RedeSerializable
 
     /**
      * @param string $threeDIndicator
+     *
      * @return ThreeDSecure
      */
     public function setThreeDIndicator($threeDIndicator)
@@ -97,6 +98,7 @@ class ThreeDSecure implements RedeSerializable
 
     /**
      * @param string $DirectoryServerTransactionId
+     *
      * @return ThreeDSecure
      */
     public function setDirectoryServerTransactionId($DirectoryServerTransactionId)
@@ -125,7 +127,6 @@ class ThreeDSecure implements RedeSerializable
     }
 
     /**
-     *
      * @return string
      */
     public function getEci()
@@ -145,7 +146,6 @@ class ThreeDSecure implements RedeSerializable
     }
 
     /**
-     *
      * @return string
      */
     public function getOnFailure()
@@ -165,7 +165,6 @@ class ThreeDSecure implements RedeSerializable
     }
 
     /**
-     *
      * @return string
      */
     public function getUrl()
@@ -185,7 +184,6 @@ class ThreeDSecure implements RedeSerializable
     }
 
     /**
-     *
      * @return string
      */
     public function getUserAgent()
@@ -205,7 +203,6 @@ class ThreeDSecure implements RedeSerializable
     }
 
     /**
-     *
      * @return string
      */
     public function getXid()
@@ -214,7 +211,6 @@ class ThreeDSecure implements RedeSerializable
     }
 
     /**
-     *
      * @param string $xid
      *
      * @return ThreeDSecure
@@ -226,7 +222,6 @@ class ThreeDSecure implements RedeSerializable
     }
 
     /**
-     *
      * @return bool
      */
     public function isEmbedded()

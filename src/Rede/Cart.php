@@ -32,7 +32,6 @@ class Cart implements RedeSerializable
     private $items;
 
     /**
-     *
      * @var Address
      */
     private $shipping;
@@ -69,7 +68,6 @@ class Cart implements RedeSerializable
     }
 
     /**
-     *
      * @param Address $address
      *
      * @return Cart
@@ -129,7 +127,6 @@ class Cart implements RedeSerializable
     }
 
     /**
-     *
      * @return Address
      */
     public function getBillingAddress()
@@ -138,7 +135,6 @@ class Cart implements RedeSerializable
     }
 
     /**
-     *
      * @return Consumer
      */
     public function getConsumer()
@@ -147,7 +143,6 @@ class Cart implements RedeSerializable
     }
 
     /**
-     *
      * @param Consumer $consumer
      *
      * @return Cart
@@ -159,7 +154,6 @@ class Cart implements RedeSerializable
     }
 
     /**
-     *
      * @return Iata
      */
     public function getIata()
@@ -168,7 +162,6 @@ class Cart implements RedeSerializable
     }
 
     /**
-     *
      * @param Flight $flight
      *
      * @return $this
@@ -181,7 +174,6 @@ class Cart implements RedeSerializable
     }
 
     /**
-     *
      * @return Address
      */
     public function getShippingAddress()

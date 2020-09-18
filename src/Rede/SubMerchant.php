@@ -44,6 +44,7 @@ class SubMerchant
 
     /**
      * @param string $mcc
+     *
      * @return SubMerchant
      */
     public function setMcc($mcc)
@@ -62,6 +63,7 @@ class SubMerchant
 
     /**
      * @param string $city
+     *
      * @return SubMerchant
      */
     public function setCity($city)
@@ -80,6 +82,7 @@ class SubMerchant
 
     /**
      * @param string $country
+     *
      * @return SubMerchant
      */
     public function setCountry($country)

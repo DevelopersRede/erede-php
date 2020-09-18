@@ -47,6 +47,7 @@ class eRede
 
     /**
      * @param string $platform
+     *
      * @return eRede
      */
     public function platform($platform, $platformVersion)

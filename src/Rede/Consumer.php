@@ -33,13 +33,11 @@ class Consumer implements RedeSerializable
     private $gender;
 
     /**
-     *
      * @var string
      */
     private $name;
 
     /**
-     *
      * @var Phone
      */
     private $phone;
@@ -80,7 +78,6 @@ class Consumer implements RedeSerializable
     }
 
     /**
-     *
      * @return string
      */
     public function getCpf()
@@ -112,7 +109,6 @@ class Consumer implements RedeSerializable
     }
 
     /**
-     *
      * @return string
      */
     public function getEmail()
@@ -132,7 +128,6 @@ class Consumer implements RedeSerializable
     }
 
     /**
-     *
      * @return string
      */
     public function getGender()
@@ -152,7 +147,6 @@ class Consumer implements RedeSerializable
     }
 
     /**
-     *
      * @return string
      */
     public function getName()
@@ -161,7 +155,6 @@ class Consumer implements RedeSerializable
     }
 
     /**
-     *
      * @param string $name
      *
      * @return Consumer
@@ -173,7 +166,6 @@ class Consumer implements RedeSerializable
     }
 
     /**
-     *
      * @return Phone
      */
     public function getPhone()
@@ -182,7 +174,6 @@ class Consumer implements RedeSerializable
     }
 
     /**
-     *
      * @param Phone $phone
      *
      * @return Consumer

@@ -9,7 +9,7 @@
     "php": ">=7.2",
     "ext-curl": "*",
     "ext-json": "*",
-    "psr/log":"^1.1",
+    "psr/log": "^1.1",
     "monolog/monolog": ">=2.1.1"
   },
   "autoload": {

@@ -83,7 +83,6 @@ class Environment implements RedeSerializable
     }
 
     /**
-     *
      * @return string
      */
     public function getSessionId()
@@ -103,7 +102,6 @@ class Environment implements RedeSerializable
     }
 
     /**
-     *
      * @return array
      */
     public function jsonSerialize()

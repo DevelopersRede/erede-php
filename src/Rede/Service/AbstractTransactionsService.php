@@ -56,7 +56,6 @@ abstract class AbstractTransactionsService extends AbstractService
     }
 
     /**
-     *
      * @param string $tid
      */
     public function setTid($tid)
@@ -65,8 +64,8 @@ abstract class AbstractTransactionsService extends AbstractService
     }
 
     /**
-     * @see    AbstractService::getService()
      * @return string
+     * @see    AbstractService::getService()
      */
     protected function getService()
     {

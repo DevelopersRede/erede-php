@@ -64,7 +64,6 @@ class Capture
     }
 
     /**
-     *
      * @return string
      */
     public function getNsu()

@@ -27,7 +27,6 @@ class Flight implements RedeSerializable
     private $passenger;
 
     /**
-     *
      * @var string
      */
     private $to;
@@ -60,7 +59,6 @@ class Flight implements RedeSerializable
     }
 
     /**
-     *
      * @return string
      */
     public function getFrom()
@@ -80,7 +78,6 @@ class Flight implements RedeSerializable
     }
 
     /**
-     *
      * @return string
      */
     public function getNumber()
@@ -100,7 +97,6 @@ class Flight implements RedeSerializable
     }
 
     /**
-     *
      * @return array
      */
     public function getPassenger()
@@ -137,7 +133,6 @@ class Flight implements RedeSerializable
     }
 
     /**
-     *
      * @return string
      */
     public function getTo()
@@ -146,7 +141,6 @@ class Flight implements RedeSerializable
     }
 
     /**
-     *
      * @param string $to
      *
      * @return Flight

@@ -46,7 +46,6 @@ class Antifraud
     }
 
     /**
-     *
      * @return string
      */
     public function getRiskLevel()
@@ -66,7 +65,6 @@ class Antifraud
     }
 
     /**
-     *
      * @return int
      */
     public function getScore()
@@ -86,7 +84,6 @@ class Antifraud
     }
 
     /**
-     *
      * @return bool
      */
     public function isSuccess()

@@ -34,6 +34,7 @@ class Additional implements RedeSerializable
 
     /**
      * @param int $gateway
+     *
      * @return Additional
      */
     public function setGateway($gateway)
@@ -52,6 +53,7 @@ class Additional implements RedeSerializable
 
     /**
      * @param int $module
+     *
      * @return Additional
      */
     public function setModule($module)

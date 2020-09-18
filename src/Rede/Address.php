@@ -36,31 +36,26 @@ class Address implements RedeSerializable
     private $complement;
 
     /**
-     *
      * @var string
      */
     private $neighbourhood;
 
     /**
-     *
      * @var string
      */
     private $number;
 
     /**
-     *
      * @var string
      */
     private $state;
 
     /**
-     *
      * @var int
      */
     private $type;
 
     /**
-     *
      * @var string
      */
     private $zipCode;
@@ -85,7 +80,6 @@ class Address implements RedeSerializable
     }
 
     /**
-     *
      * @return string
      */
     public function getAddresseeName()
@@ -105,7 +99,6 @@ class Address implements RedeSerializable
     }
 
     /**
-     *
      * @return string
      */
     public function getCity()
@@ -125,7 +118,6 @@ class Address implements RedeSerializable
     }
 
     /**
-     *
      * @return string
      */
     public function getComplement()
@@ -145,7 +137,6 @@ class Address implements RedeSerializable
     }
 
     /**
-     *
      * @return string
      */
     public function getNeighbourhood()
@@ -165,7 +156,6 @@ class Address implements RedeSerializable
     }
 
     /**
-     *
      * @return string
      */
     public function getNumber()
@@ -174,7 +164,6 @@ class Address implements RedeSerializable
     }
 
     /**
-     *
      * @param string $number
      *
      * @return Address
@@ -186,7 +175,6 @@ class Address implements RedeSerializable
     }
 
     /**
-     *
      * @return string
      */
     public function getState()
@@ -195,7 +183,6 @@ class Address implements RedeSerializable
     }
 
     /**
-     *
      * @param string $state
      *
      * @return Address
@@ -207,7 +194,6 @@ class Address implements RedeSerializable
     }
 
     /**
-     *
      * @return int
      */
     public function getType()
@@ -216,7 +202,6 @@ class Address implements RedeSerializable
     }
 
     /**
-     *
      * @param int $type
      *
      * @return Address
@@ -228,7 +213,6 @@ class Address implements RedeSerializable
     }
 
     /**
-     *
      * @return string
      */
     public function getZipCode()
@@ -237,7 +221,6 @@ class Address implements RedeSerializable
     }
 
     /**
-     *
      * @param string $zipCode
      *
      * @return Address

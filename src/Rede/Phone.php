@@ -79,7 +79,6 @@ class Phone implements RedeSerializable
     }
 
     /**
-     *
      * @return string
      */
     public function getType()

@@ -30,7 +30,6 @@ class Refund
     private $status;
 
     /**
-     *
      * @return int
      */
     public function getAmount()
@@ -70,7 +69,6 @@ class Refund
     }
 
     /**
-     *
      * @return string
      */
     public function getRefundId()
@@ -90,7 +88,6 @@ class Refund
     }
 
     /**
-     *
      * @return string
      */
     public function getStatus()

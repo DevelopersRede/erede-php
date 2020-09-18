@@ -30,7 +30,6 @@ class Authorization
     private $cardBin;
 
     /**
-     *
      * @var string
      */
     private $cardHolderName;
@@ -41,73 +40,61 @@ class Authorization
     private $dateTime;
 
     /**
-     *
      * @var int
      */
     private $installments;
 
     /**
-     *
      * @var string
      */
     private $kind;
 
     /**
-     *
      * @var string
      */
     private $last4;
 
     /**
-     *
      * @var string
      */
     private $nsu;
 
     /**
-     *
      * @var string
      */
     private $origin;
 
     /**
-     *
      * @var string
      */
     private $reference;
 
     /**
-     *
      * @var string
      */
     private $returnCode;
 
     /**
-     *
      * @var string
      */
     private $returnMessage;
 
     /**
-     *
      * @var string
      */
     private $status;
 
     /**
-     *
      * @var string
      */
     private $subscription;
 
     /**
-     *
      * @var string
      */
     private $tid;
 
     /**
-     *
      * @return string
      */
     public function getAffiliation()
@@ -127,7 +114,6 @@ class Authorization
     }
 
     /**
-     *
      * @return int
      */
     public function getAmount()
@@ -147,7 +133,6 @@ class Authorization
     }
 
     /**
-     *
      * @return string
      */
     public function getAuthorizationCode()
@@ -167,7 +152,6 @@ class Authorization
     }
 
     /**
-     *
      * @return string
      */
     public function getCardBin()
@@ -187,7 +171,6 @@ class Authorization
     }
 
     /**
-     *
      * @return string
      */
     public function getCardHolderName()
@@ -227,7 +210,6 @@ class Authorization
     }
 
     /**
-     *
      * @return int
      */
     public function getInstallments()
@@ -236,7 +218,6 @@ class Authorization
     }
 
     /**
-     *
      * @param int $installments
      *
      * @return Authorization
@@ -248,7 +229,6 @@ class Authorization
     }
 
     /**
-     *
      * @return string
      */
     public function getKind()
@@ -257,7 +237,6 @@ class Authorization
     }
 
     /**
-     *
      * @param string $kind
      *
      * @return Authorization
@@ -269,7 +248,6 @@ class Authorization
     }
 
     /**
-     *
      * @return string
      */
     public function getLast4()
@@ -278,7 +256,6 @@ class Authorization
     }
 
     /**
-     *
      * @param string $last4
      *
      * @return Authorization
@@ -290,7 +267,6 @@ class Authorization
     }
 
     /**
-     *
      * @return string
      */
     public function getNsu()
@@ -299,7 +275,6 @@ class Authorization
     }
 
     /**
-     *
      * @param string $nsu
      *
      * @return Authorization
@@ -311,7 +286,6 @@ class Authorization
     }
 
     /**
-     *
      * @return string
      */
     public function getOrigin()
@@ -320,7 +294,6 @@ class Authorization
     }
 
     /**
-     *
      * @param string $origin
      *
      * @return Authorization
@@ -332,7 +305,6 @@ class Authorization
     }
 
     /**
-     *
      * @return string
      */
     public function getReference()
@@ -341,7 +313,6 @@ class Authorization
     }
 
     /**
-     *
      * @param string $reference
      *
      * @return Authorization
@@ -353,7 +324,6 @@ class Authorization
     }
 
     /**
-     *
      * @return string
      */
     public function getReturnCode()
@@ -373,7 +343,6 @@ class Authorization
     }
 
     /**
-     *
      * @return string
      */
     public function getReturnMessage()
@@ -382,7 +351,6 @@ class Authorization
     }
 
     /**
-     *
      * @param string $returnMessage
      *
      * @return Authorization
@@ -394,7 +362,6 @@ class Authorization
     }
 
     /**
-     *
      * @return string
      */
     public function getStatus()
@@ -403,7 +370,6 @@ class Authorization
     }
 
     /**
-     *
      * @param string $status
      *
      * @return Authorization
@@ -415,7 +381,6 @@ class Authorization
     }
 
     /**
-     *
      * @return string
      */
     public function getSubscription()
@@ -424,7 +389,6 @@ class Authorization
     }
 
     /**
-     *
      * @param string $subscription
      *
      * @return Authorization
@@ -436,7 +400,6 @@ class Authorization
     }
 
     /**
-     *
      * @return string
      */
     public function getTid()
@@ -445,7 +408,6 @@ class Authorization
     }
 
     /**
-     *
      * @param string $tid
      *
      * @return Authorization

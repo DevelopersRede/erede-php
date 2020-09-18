@@ -53,7 +53,6 @@ class Passenger implements RedeSerializable
     }
 
     /**
-     *
      * @return string
      */
     public function getName()
@@ -73,7 +72,6 @@ class Passenger implements RedeSerializable
     }
 
     /**
-     *
      * @return Phone
      */
     public function getPhone()
@@ -93,7 +91,6 @@ class Passenger implements RedeSerializable
     }
 
     /**
-     *
      * @return string
      */
     public function getTicket()

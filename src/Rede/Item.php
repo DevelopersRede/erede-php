@@ -32,25 +32,21 @@ class Item implements RedeSerializable
     private $freight;
 
     /**
-     *
      * @var string
      */
     private $id;
 
     /**
-     *
      * @var int
      */
     private $quantity;
 
     /**
-     *
      * @var string
      */
     private $shippingType;
 
     /**
-     *
      * @var int
      */
     private $type;
@@ -70,7 +66,6 @@ class Item implements RedeSerializable
     }
 
     /**
-     *
      * @return int
      */
     public function getAmount()
@@ -109,7 +104,6 @@ class Item implements RedeSerializable
     }
 
     /**
-     *
      * @return int
      */
     public function getDiscount()
@@ -129,7 +123,6 @@ class Item implements RedeSerializable
     }
 
     /**
-     *
      * @return int
      */
     public function getFreight()
@@ -149,7 +142,6 @@ class Item implements RedeSerializable
     }
 
     /**
-     *
      * @return string
      */
     public function getId()
@@ -158,7 +150,6 @@ class Item implements RedeSerializable
     }
 
     /**
-     *
      * @param string $id
      *
      * @return Item
@@ -170,7 +161,6 @@ class Item implements RedeSerializable
     }
 
     /**
-     *
      * @return int
      */
     public function getQuantity()
@@ -190,7 +180,6 @@ class Item implements RedeSerializable
     }
 
     /**
-     *
      * @return string
      */
     public function getShippingType()
@@ -210,7 +199,6 @@ class Item implements RedeSerializable
     }
 
     /**
-     *
      * @return int
      */
     public function getType()
@@ -219,7 +207,6 @@ class Item implements RedeSerializable
     }
 
     /**
-     *
      * @param int $type
      *
      * @return Item

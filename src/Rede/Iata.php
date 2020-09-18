@@ -43,7 +43,6 @@ class Iata implements RedeSerializable
     }
 
     /**
-     *
      * @return string
      */
     public function getDepartureTax()
@@ -63,7 +62,6 @@ class Iata implements RedeSerializable
     }
 
     /**
-     *
      * @return ArrayIterator
      */
     public function getFlightIterator()

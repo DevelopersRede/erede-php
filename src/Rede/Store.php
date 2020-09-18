@@ -77,7 +77,6 @@ class Store
     }
 
     /**
-     *
      * @return string
      */
     public function getToken()

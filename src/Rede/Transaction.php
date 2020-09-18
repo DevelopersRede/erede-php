@@ -29,16 +29,6 @@ class Transaction implements RedeSerializable, RedeUnserializable
     private $additional;
 
     /**
-     * @var Antifraud
-     */
-    private $antifraud;
-
-    /**
-     * @var bool
-     */
-    private $antifraudRequired;
-
-    /**
      * @var Authorization
      */
     private $authorization;
@@ -238,19 +228,6 @@ class Transaction implements RedeSerializable, RedeUnserializable
     }
 
     /**
-     * @return Cart
-     */
-    public function antifraud()
-    {
-        $cart = new Cart();
-
-        $this->setAntifraudRequired(true);
-        $this->setCart($cart);
-
-        return $cart;
-    }
-
-    /**
      * @param integer $gateway
      * @param integer $module
      *
@@ -361,7 +338,6 @@ class Transaction implements RedeSerializable, RedeUnserializable
         return array_filter(
             [
                 'capture' => $capture,
-                'antifraudRequired' => $this->antifraudRequired,
                 'cart' => $this->cart,
                 'kind' => $this->kind,
                 'threeDSecure' => $this->threeDSecure,
@@ -450,12 +426,6 @@ class Transaction implements RedeSerializable, RedeUnserializable
                 continue;
             }
 
-            if ($property == 'antifraud' && is_object($value)) {
-                $this->antifraud = Antifraud::create($value);
-
-                continue;
-            }
-
             if ($property == 'requestDateTime' || $property == 'dateTime' || $property == 'refundDateTime') {
                 $value = new DateTime($value);
             }
@@ -483,20 +453,6 @@ class Transaction implements RedeSerializable, RedeUnserializable
     {
         $this->amount = (int)($amount * 100);
         return $this;
-    }
-
-    /**
-     * @return Antifraud
-     */
-    public function getAntifraud()
-    {
-        $antifraud = $this->antifraud;
-
-        if ($antifraud === null) {
-            $antifraud = new Antifraud();
-        }
-
-        return $antifraud;
     }
 
     /**
@@ -878,25 +834,6 @@ class Transaction implements RedeSerializable, RedeUnserializable
     public function setStorageCard($storageCard)
     {
         $this->storageCard = $storageCard;
-        return $this;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isAntifraudRequired()
-    {
-        return $this->antifraudRequired;
-    }
-
-    /**
-     * @param bool $antifraudRequired
-     *
-     * @return Transaction
-     */
-    public function setAntifraudRequired($antifraudRequired)
-    {
-        $this->antifraudRequired = $antifraudRequired;
         return $this;
     }
 

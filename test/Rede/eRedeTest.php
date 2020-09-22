@@ -3,7 +3,8 @@
 namespace Rede;
 
 // Configuração da loja em modo produção
-use http\Exception\RuntimeException;
+use Monolog\Handler\StreamHandler;
+use Monolog\Logger;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 
@@ -33,11 +34,17 @@ class eRedeTest extends TestCase
     {
         $filiation = getenv('REDE_PV');
         $token = getenv('REDE_TOKEN');
+        $debug = getenv('REDE_DEBUG');
 
         if (empty($filiation) || empty($token)) {
             echo "Você precisa informar seu PV e Token para rodar os testes.\n";
 
             die;
+        }
+
+        if ((bool)$debug) {
+            $this->logger = new Logger('eRede SDK Test');
+            $this->logger->pushHandler(new StreamHandler('php://stdout'));
         }
 
         $this->store = new Store($filiation, $token, Environment::sandbox());

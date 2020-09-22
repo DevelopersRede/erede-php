@@ -157,7 +157,7 @@ abstract class AbstractService
                         $method,
                         $this->store->getEnvironment()->getEndpoint($this->getService()),
                         implode("\n", $headers),
-                        preg_replace('/"(cardnumber|securitycode)":"[^"]+"/i', '"\1":"***"', $body)
+                        preg_replace('/"(cardHolderName|cardnumber|securitycode)":"[^"]+"/i', '"\1":"***"', $body)
                     )
                 )
             );

@@ -179,7 +179,7 @@ class eRedeTest extends TestCase
     public function testShouldAuthorizeAZeroDolarCreditcardTransaction(): void
     {
         $transaction = (new Transaction(0, $this->generateReferenceNumber()))->creditCard(
-            '5105105105105100',
+            '5448280000000007',
             '235',
             '12',
             date('Y') + 1,

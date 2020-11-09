@@ -1016,7 +1016,7 @@ class Transaction implements RedeSerializable, RedeUnserializable
      *
      * @return Transaction
      */
-    public function setBrandTid(int $brandTid): Transaction
+    public function setBrandTid(int $brandTid)
     {
         $this->brandTid = $brandTid;
         return $this;
@@ -1025,7 +1025,7 @@ class Transaction implements RedeSerializable, RedeUnserializable
     /**
      * @return Brand
      */
-    public function getBrand(): Brand
+    public function getBrand()
     {
         return $this->brand;
     }
@@ -1035,7 +1035,7 @@ class Transaction implements RedeSerializable, RedeUnserializable
      *
      * @return Transaction
      */
-    public function setBrand(Brand $brand): Transaction
+    public function setBrand(Brand $brand)
     {
         $this->brand = $brand;
         return $this;

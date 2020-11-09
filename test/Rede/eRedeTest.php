@@ -171,13 +171,15 @@ class eRedeTest extends TestCase
 
         $transaction = (new eRede($this->store, $this->logger))->create($transaction);
 
+        error_log(print_r($transaction, true));
+
         $this->assertEquals('00', $transaction->getReturnCode());
     }
 
     public function testShouldAuthorizeAZeroDolarCreditcardTransaction(): void
     {
         $transaction = (new Transaction(0, $this->generateReferenceNumber()))->creditCard(
-            '5448280000000007',
+            '5105105105105100',
             '235',
             '12',
             date('Y') + 1,

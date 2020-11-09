@@ -167,6 +167,8 @@ abstract class AbstractService
         $response = curl_exec($this->curl);
         $httpInfo = curl_getinfo($this->curl);
 
+        error_log($response);
+
         if ($this->logger !== null) {
             $this->logger->debug(
                 sprintf("Response Rede\nStatus Code: %s\n\n%s",

@@ -39,6 +39,16 @@ class Transaction implements RedeSerializable, RedeUnserializable
     private $authorizationCode;
 
     /**
+     * @var int
+     */
+    private $brandTid;
+
+    /**
+     * @var Brand
+     */
+    private $brand;
+
+    /**
      * @var string
      */
     private $cancelId;
@@ -428,6 +438,12 @@ class Transaction implements RedeSerializable, RedeUnserializable
 
             if ($property == 'requestDateTime' || $property == 'dateTime' || $property == 'refundDateTime') {
                 $value = new DateTime($value);
+            }
+
+            if ($property == 'brand') {
+                $this->brand = Brand::create($value);
+
+                continue;
             }
 
             $this->$property = $value;
@@ -984,6 +1000,44 @@ class Transaction implements RedeSerializable, RedeUnserializable
 
         $this->threeDSecure = $threeDSecure;
 
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getBrandTid(): int
+    {
+        return $this->brandTid;
+    }
+
+    /**
+     * @param int $brandTid
+     *
+     * @return Transaction
+     */
+    public function setBrandTid(int $brandTid): Transaction
+    {
+        $this->brandTid = $brandTid;
+        return $this;
+    }
+
+    /**
+     * @return Brand
+     */
+    public function getBrand(): Brand
+    {
+        return $this->brand;
+    }
+
+    /**
+     * @param Brand $brand
+     *
+     * @return Transaction
+     */
+    public function setBrand(Brand $brand): Transaction
+    {
+        $this->brand = $brand;
         return $this;
     }
 }

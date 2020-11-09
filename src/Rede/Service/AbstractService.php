@@ -110,7 +110,8 @@ abstract class AbstractService
             str_replace('  ', ' ',
                 $userAgent
             ),
-            'Accept: application/json'
+            'Accept: application/json',
+            'Transaction-Response: brand-return-opened'
         ];
 
         $this->curl = curl_init($this->store->getEnvironment()->getEndpoint($this->getService()));

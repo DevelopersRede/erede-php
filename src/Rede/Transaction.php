@@ -1006,7 +1006,7 @@ class Transaction implements RedeSerializable, RedeUnserializable
     /**
      * @return int
      */
-    public function getBrandTid(): int
+    public function getBrandTid()
     {
         return $this->brandTid;
     }

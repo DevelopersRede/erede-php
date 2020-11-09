@@ -10,7 +10,7 @@ use Rede\Service\GetTransactionService;
 
 class eRede
 {
-    const VERSION = '5.0.1';
+    const VERSION = '5.1.2';
     const USER_AGENT = 'eRede/' . eRede::VERSION . ' (PHP %s; Store %s; %s %s)';
 
     /**

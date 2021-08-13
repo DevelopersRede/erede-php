@@ -94,4 +94,12 @@ class Brand
         return $this;
     }
 
+    /**
+     * @return string
+     */
+    public function getAuthorizationCode(): string
+    {
+        return $this->authorizationCode;
+    }
+
 }

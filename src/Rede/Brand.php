@@ -22,6 +22,11 @@ class Brand
     private $returnMessage;
 
     /**
+     * @var string
+     */
+    private $authorizationCode;
+
+    /**
      * @return string
      */
     public function getName(): string
@@ -78,5 +83,15 @@ class Brand
         return $this;
     }
 
+    /**
+     * @param string $authorizationCode
+     *
+     * @return Brand
+     */
+    public function setAuthorizationCode(string $authorizationCode): Brand
+    {
+        $this->authorizationCode = $authorizationCode;
+        return $this;
+    }
 
 }

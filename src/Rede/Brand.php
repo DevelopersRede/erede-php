@@ -22,6 +22,12 @@ class Brand
     private $returnMessage;
 
     /**
+     * @var string
+     */
+    private $brandTid;
+
+
+    /**
      * @return string
      */
     public function getName(): string
@@ -75,6 +81,25 @@ class Brand
     public function setReturnMessage(string $returnMessage): Brand
     {
         $this->returnMessage = $returnMessage;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getBrandTid()
+    {
+        return $this->brandTid;
+    }
+
+    /**
+     * @param mixed $brandTid
+     *
+     * @return Brand
+     */
+    public function setBrandTid(string $brandTid): Brand
+    {
+        $this->brandTid = $brandTid;
         return $this;
     }
 

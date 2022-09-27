@@ -6,54 +6,35 @@ class Phone implements RedeSerializable
 {
     use SerializeTrait;
 
-    const CELLPHONE = 1;
-    const HOME = 2;
-    const WORK = 3;
-    const OTHER = 4;
-
-    /**
-     * @var string
-     */
-    private $ddd;
-
-    /**
-     * @var string
-     */
-    private $number;
-
-    /**
-     * @var string
-     */
-    private $type;
+    public const CELLPHONE = 1;
+    public const HOME = 2;
+    public const WORK = 3;
+    public const OTHER = 4;
 
     /**
      * Phone constructor.
      *
-     * @param $ddd
-     * @param $number
-     * @param int $type
+     * @param string $ddd
+     * @param string $number
+     * @param int    $type
      */
-    public function __construct($ddd, $number, $type = Phone::CELLPHONE)
+    public function __construct(private string $ddd, private string $number, private int $type = Phone::CELLPHONE)
     {
-        $this->setDdd($ddd);
-        $this->setNumber($number);
-        $this->setType($type);
     }
 
     /**
      * @return string
      */
-    public function getDdd()
+    public function getDdd(): string
     {
         return $this->ddd;
     }
 
     /**
      * @param string $ddd
-     *
-     * @return Phone
+     * @return $this
      */
-    public function setDdd($ddd)
+    public function setDdd(string $ddd): static
     {
         $this->ddd = $ddd;
         return $this;
@@ -62,36 +43,34 @@ class Phone implements RedeSerializable
     /**
      * @return string
      */
-    public function getNumber()
+    public function getNumber(): string
     {
         return $this->number;
     }
 
     /**
      * @param string $number
-     *
-     * @return Phone
+     * @return $this
      */
-    public function setNumber($number)
+    public function setNumber(string $number): static
     {
         $this->number = $number;
         return $this;
     }
 
     /**
-     * @return string
+     * @return int
      */
-    public function getType()
+    public function getType(): int
     {
         return $this->type;
     }
 
     /**
-     * @param string $type
-     *
-     * @return Phone
+     * @param int $type
+     * @return $this
      */
-    public function setType($type)
+    public function setType(int $type): static
     {
         $this->type = $type;
         return $this;

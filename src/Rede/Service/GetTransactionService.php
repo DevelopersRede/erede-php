@@ -10,14 +10,14 @@ use RuntimeException;
 class GetTransactionService extends AbstractTransactionsService
 {
     /**
-     * @var string
+     * @var ?string
      */
-    private $reference;
+    private ?string $reference = null;
 
     /**
      * @var bool
      */
-    private $refund = false;
+    private bool $refund = false;
 
     /**
      * @return Transaction
@@ -25,17 +25,17 @@ class GetTransactionService extends AbstractTransactionsService
      * @throws RuntimeException
      * @throws RedeException
      */
-    public function execute()
+    public function execute(): Transaction
     {
-        return $this->sendRequest(null, AbstractService::GET);
+        return $this->sendRequest();
     }
 
     /**
      * @param string $reference
      *
-     * @return GetTransactionService
+     * @return $this
      */
-    public function setReference($reference)
+    public function setReference(string $reference): static
     {
         $this->reference = $reference;
         return $this;
@@ -44,9 +44,9 @@ class GetTransactionService extends AbstractTransactionsService
     /**
      * @param bool $refund
      *
-     * @return GetTransactionService
+     * @return $this
      */
-    public function setRefund($refund = true)
+    public function setRefund(bool $refund = true): static
     {
         $this->refund = $refund;
 
@@ -56,7 +56,7 @@ class GetTransactionService extends AbstractTransactionsService
     /**
      * @return string
      */
-    protected function getService()
+    protected function getService(): string
     {
         if ($this->reference !== null) {
             return sprintf('%s?reference=%s', parent::getService(), $this->reference);

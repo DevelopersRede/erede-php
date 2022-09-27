@@ -15,16 +15,26 @@ class CaptureTransactionService extends AbstractTransactionsService
      * @throws RuntimeException
      * @throws RedeException
      */
-    public function execute()
+    public function execute(): Transaction
     {
-        return $this->sendRequest(json_encode($this->transaction), AbstractService::PUT);
+        $json = json_encode($this->transaction);
+
+        if (!is_string($json)) {
+            throw new RuntimeException('Problem converting the Transaction object to json');
+        }
+
+        return $this->sendRequest($json, AbstractService::PUT);
     }
 
     /**
      * @return string
      */
-    protected function getService()
+    protected function getService(): string
     {
+        if ($this->transaction === null) {
+            throw new RuntimeException('Transaction was not defined yet');
+        }
+
         return sprintf('%s/%s', parent::getService(), $this->transaction->getTid());
     }
 }

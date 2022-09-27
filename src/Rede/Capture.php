@@ -3,80 +3,75 @@
 namespace Rede;
 
 use DateTime;
-use Exception;
 
 class Capture
 {
     use CreateTrait;
 
     /**
-     * @var int
+     * @var int|null
      */
-    private $amount;
+    private ?int $amount = null;
 
     /**
-     * @var DateTime
+     * @var DateTime|null
      */
-    private $dateTime;
+    private ?DateTime $dateTime = null;
 
     /**
-     * @var string
+     * @var string|null
      */
-    private $nsu;
+    private ?string $nsu = null;
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getAmount()
+    public function getAmount(): ?int
     {
         return $this->amount;
     }
 
     /**
-     * @param int $amount
-     *
+     * @param int|null $amount
      * @return Capture
      */
-    public function setAmount($amount)
+    public function setAmount(?int $amount): Capture
     {
         $this->amount = $amount;
         return $this;
     }
 
     /**
-     * @return DateTime
+     * @return DateTime|null
      */
-    public function getDateTime()
+    public function getDateTime(): ?DateTime
     {
         return $this->dateTime;
     }
 
     /**
-     * @param string $dateTime
-     *
+     * @param DateTime|null $dateTime
      * @return Capture
-     * @throws Exception
      */
-    public function setDateTime($dateTime)
+    public function setDateTime(?DateTime $dateTime): Capture
     {
-        $this->dateTime = new DateTime($dateTime);
+        $this->dateTime = $dateTime;
         return $this;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getNsu()
+    public function getNsu(): ?string
     {
         return $this->nsu;
     }
 
     /**
-     * @param string $nsu
-     *
+     * @param string|null $nsu
      * @return Capture
      */
-    public function setNsu($nsu)
+    public function setNsu(?string $nsu): Capture
     {
         $this->nsu = $nsu;
         return $this;

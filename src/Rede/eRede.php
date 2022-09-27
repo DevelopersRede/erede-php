@@ -8,50 +8,65 @@ use Rede\Service\CaptureTransactionService;
 use Rede\Service\CreateTransactionService;
 use Rede\Service\GetTransactionService;
 
+/**
+ * phpcs:disable Squiz.Classes.ValidClassName.NotCamelCaps
+ */
 class eRede
 {
-    const VERSION = '5.1.2';
-    const USER_AGENT = 'eRede/' . eRede::VERSION . ' (PHP %s; Store %s; %s %s)';
+    public const VERSION = '6.0.0';
+    public const USER_AGENT = 'eRede/' . eRede::VERSION . ' (PHP %s; Store %s; %s %s) %s';
 
     /**
-     * @var Store
+     * @var string|null
      */
-    private $store;
+    private ?string $platform = null;
 
     /**
-     * @var LoggerInterface
+     * @var string|null
      */
-    private $logger;
-
-    /**
-     * @var string
-     */
-    private $platform;
-
-    /**
-     * @var string
-     */
-    private $platformVersion;
+    private ?string $platformVersion = null;
 
     /**
      * eRede constructor.
      *
-     * @param Store $store
+     * @param Store                $store
      * @param LoggerInterface|null $logger
      */
-    public function __construct(Store $store, LoggerInterface $logger = null)
+    public function __construct(private readonly Store $store, private readonly ?LoggerInterface $logger = null)
     {
-        $this->store = $store;
-        $this->logger = $logger;
+    }
+
+    /**
+     * @param Transaction $transaction
+     *
+     * @return Transaction
+     * @see    eRede::create()
+     */
+    public function authorize(Transaction $transaction): Transaction
+    {
+        return $this->create($transaction);
+    }
+
+    /**
+     * @param Transaction $transaction
+     *
+     * @return Transaction
+     */
+    public function create(Transaction $transaction): Transaction
+    {
+        $service = new CreateTransactionService($this->store, $transaction, $this->logger);
+        $service->platform($this->platform, $this->platformVersion);
+
+        return $service->execute();
     }
 
     /**
      * @param string $platform
-     * @param $platformVersion
+     * @param string $platformVersion
      *
-     * @return eRede
+     * @return $this
      */
-    public function platform($platform, $platformVersion)
+    public function platform(string $platform, string $platformVersion): static
     {
         $this->platform = $platform;
         $this->platformVersion = $platformVersion;
@@ -63,59 +78,22 @@ class eRede
      * @param Transaction $transaction
      *
      * @return Transaction
-     * @see    eRede::create()
      */
-    public function authorize(Transaction $transaction)
+    public function cancel(Transaction $transaction): Transaction
     {
-        return $this->create($transaction);
+        $service = new CancelTransactionService($this->store, $transaction, $this->logger);
+        $service->platform($this->platform, $this->platformVersion);
+
+        return $service->execute();
     }
 
     /**
-     * @param Transaction $transaction
-     *
-     * @return Transaction
-     */
-    public function create(Transaction $transaction)
-    {
-        $createTransactionService = new CreateTransactionService($this->store, $transaction, $this->logger);
-        $createTransactionService->platform($this->platform, $this->platformVersion);
-
-        return $createTransactionService->execute();
-    }
-
-    /**
-     * @param Transaction $transaction
-     *
-     * @return Transaction
-     */
-    public function cancel(Transaction $transaction)
-    {
-        $cancelTransactionService = new CancelTransactionService($this->store, $transaction, $this->logger);
-        $cancelTransactionService->platform($this->platform, $this->platformVersion);
-
-        return $cancelTransactionService->execute();
-    }
-
-    /**
-     * @param Transaction $transaction
-     *
-     * @return Transaction
-     */
-    public function capture(Transaction $transaction)
-    {
-        $captureTransactionService = new CaptureTransactionService($this->store, $transaction, $this->logger);
-        $captureTransactionService->platform($this->platform, $this->platformVersion);
-
-        return $captureTransactionService->execute();
-    }
-
-    /**
-     * @param $tid
+     * @param string $tid
      *
      * @return Transaction
      * @see    eRede::get()
      */
-    public function getById($tid)
+    public function getById(string $tid): Transaction
     {
         return $this->get($tid);
     }
@@ -125,42 +103,45 @@ class eRede
      *
      * @return Transaction
      */
-    public function get($tid)
+    public function get(string $tid): Transaction
     {
-        $getTransactionService = new GetTransactionService($this->store, null, $this->logger);
-        $getTransactionService->platform($this->platform, $this->platformVersion);
-        $getTransactionService->setTid($tid);
+        $service = new GetTransactionService(store: $this->store, logger: $this->logger);
+        $service->platform($this->platform, $this->platformVersion);
+        $service->setTid($tid);
 
-        return $getTransactionService->execute();
+        return $service->execute();
     }
 
     /**
-     * @param $reference
+     * @param string $reference
      *
      * @return Transaction
      */
-    public function getByReference($reference)
+    public function getByReference(string $reference): Transaction
     {
-        $getTransactionService = new GetTransactionService($this->store, null, $this->logger);
-        $getTransactionService->platform($this->platform, $this->platformVersion);
-        $getTransactionService->setReference($reference);
+        $service = new GetTransactionService(store: $this->store, logger: $this->logger);
+        $service->platform($this->platform, $this->platformVersion);
+        $service->setReference($reference);
 
-        return $getTransactionService->execute();
+        return $service->execute();
     }
 
     /**
-     * @param $tid
+     * @param string $tid
      *
      * @return Transaction
      */
-    public function getRefunds($tid)
+    public function getRefunds(string $tid): Transaction
     {
-        $getTransactionService = new GetTransactionService($this->store, null, $this->logger);
-        $getTransactionService->platform($this->platform, $this->platformVersion);
-        $getTransactionService->setTid($tid);
-        $getTransactionService->setRefund(true);
+        $service = new GetTransactionService(
+            store: $this->store,
+            logger: $this->logger
+        );
+        $service->platform($this->platform, $this->platformVersion);
+        $service->setTid($tid);
+        $service->setRefund();
 
-        return $getTransactionService->execute();
+        return $service->execute();
     }
 
     /**
@@ -168,9 +149,9 @@ class eRede
      *
      * @return Transaction
      */
-    public function zero(Transaction $transaction)
+    public function zero(Transaction $transaction): Transaction
     {
-        $amount = (int)$transaction->getAmount();
+        $amount = (int) $transaction->getAmount();
         $capture = (bool)$transaction->getCapture();
 
         $transaction->setAmount(0);
@@ -182,5 +163,18 @@ class eRede
         $transaction->capture($capture);
 
         return $transaction;
+    }
+
+    /**
+     * @param Transaction $transaction
+     *
+     * @return Transaction
+     */
+    public function capture(Transaction $transaction): Transaction
+    {
+        $service = new CaptureTransactionService($this->store, $transaction, $this->logger);
+        $service->platform($this->platform, $this->platformVersion);
+
+        return $service->execute();
     }
 }

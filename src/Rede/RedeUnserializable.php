@@ -7,7 +7,7 @@ interface RedeUnserializable
     /**
      * @param string $serialized
      *
-     * @return mixed
+     * @return $this
      */
-    public function jsonUnserialize($serialized);
+    public function jsonUnserialize(string $serialized): static;
 }

@@ -6,229 +6,219 @@ class Address implements RedeSerializable
 {
     use SerializeTrait;
 
-    const BILLING = 1;
-    const SHIPPING = 2;
-    const BOTH = 3;
+    public const BILLING = 1;
+    public const SHIPPING = 2;
+    public const BOTH = 3;
 
-    const APARTMENT = 1;
-    const HOUSE = 2;
-    const COMMERCIAL = 3;
-    const OTHER = 4;
-
-    /**
-     * @var string
-     */
-    private $address;
+    public const APARTMENT = 1;
+    public const HOUSE = 2;
+    public const COMMERCIAL = 3;
+    public const OTHER = 4;
 
     /**
-     * @var string
+     * @var string|null
      */
-    private $addresseeName;
+    private ?string $address = null;
 
     /**
-     * @var string
+     * @var string|null
      */
-    private $city;
+    private ?string $addresseeName = null;
 
     /**
-     * @var string
+     * @var string|null
      */
-    private $complement;
+    private ?string $city = null;
 
     /**
-     * @var string
+     * @var string|null
      */
-    private $neighbourhood;
+    private ?string $complement = null;
 
     /**
-     * @var string
+     * @var string|null
      */
-    private $number;
+    private ?string $neighbourhood = null;
 
     /**
-     * @var string
+     * @var string|null
      */
-    private $state;
+    private ?string $number = null;
 
     /**
-     * @var int
+     * @var string|null
      */
-    private $type;
+    private ?string $state = null;
 
     /**
-     * @var string
+     * @var int|null
      */
-    private $zipCode;
+    private ?int $type = null;
 
     /**
-     * @return string
+     * @var string|null
      */
-    public function getAddress()
+    private ?string $zipCode = null;
+
+    /**
+     * @return string|null
+     */
+    public function getAddress(): ?string
     {
         return $this->address;
     }
 
     /**
-     * @param string $address
-     *
-     * @return Address
+     * @param string|null $address
+     * @return $this
      */
-    public function setAddress($address)
+    public function setAddress(?string $address): static
     {
         $this->address = $address;
         return $this;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getAddresseeName()
+    public function getAddresseeName(): ?string
     {
         return $this->addresseeName;
     }
 
     /**
-     * @param string $addresseeName
-     *
-     * @return Address
+     * @param string|null $addresseeName
+     * @return $this
      */
-    public function setAddresseeName($addresseeName)
+    public function setAddresseeName(?string $addresseeName): static
     {
         $this->addresseeName = $addresseeName;
         return $this;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCity()
+    public function getCity(): ?string
     {
         return $this->city;
     }
 
     /**
-     * @param string $city
-     *
-     * @return Address
+     * @param string|null $city
+     * @return $this
      */
-    public function setCity($city)
+    public function setCity(?string $city): static
     {
         $this->city = $city;
         return $this;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getComplement()
+    public function getComplement(): ?string
     {
         return $this->complement;
     }
 
     /**
-     * @param string $complement
-     *
-     * @return Address
+     * @param string|null $complement
+     * @return $this
      */
-    public function setComplement($complement)
+    public function setComplement(?string $complement): static
     {
         $this->complement = $complement;
         return $this;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getNeighbourhood()
+    public function getNeighbourhood(): ?string
     {
         return $this->neighbourhood;
     }
 
     /**
-     * @param string $neighbourhood
-     *
-     * @return Address
+     * @param string|null $neighbourhood
+     * @return $this
      */
-    public function setNeighbourhood($neighbourhood)
+    public function setNeighbourhood(?string $neighbourhood): static
     {
         $this->neighbourhood = $neighbourhood;
         return $this;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getNumber()
+    public function getNumber(): ?string
     {
         return $this->number;
     }
 
     /**
-     * @param string $number
-     *
-     * @return Address
+     * @param string|null $number
+     * @return $this
      */
-    public function setNumber($number)
+    public function setNumber(?string $number): static
     {
         $this->number = $number;
         return $this;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getState()
+    public function getState(): ?string
     {
         return $this->state;
     }
 
     /**
-     * @param string $state
-     *
-     * @return Address
+     * @param string|null $state
+     * @return $this
      */
-    public function setState($state)
+    public function setState(?string $state): static
     {
         $this->state = $state;
         return $this;
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getType()
+    public function getType(): ?int
     {
         return $this->type;
     }
 
     /**
-     * @param int $type
-     *
-     * @return Address
+     * @param int|null $type
+     * @return $this
      */
-    public function setType($type)
+    public function setType(?int $type): static
     {
         $this->type = $type;
         return $this;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getZipCode()
+    public function getZipCode(): ?string
     {
         return $this->zipCode;
     }
 
     /**
-     * @param string $zipCode
-     *
-     * @return Address
+     * @param string|null $zipCode
+     * @return $this
      */
-    public function setZipCode($zipCode)
+    public function setZipCode(?string $zipCode): static
     {
         $this->zipCode = $zipCode;
         return $this;
-
     }
 }

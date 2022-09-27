@@ -7,53 +7,53 @@ class ThreeDSecure implements RedeSerializable
     use CreateTrait;
     use SerializeTrait;
 
-    const CONTINUE_ON_FAILURE = 'continue';
-    const DECLINE_ON_FAILURE = 'decline';
+    public const CONTINUE_ON_FAILURE = 'continue';
+    public const DECLINE_ON_FAILURE = 'decline';
 
     /**
-     * @var string
+     * @var string|null
      */
-    private $cavv;
+    private ?string $cavv = null;
 
     /**
-     * @var string
+     * @var string|null
      */
-    private $eci;
+    private ?string $eci = null;
 
     /**
      * @var bool
      */
-    private $embedded = true;
+    private bool $embedded = true;
 
     /**
      * @var string
      */
-    private $onFailure;
+    private string $onFailure = self::DECLINE_ON_FAILURE;
+
+    /**
+     * @var string|null
+     */
+    private ?string $url = null;
 
     /**
      * @var string
      */
-    private $url;
+    private string $userAgent;
+
+    /**
+     * @var string|null
+     */
+    private ?string $xid = null;
 
     /**
      * @var string
      */
-    private $userAgent;
+    private string $threeDIndicator = '1';
 
     /**
-     * @var string
+     * @var string|null
      */
-    private $xid;
-
-    /**
-     * @var string
-     */
-    private $threeDIndicator = "1";
-
-    /**
-     * @var string
-     */
-    private $DirectoryServerTransactionId;
+    private ?string $DirectoryServerTransactionId = null;
 
     /**
      * ThreeDSecure constructor.
@@ -72,7 +72,7 @@ class ThreeDSecure implements RedeSerializable
     /**
      * @return string
      */
-    public function getThreeDIndicator()
+    public function getThreeDIndicator(): string
     {
         return $this->threeDIndicator;
     }
@@ -80,18 +80,18 @@ class ThreeDSecure implements RedeSerializable
     /**
      * @param string $threeDIndicator
      *
-     * @return ThreeDSecure
+     * @return $this
      */
-    public function setThreeDIndicator($threeDIndicator)
+    public function setThreeDIndicator(string $threeDIndicator): static
     {
         $this->threeDIndicator = $threeDIndicator;
         return $this;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getDirectoryServerTransactionId()
+    public function getDirectoryServerTransactionId(): ?string
     {
         return $this->DirectoryServerTransactionId;
     }
@@ -99,18 +99,18 @@ class ThreeDSecure implements RedeSerializable
     /**
      * @param string $DirectoryServerTransactionId
      *
-     * @return ThreeDSecure
+     * @return $this
      */
-    public function setDirectoryServerTransactionId($DirectoryServerTransactionId)
+    public function setDirectoryServerTransactionId(string $DirectoryServerTransactionId): static
     {
         $this->DirectoryServerTransactionId = $DirectoryServerTransactionId;
         return $this;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCavv()
+    public function getCavv(): ?string
     {
         return $this->cavv;
     }
@@ -118,18 +118,18 @@ class ThreeDSecure implements RedeSerializable
     /**
      * @param string $cavv
      *
-     * @return ThreeDSecure
+     * @return $this
      */
-    public function setCavv($cavv)
+    public function setCavv(string $cavv): static
     {
         $this->cavv = $cavv;
         return $this;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getEci()
+    public function getEci(): ?string
     {
         return $this->eci;
     }
@@ -137,9 +137,9 @@ class ThreeDSecure implements RedeSerializable
     /**
      * @param string $eci
      *
-     * @return ThreeDSecure
+     * @return $this
      */
-    public function setEci($eci)
+    public function setEci(string $eci): static
     {
         $this->eci = $eci;
         return $this;
@@ -148,7 +148,7 @@ class ThreeDSecure implements RedeSerializable
     /**
      * @return string
      */
-    public function getOnFailure()
+    public function getOnFailure(): string
     {
         return $this->onFailure;
     }
@@ -156,18 +156,18 @@ class ThreeDSecure implements RedeSerializable
     /**
      * @param string $onFailure
      *
-     * @return ThreeDSecure
+     * @return $this
      */
-    public function setOnFailure($onFailure)
+    public function setOnFailure(string $onFailure): static
     {
         $this->onFailure = $onFailure;
         return $this;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getUrl()
+    public function getUrl(): ?string
     {
         return $this->url;
     }
@@ -175,9 +175,9 @@ class ThreeDSecure implements RedeSerializable
     /**
      * @param string $url
      *
-     * @return ThreeDSecure
+     * @return $this
      */
-    public function setUrl($url)
+    public function setUrl(string $url): static
     {
         $this->url = $url;
         return $this;
@@ -186,7 +186,7 @@ class ThreeDSecure implements RedeSerializable
     /**
      * @return string
      */
-    public function getUserAgent()
+    public function getUserAgent(): string
     {
         return $this->userAgent;
     }
@@ -194,18 +194,18 @@ class ThreeDSecure implements RedeSerializable
     /**
      * @param string $userAgent
      *
-     * @return ThreeDSecure
+     * @return $this
      */
-    public function setUserAgent($userAgent)
+    public function setUserAgent(string $userAgent): static
     {
         $this->userAgent = $userAgent;
         return $this;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getXid()
+    public function getXid(): ?string
     {
         return $this->xid;
     }
@@ -213,9 +213,9 @@ class ThreeDSecure implements RedeSerializable
     /**
      * @param string $xid
      *
-     * @return ThreeDSecure
+     * @return $this
      */
-    public function setXid($xid)
+    public function setXid(string $xid): static
     {
         $this->xid = $xid;
         return $this;
@@ -224,7 +224,7 @@ class ThreeDSecure implements RedeSerializable
     /**
      * @return bool
      */
-    public function isEmbedded()
+    public function isEmbedded(): bool
     {
         return $this->embedded;
     }
@@ -232,9 +232,9 @@ class ThreeDSecure implements RedeSerializable
     /**
      * @param bool $embedded
      *
-     * @return ThreeDSecure
+     * @return $this
      */
-    public function setEmbedded($embedded)
+    public function setEmbedded(bool $embedded): static
     {
         $this->embedded = $embedded;
         return $this;

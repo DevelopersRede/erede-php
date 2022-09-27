@@ -7,42 +7,18 @@ class Flight implements RedeSerializable
     use SerializeTrait;
 
     /**
-     * @var string
+     * @var array<Passenger>
      */
-    private $date;
+    private array $passenger = [];
 
-    /**
-     * @var string
-     */
-    private $from;
-
-    /**
-     * @var string
-     */
-    private $number;
-
-    /**
-     * @var array[Passenger]
-     */
-    private $passenger;
-
-    /**
-     * @var string
-     */
-    private $to;
-
-    public function __construct($number, $from, $to, $date)
+    public function __construct(private string $number, private string $from, private string $to, private string $date)
     {
-        $this->setNumber($number);
-        $this->setFrom($from);
-        $this->setTo($to);
-        $this->setDate($date);
     }
 
     /**
      * @return string
      */
-    public function getDate()
+    public function getDate(): string
     {
         return $this->date;
     }
@@ -50,9 +26,9 @@ class Flight implements RedeSerializable
     /**
      * @param string $date
      *
-     * @return Flight
+     * @return $this
      */
-    public function setDate($date)
+    public function setDate(string $date): static
     {
         $this->date = $date;
         return $this;
@@ -61,7 +37,7 @@ class Flight implements RedeSerializable
     /**
      * @return string
      */
-    public function getFrom()
+    public function getFrom(): string
     {
         return $this->from;
     }
@@ -69,9 +45,9 @@ class Flight implements RedeSerializable
     /**
      * @param string $from
      *
-     * @return Flight
+     * @return $this
      */
-    public function setFrom($from)
+    public function setFrom(string $from): static
     {
         $this->from = $from;
         return $this;
@@ -80,7 +56,7 @@ class Flight implements RedeSerializable
     /**
      * @return string
      */
-    public function getNumber()
+    public function getNumber(): string
     {
         return $this->number;
     }
@@ -88,18 +64,18 @@ class Flight implements RedeSerializable
     /**
      * @param string $number
      *
-     * @return Flight
+     * @return $this
      */
-    public function setNumber($number)
+    public function setNumber(string $number): static
     {
         $this->number = $number;
         return $this;
     }
 
     /**
-     * @return array
+     * @return array<Passenger>
      */
-    public function getPassenger()
+    public function getPassenger(): array
     {
         return $this->passenger;
     }
@@ -107,9 +83,9 @@ class Flight implements RedeSerializable
     /**
      * @param Passenger $passenger
      *
-     * @return Flight
+     * @return $this
      */
-    public function setPassenger(Passenger $passenger)
+    public function setPassenger(Passenger $passenger): static
     {
         $this->passenger = [];
         $this->addPassenger($passenger);
@@ -119,14 +95,10 @@ class Flight implements RedeSerializable
     /**
      * @param Passenger $passenger
      *
-     * @return Flight
+     * @return $this
      */
-    public function addPassenger(Passenger $passenger)
+    public function addPassenger(Passenger $passenger): static
     {
-        if ($this->passenger === null) {
-            $this->passenger = [];
-        }
-
         $this->passenger[] = $passenger;
 
         return $this;
@@ -135,7 +107,7 @@ class Flight implements RedeSerializable
     /**
      * @return string
      */
-    public function getTo()
+    public function getTo(): string
     {
         return $this->to;
     }
@@ -143,9 +115,9 @@ class Flight implements RedeSerializable
     /**
      * @param string $to
      *
-     * @return Flight
+     * @return $this
      */
-    public function setTo($to)
+    public function setTo(string $to): static
     {
         $this->to = $to;
         return $this;

@@ -2,6 +2,7 @@
 
 namespace Rede\Service;
 
+use CurlHandle;
 use InvalidArgumentException;
 use Psr\Log\LoggerInterface;
 use Rede\eRede;
@@ -12,54 +13,37 @@ use RuntimeException;
 
 abstract class AbstractService
 {
-    const GET = 'GET';
-    const POST = 'POST';
-    const PUT = 'PUT';
+    public const GET = 'GET';
+    public const POST = 'POST';
+    public const PUT = 'PUT';
 
     /**
-     * @var resource
+     * @var string|null
      */
-    protected $curl;
+    private ?string $platform = null;
 
     /**
-     * @var Store
+     * @var string|null
      */
-    protected $store;
-
-    /**
-     * @var LoggerInterface
-     */
-    private $logger;
-
-    /**
-     * @var string
-     */
-    private $platform;
-
-    /**
-     * @var string
-     */
-    private $platformVersion;
+    private ?string $platformVersion = null;
 
     /**
      * AbstractService constructor.
      *
-     * @param Store $store
+     * @param Store                $store
      * @param LoggerInterface|null $logger
      */
-    public function __construct(Store $store, LoggerInterface $logger = null)
+    public function __construct(protected Store $store, protected ?LoggerInterface $logger = null)
     {
-        $this->store = $store;
-        $this->logger = $logger;
     }
 
     /**
-     * @param string $platform
-     * @param string $platformVersion
+     * @param string|null $platform
+     * @param string|null $platformVersion
      *
      * @return $this
      */
-    public function platform($platform, $platformVersion)
+    public function platform(?string $platform, ?string $platformVersion): static
     {
         $this->platform = $platform;
         $this->platformVersion = $platformVersion;
@@ -73,144 +57,170 @@ abstract class AbstractService
      * @throws RuntimeException
      * @throws RedeException
      */
-    abstract public function execute();
+    abstract public function execute(): Transaction;
 
     /**
      * @param string $body
      * @param string $method
      *
-     * @return mixed
+     * @return Transaction
      * @throws RuntimeException
      */
-    protected function sendRequest($body = '', $method = 'GET')
+    protected function sendRequest(string $body = '', string $method = 'GET'): Transaction
     {
-        $userAgent = sprintf('User-Agent: %s',
-            sprintf(eRede::USER_AGENT, phpversion(), $this->store->getFiliation(), php_uname('s'), php_uname('r'),
-                php_uname('m'))
-        );
-
-        if (!empty($this->platform) && !empty($this->platformVersion)) {
-            $userAgent .= sprintf(' %s/%s', $this->platform, $this->platformVersion);
-        }
-
-        if (is_resource($this->curl)) {
-            curl_close($this->curl);
-        }
-
-        $curlVersion = curl_version();
-
-        if (is_array($curlVersion)) {
-            $userAgent .= sprintf(' curl/%s %s',
-                isset($curlVersion['version']) ? $curlVersion['version'] : '',
-                isset($curlVersion['ssl_version']) ? $curlVersion['ssl_version'] : ''
-            );
-        }
-
+        $userAgent = $this->getUserAgent();
         $headers = [
-            str_replace('  ', ' ',
+            str_replace(
+                '  ',
+                ' ',
                 $userAgent
             ),
             'Accept: application/json',
             'Transaction-Response: brand-return-opened'
         ];
 
-        $this->curl = curl_init($this->store->getEnvironment()->getEndpoint($this->getService()));
+        $curl = curl_init($this->store->getEnvironment()->getEndpoint($this->getService()));
+
+        if (!$curl instanceof CurlHandle) {
+            throw new RuntimeException('Was not possible to create a curl instance.');
+        }
 
         curl_setopt(
-            $this->curl,
+            $curl,
             CURLOPT_USERPWD,
             sprintf('%s:%s', $this->store->getFiliation(), $this->store->getToken())
         );
 
-        if (!defined('CURL_SSLVERSION_TLSv1_2')) {
-            throw new RuntimeException(sprintf('Atenção, sua versão da curl não suporta TLS 1.2 e precisa ser atualizada. Sua versão atual da curl é %s',
-                $curlVersion));
-        }
-
-        curl_setopt($this->curl, CURLOPT_SSLVERSION, CURL_SSLVERSION_TLSv1_2);
-        curl_setopt($this->curl, CURLOPT_SSL_VERIFYPEER, true);
+        curl_setopt($curl, CURLOPT_SSLVERSION, CURL_SSLVERSION_TLSv1_2);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, true);
 
         switch ($method) {
             case 'GET':
                 break;
             case 'POST':
-                curl_setopt($this->curl, CURLOPT_POST, true);
+                curl_setopt($curl, CURLOPT_POST, true);
                 break;
             default:
-                curl_setopt($this->curl, CURLOPT_CUSTOMREQUEST, $method);
+                curl_setopt($curl, CURLOPT_CUSTOMREQUEST, $method);
         }
 
-        if (!empty($body)) {
-            curl_setopt($this->curl, CURLOPT_POSTFIELDS, $body);
+        if ($body !== '') {
+            curl_setopt($curl, CURLOPT_POSTFIELDS, $body);
 
             $headers[] = 'Content-Type: application/json; charset=utf8';
         } else {
             $headers[] = 'Content-Length: 0';
         }
 
-        curl_setopt($this->curl, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($this->curl, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
 
-        if ($this->logger !== null) {
-            $this->logger->debug(
-                trim(
-                    sprintf("Request Rede\n%s %s\n%s\n\n%s",
-                        $method,
-                        $this->store->getEnvironment()->getEndpoint($this->getService()),
-                        implode("\n", $headers),
-                        preg_replace('/"(cardHolderName|cardnumber|securitycode)":"[^"]+"/i', '"\1":"***"', $body)
-                    )
+        $this->logger?->debug(
+            trim(
+                sprintf(
+                    "Request Rede\n%s %s\n%s\n\n%s",
+                    $method,
+                    $this->store->getEnvironment()->getEndpoint($this->getService()),
+                    implode("\n", $headers),
+                    preg_replace('/"(cardHolderName|cardnumber|securitycode)":"[^"]+"/i', '"\1":"***"', $body)
                 )
-            );
+            )
+        );
+
+        $response = curl_exec($curl);
+        $httpInfo = curl_getinfo($curl);
+
+        $this->logger?->debug(
+            sprintf(
+                "Response Rede\nStatus Code: %s\n\n%s",
+                $httpInfo['http_code'],
+                $response
+            )
+        );
+
+        $this->dumpHttpInfo($httpInfo);
+
+        if (curl_errno($curl)) {
+            throw new RuntimeException(sprintf('Curl error[%s]: %s', curl_errno($curl), curl_error($curl)));
         }
 
-        $response = curl_exec($this->curl);
-        $httpInfo = curl_getinfo($this->curl);
-
-        error_log($response);
-
-        if ($this->logger !== null) {
-            $this->logger->debug(
-                sprintf("Response Rede\nStatus Code: %s\n\n%s",
-                    $httpInfo['http_code'],
-                    $response
-                )
-            );
-
-            foreach ($httpInfo as $key => $info) {
-                if (is_array($info)) {
-                    foreach ($info as $infoKey => $infoValue) {
-                        $this->logger->debug(sprintf('Curl[%s][%s]: %s', $key, $infoKey, $infoValue));
-                    }
-
-                    continue;
-                }
-
-                $this->logger->debug(sprintf('Curl[%s]: %s', $key, $info));
-            }
+        if (!is_string($response)) {
+            throw new RuntimeException('Error obtaining a response from the API');
         }
 
-        if (curl_errno($this->curl)) {
-            throw new RuntimeException(sprintf('Curl error[%s]: %s', curl_errno($this->curl), curl_error($this->curl)));
-        }
-
-        curl_close($this->curl);
-
-        $this->curl = null;
+        curl_close($curl);
 
         return $this->parseResponse($response, $httpInfo['http_code']);
     }
 
     /**
-     * @return string Gets the service that will be used on the request
+     * Gets the User-Agent string.
+     *
+     * @return string
      */
-    abstract protected function getService();
+    private function getUserAgent(): string
+    {
+        $userAgent = sprintf(
+            'User-Agent: %s',
+            sprintf(
+                eRede::USER_AGENT,
+                phpversion(),
+                $this->store->getFiliation(),
+                php_uname('s'),
+                php_uname('r'),
+                php_uname('m')
+            )
+        );
+
+        if (!empty($this->platform) && !empty($this->platformVersion)) {
+            $userAgent .= sprintf(' %s/%s', $this->platform, $this->platformVersion);
+        }
+
+        $curlVersion = curl_version();
+
+        if (is_array($curlVersion)) {
+            $userAgent .= sprintf(
+                ' curl/%s %s',
+                $curlVersion['version'] ?? '',
+                $curlVersion['ssl_version'] ?? ''
+            );
+        }
+
+        return $userAgent;
+    }
 
     /**
-     * @param string $response Parses the HTTP response from Rede
-     * @param string $statusCode The HTTP status code
-     *
-     * @return mixed
+     * @return string Gets the service that will be used on the request
      */
-    abstract protected function parseResponse($response, $statusCode);
+    abstract protected function getService(): string;
+
+    /**
+     * Dumps the httpInfo log
+     *
+     * @param array<mixed> $httpInfo The http info.
+     * @return void
+     * @noinspection PhpPluralMixedCanBeReplacedWithArrayInspection
+     */
+    private function dumpHttpInfo(array $httpInfo): void
+    {
+        foreach ($httpInfo as $key => $info) {
+            if (is_array($info)) {
+                foreach ($info as $infoKey => $infoValue) {
+                    $this->logger?->debug(sprintf('Curl[%s][%s]: %s', $key, $infoKey, implode(',', $infoValue)));
+                }
+
+                continue;
+            }
+
+            $this->logger?->debug(sprintf('Curl[%s]: %s', $key, $info));
+        }
+    }
+
+    /**
+     * @param string $response   Parses the HTTP response from Rede
+     * @param int    $statusCode The HTTP status code
+     *
+     * @return Transaction
+     */
+    abstract protected function parseResponse(string $response, int $statusCode): Transaction;
 }

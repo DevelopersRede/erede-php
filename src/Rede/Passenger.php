@@ -7,84 +7,27 @@ class Passenger implements RedeSerializable
     use SerializeTrait;
 
     /**
-     * @var string
+     * @var Phone|null
      */
-    private $email;
+    private ?Phone $phone = null;
 
-    /**
-     * @var string
-     */
-    private $name;
-
-    /**
-     * @var Phone
-     */
-    private $phone;
-
-    /**
-     * @var string
-     */
-    private $ticket;
-
-    public function __construct($name, $email, $ticket)
+    public function __construct(private string $name, private string $email, private string $ticket)
     {
-        $this->setName($name);
-        $this->setEmail($email);
-        $this->setTicket($ticket);
     }
 
     /**
-     * @return string
+     * @return Phone|null
      */
-    public function getEmail()
-    {
-        return $this->email;
-    }
-
-    /**
-     * @param string $email
-     *
-     * @return Passenger
-     */
-    public function setEmail($email)
-    {
-        $this->email = $email;
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * @param string $name
-     *
-     * @return Passenger
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-        return $this;
-    }
-
-    /**
-     * @return Phone
-     */
-    public function getPhone()
+    public function getPhone(): ?Phone
     {
         return $this->phone;
     }
 
     /**
      * @param Phone $phone
-     *
-     * @return Passenger
+     * @return $this
      */
-    public function setPhone(Phone $phone)
+    public function setPhone(Phone $phone): static
     {
         $this->phone = $phone;
         return $this;
@@ -93,17 +36,52 @@ class Passenger implements RedeSerializable
     /**
      * @return string
      */
-    public function getTicket()
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string $name
+     * @return $this
+     */
+    public function setName(string $name): static
+    {
+        $this->name = $name;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEmail(): string
+    {
+        return $this->email;
+    }
+
+    /**
+     * @param string $email
+     * @return $this
+     */
+    public function setEmail(string $email): static
+    {
+        $this->email = $email;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTicket(): string
     {
         return $this->ticket;
     }
 
     /**
      * @param string $ticket
-     *
-     * @return Passenger
+     * @return $this
      */
-    public function setTicket($ticket)
+    public function setTicket(string $ticket): static
     {
         $this->ticket = $ticket;
         return $this;

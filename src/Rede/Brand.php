@@ -7,76 +7,70 @@ class Brand
     use CreateTrait;
 
     /**
-     * @var string
+     * @var string|null
      */
-    private $name;
+    private ?string $name = null;
 
     /**
-     * @var string
+     * @var string|null
      */
-    private $returnCode;
+    private ?string $returnCode = null;
+    /**
+     * @var string|null
+     */
+    private ?string $returnMessage = null;
 
     /**
-     * @var string
+     * @return string|null
      */
-    private $returnMessage;
-
-    /**
-     * @return string
-     */
-    public function getName(): string
+    public function getName(): ?string
     {
         return $this->name;
     }
 
     /**
-     * @param string $name
-     *
+     * @param string|null $name
      * @return Brand
      */
-    public function setName(string $name): Brand
+    public function setName(?string $name): Brand
     {
         $this->name = $name;
         return $this;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getReturnCode(): string
+    public function getReturnCode(): ?string
     {
         return $this->returnCode;
     }
 
     /**
-     * @param string $returnCode
-     *
+     * @param string|null $returnCode
      * @return Brand
      */
-    public function setReturnCode(string $returnCode): Brand
+    public function setReturnCode(?string $returnCode): Brand
     {
         $this->returnCode = $returnCode;
         return $this;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getReturnMessage(): string
+    public function getReturnMessage(): ?string
     {
         return $this->returnMessage;
     }
 
     /**
-     * @param string $returnMessage
-     *
+     * @param string|null $returnMessage
      * @return Brand
      */
-    public function setReturnMessage(string $returnMessage): Brand
+    public function setReturnMessage(?string $returnMessage): Brand
     {
         $this->returnMessage = $returnMessage;
         return $this;
     }
-
-
 }

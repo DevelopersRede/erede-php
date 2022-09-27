@@ -9,38 +9,23 @@ class Consumer implements RedeSerializable
 {
     use SerializeTrait;
 
-    const MALE = 'M';
-    const FEMALE = 'F';
+    public const MALE = 'M';
+    public const FEMALE = 'F';
 
     /**
-     * @var string
+     * @var array<object>
      */
-    private $cpf;
+    private array $documents = [];
 
     /**
-     * @var array
+     * @var string|null
      */
-    private $documents;
+    private ?string $gender = null;
 
     /**
-     * @var string
+     * @var Phone|null
      */
-    private $email;
-
-    /**
-     * @var string
-     */
-    private $gender;
-
-    /**
-     * @var string
-     */
-    private $name;
-
-    /**
-     * @var Phone
-     */
-    private $phone;
+    private ?Phone $phone = null;
 
     /**
      * Consumer constructor.
@@ -49,25 +34,18 @@ class Consumer implements RedeSerializable
      * @param string $email
      * @param string $cpf
      */
-    public function __construct($name, $email, $cpf)
+    public function __construct(private string $name, private string $email, private string $cpf)
     {
-        $this->setName($name);
-        $this->setEmail($email);
-        $this->setCpf($cpf);
     }
 
     /**
      * @param string $type
      * @param string $number
      *
-     * @return Consumer
+     * @return $this
      */
-    public function addDocument($type, $number)
+    public function addDocument(string $type, string $number): static
     {
-        if ($this->documents === null) {
-            $this->documents = [];
-        }
-
         $document = new stdClass();
         $document->type = $type;
         $document->number = $number;
@@ -78,50 +56,82 @@ class Consumer implements RedeSerializable
     }
 
     /**
-     * @return string
+     * @return ArrayIterator<int,object>
      */
-    public function getCpf()
+    public function getDocumentsIterator(): ArrayIterator
     {
-        return $this->cpf;
-    }
-
-    /**
-     * @param string $cpf
-     *
-     * @return Consumer
-     */
-    public function setCpf($cpf)
-    {
-        $this->cpf = $cpf;
-        return $this;
-    }
-
-    /**
-     * @return ArrayIterator
-     */
-    public function getDocumentsIterator()
-    {
-        if ($this->documents === null) {
-            $this->documents = [];
-        }
-
         return new ArrayIterator($this->documents);
     }
 
     /**
+     * @return string|null
+     */
+    public function getGender(): ?string
+    {
+        return $this->gender;
+    }
+
+    /**
+     * @param string $gender
+     * @return Consumer
+     */
+    public function setGender(string $gender): Consumer
+    {
+        $this->gender = $gender;
+        return $this;
+    }
+
+    /**
+     * @return Phone|null
+     */
+    public function getPhone(): ?Phone
+    {
+        return $this->phone;
+    }
+
+    /**
+     * @param string $ddd
+     * @param string $number
+     * @param int    $type
+     * @return $this
+     */
+    public function setPhone(string $ddd, string $number, int $type = Phone::CELLPHONE): static
+    {
+        $this->phone = new Phone($ddd, $number, $type);
+        return $this;
+    }
+
+    /**
      * @return string
      */
-    public function getEmail()
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string $name
+     * @return Consumer
+     */
+    public function setName(string $name): Consumer
+    {
+        $this->name = $name;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEmail(): string
     {
         return $this->email;
     }
 
     /**
      * @param string $email
-     *
      * @return Consumer
      */
-    public function setEmail($email)
+    public function setEmail(string $email): Consumer
     {
         $this->email = $email;
         return $this;
@@ -130,69 +140,18 @@ class Consumer implements RedeSerializable
     /**
      * @return string
      */
-    public function getGender()
+    public function getCpf(): string
     {
-        return $this->gender;
+        return $this->cpf;
     }
 
     /**
-     * @param string $gender
-     *
+     * @param string $cpf
      * @return Consumer
      */
-    public function setGender($gender)
+    public function setCpf(string $cpf): Consumer
     {
-        $this->gender = $gender;
+        $this->cpf = $cpf;
         return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * @param string $name
-     *
-     * @return Consumer
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-        return $this;
-    }
-
-    /**
-     * @return Phone
-     */
-    public function getPhone()
-    {
-        return $this->phone;
-    }
-
-    /**
-     * @param Phone $phone
-     *
-     * @return Consumer
-     */
-    public function setPhone($phone)
-    {
-        $this->phone = $phone;
-        return $this;
-    }
-
-    /**
-     * @param string $ddd
-     * @param string $number
-     * @param int $type
-     *
-     * @return Consumer
-     */
-    public function phone($ddd, $number, $type = Phone::CELLPHONE)
-    {
-        return $this->setPhone(new Phone($ddd, $number, $type));
     }
 }

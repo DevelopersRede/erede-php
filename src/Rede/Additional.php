@@ -1,13 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: neto
- * Date: 08/04/19
- * Time: 12:07
- */
 
 namespace Rede;
-
 
 class Additional implements RedeSerializable
 {
@@ -15,19 +8,19 @@ class Additional implements RedeSerializable
     use CreateTrait;
 
     /**
-     * @var integer
+     * @var int|null
      */
-    private $gateway;
+    private ?int $gateway = null;
 
     /**
-     * @var integer
+     * @var int|null
      */
-    private $module;
+    private ?int $module = null;
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getGateway()
+    public function getGateway(): ?int
     {
         return $this->gateway;
     }
@@ -35,18 +28,18 @@ class Additional implements RedeSerializable
     /**
      * @param int $gateway
      *
-     * @return Additional
+     * @return $this
      */
-    public function setGateway($gateway)
+    public function setGateway(int $gateway): static
     {
         $this->gateway = $gateway;
         return $this;
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getModule()
+    public function getModule(): ?int
     {
         return $this->module;
     }
@@ -54,9 +47,9 @@ class Additional implements RedeSerializable
     /**
      * @param int $module
      *
-     * @return Additional
+     * @return $this
      */
-    public function setModule($module)
+    public function setModule(int $module): static
     {
         $this->module = $module;
         return $this;

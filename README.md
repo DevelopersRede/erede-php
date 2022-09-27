@@ -45,7 +45,7 @@ as variáveis de ambiente `REDE_PV` e `REDE_TOKEN` com suas credenciais da API. 
 export REDE_PV=1234
 export REDE_TOKEN=5678
 
-vendor/bin/phpunit --testdox --colors='always' test
+./tests
 ```
 
 Os testes também podem ser executados através de um container com a configuração ideal para o projeto. Para isso, basta
@@ -55,7 +55,7 @@ fazer:
 docker build . -t erede-docker
 docker run -e REDE_PV='1234' -e REDE_TOKEN='5678' erede-docker
 ```
-
+````
 Caso necessário, o SDK possui a possibilidade de logs de depuração que podem ser utilizados ao executar os testes. Para isso, 
 basta exportar a variável de ambiente `REDE_DEBUG` com o valor 1:
 

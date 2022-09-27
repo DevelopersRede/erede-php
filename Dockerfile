@@ -14,6 +14,9 @@ WORKDIR /src/erede-php
 
 RUN composer install
 
-RUN echo "./vendor/bin/phpunit --testdox --colors='always' test" >tests
+RUN echo "./vendor/bin/phpcs --ignore=vendor --standard=PSR12 src test\n">tests
+RUN echo "./vendor/bin/phpstan\n" >>tests
+RUN echo "./vendor/bin/phpcpd src tests\n" >>tests
+RUN echo "./vendor/bin/phpunit --testdox --colors='always' test" >>tests
 
 CMD sh tests

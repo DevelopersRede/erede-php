@@ -1,0 +1,16 @@
+#!/bin/bash
+
+if [[ ! -d vendor ]]; then
+  echo "Vendor dir not found; running composer install"
+  composer install
+fi
+
+if [[ ! -v REDE_PV ]] || [[ ! -v REDE_TOKEN ]]; then
+  echo "You need to define the environment variables REDE_PV AND REDE_TOKEN to continue"
+  exit 1
+fi
+
+./vendor/bin/phpcs --ignore=vendor --standard=PSR12 src test
+./vendor/bin/phpstan
+./vendor/bin/phpcpd src tests\n
+./vendor/bin/phpunit --testdox --colors='always' test

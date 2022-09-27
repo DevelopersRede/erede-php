@@ -1,7 +1,7 @@
-FROM php:7.2-cli
+FROM php:8.1-cli
 LABEL maintainer="neto.joaobatista@gmail.com"
 
-RUN apt -y update && apt -y install zlib1g-dev zip
+RUN apt -y update && apt -y install libzip-dev
 RUN docker-php-ext-install zip
 
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"

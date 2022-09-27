@@ -203,11 +203,14 @@ class eRedeTest extends TestCase
         $transaction->addUrl('https://redirecturl.com/3ds/failure', Url::THREE_D_SECURE_FAILURE);
 
         $transaction = $this->createERede()->create($transaction);
+        $returnCode = $transaction->getReturnCode();
 
-        $this->assertEquals('220', $transaction->getReturnCode());
+        $this->assertContains($returnCode, ['220', '201']);
         $this->assertNotEmpty($transaction->getThreeDSecure()->getUrl());
 
-        printf("\tURL de autenticação: %s\n", $transaction->getThreeDSecure()->getUrl());
+        if ($returnCode === '220') {
+            printf("\tURL de autenticação: %s\n", $transaction->getThreeDSecure()->getUrl());
+        }
     }
 
     public function testShouldCaptureATransaction(): void

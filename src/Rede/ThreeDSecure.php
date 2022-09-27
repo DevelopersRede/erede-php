@@ -21,24 +21,9 @@ class ThreeDSecure implements RedeSerializable
     private ?string $eci = null;
 
     /**
-     * @var bool
-     */
-    private bool $embedded = true;
-
-    /**
-     * @var string
-     */
-    private string $onFailure = self::DECLINE_ON_FAILURE;
-
-    /**
      * @var string|null
      */
     private ?string $url = null;
-
-    /**
-     * @var string
-     */
-    private string $userAgent;
 
     /**
      * @var string|null
@@ -46,9 +31,9 @@ class ThreeDSecure implements RedeSerializable
     private ?string $xid = null;
 
     /**
-     * @var string
+     * @var int
      */
-    private string $threeDIndicator = '1';
+    private int $threeDIndicator = 2;
 
     /**
      * @var string|null
@@ -57,34 +42,54 @@ class ThreeDSecure implements RedeSerializable
 
     /**
      * ThreeDSecure constructor.
+     *
+     * @param bool        $embedded
+     * @param string      $onFailure
+     * @param string|null $userAgent
      */
-    public function __construct()
-    {
-        $userAgent = eRede::USER_AGENT;
+    public function __construct(
+        private bool $embedded = true,
+        private string $onFailure = self::DECLINE_ON_FAILURE,
+        private ?string $userAgent = null
+    ) {
+        if ($this->userAgent === null) {
+            $userAgent = eRede::USER_AGENT;
 
-        if (isset($_SERVER['HTTP_USER_AGENT'])) {
-            $userAgent = $_SERVER['HTTP_USER_AGENT'];
+            if (isset($_SERVER['HTTP_USER_AGENT'])) {
+                $userAgent = $_SERVER['HTTP_USER_AGENT'];
+            }
+
+            $this->userAgent = $userAgent;
         }
-
-        $this->setUserAgent($userAgent);
     }
 
     /**
-     * @return string
+     * @return int
      */
-    public function getThreeDIndicator(): string
+    public function getThreeDIndicator(): int
     {
         return $this->threeDIndicator;
     }
 
     /**
-     * @param string $threeDIndicator
+     * @param int $threeDIndicator
      *
      * @return $this
      */
-    public function setThreeDIndicator(string $threeDIndicator): static
+    public function setThreeDIndicator(int $threeDIndicator): static
     {
+        /**
+         * Support for 3DS 1 will be discontinued.
+         */
+        if ($threeDIndicator < 2) {
+            trigger_error(
+                'Effective 15 October 2022, support for 3DS 1 and all related technology is discontinued.',
+                time() > strtotime('2022-10-15') ? E_USER_ERROR : E_USER_DEPRECATED
+            );
+        }
+
         $this->threeDIndicator = $threeDIndicator;
+
         return $this;
     }
 
@@ -184,9 +189,9 @@ class ThreeDSecure implements RedeSerializable
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getUserAgent(): string
+    public function getUserAgent(): ?string
     {
         return $this->userAgent;
     }

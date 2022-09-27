@@ -911,7 +911,7 @@ class Transaction implements RedeSerializable, RedeUnserializable
      * @param string $onFailure
      * @param bool   $embed
      * @param string $directoryServerTransactionId
-     * @param string $threeDIndicator
+     * @param int    $threeDIndicator
      *
      * @return $this
      */
@@ -919,11 +919,9 @@ class Transaction implements RedeSerializable, RedeUnserializable
         string $onFailure = ThreeDSecure::DECLINE_ON_FAILURE,
         bool $embed = true,
         string $directoryServerTransactionId = '',
-        string $threeDIndicator = '1'
+        int $threeDIndicator = 2
     ): static {
-        $threeDSecure = new ThreeDSecure();
-        $threeDSecure->setOnFailure($onFailure);
-        $threeDSecure->setEmbedded($embed);
+        $threeDSecure = new ThreeDSecure($embed, $onFailure);
         $threeDSecure->setThreeDIndicator($threeDIndicator);
         $threeDSecure->setDirectoryServerTransactionId($directoryServerTransactionId);
 

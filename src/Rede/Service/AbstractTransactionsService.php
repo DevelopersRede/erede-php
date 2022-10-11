@@ -108,7 +108,8 @@ abstract class AbstractTransactionsService extends AbstractService
             throw new RedeException(
                 $this->transaction->getReturnMessage() ?? 'Error on getting the content from the API',
                 (int)$this->transaction->getReturnCode(),
-                $previous
+                $previous,
+                $this->transaction
             );
         }
 

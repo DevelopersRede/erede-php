@@ -2,25 +2,26 @@
 
 namespace Rede\Exception;
 
+use Rede\Transaction;
 use RuntimeException;
 use Throwable;
 
 class RedeException extends RuntimeException
 {
-    private ?string $response = null;
+    private ?Transaction $transaction = null;
 
     public function __construct(
         string $message = "",
         int $code = 0,
         ?Throwable $previous = null,
-        ?string $response = null
+        ?Transaction $transaction = null
     ) {
         parent::__construct($message, $code, $previous);
-        $this->response = $response;
+        $this->transaction = $transaction;
     }
 
-    public function getResponse(): ?string
+    public function getTransaction(): ?Transaction
     {
-        return $this->response;
+        return $this->transaction;
     }
 }

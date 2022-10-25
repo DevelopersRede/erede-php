@@ -198,7 +198,19 @@ class eRedeTest extends TestCase
             'John Snow'
         );
 
-        $transaction->threeDSecure();
+        $transaction->threeDSecure(
+            new Device(
+                ColorDepth: 1,
+                DeviceType3ds: 'BROWSER',
+                JavaEnabled: false,
+                Language: 'BR',
+                ScreenHeight: 500,
+                ScreenWidth: 500,
+                TimeZoneOffset: 3
+            ),
+            ThreeDSecure::DECLINE_ON_FAILURE
+        );
+
         $transaction->addUrl('https://redirecturl.com/3ds/success', Url::THREE_D_SECURE_SUCCESS);
         $transaction->addUrl('https://redirecturl.com/3ds/failure', Url::THREE_D_SECURE_FAILURE);
 
@@ -206,9 +218,10 @@ class eRedeTest extends TestCase
         $returnCode = $transaction->getReturnCode();
 
         $this->assertContains($returnCode, ['220', '201']);
-        $this->assertNotEmpty($transaction->getThreeDSecure()->getUrl());
 
         if ($returnCode === '220') {
+            $this->assertNotEmpty($transaction->getThreeDSecure()->getUrl());
+
             printf("\tURL de autenticação: %s\n", $transaction->getThreeDSecure()->getUrl());
         }
     }

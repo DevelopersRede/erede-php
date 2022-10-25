@@ -8,16 +8,16 @@ class Device implements RedeSerializable
     use SerializeTrait;
 
     /**
-     * @param string|null $ColorDepth
-     * @param string|null $DeviceType3ds
-     * @param bool|null   $JavaEnabled
-     * @param string      $Language
-     * @param int|null    $ScreenHeight
-     * @param int|null    $ScreenWidth
-     * @param int|null    $TimeZoneOffset
+     * @param string|int|null $ColorDepth
+     * @param string|null     $DeviceType3ds
+     * @param bool|null       $JavaEnabled
+     * @param string          $Language
+     * @param int|null        $ScreenHeight
+     * @param int|null        $ScreenWidth
+     * @param int|null        $TimeZoneOffset
      */
     public function __construct(
-        private ?string $ColorDepth = null,
+        private string|int|null $ColorDepth = null,
         private ?string $DeviceType3ds = null,
         private ?bool $JavaEnabled = null,
         private string $Language = 'BR',

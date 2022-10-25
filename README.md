@@ -6,10 +6,7 @@ SDK de integração eRede
 
 ## Dependências
 
-* PHP >= 7.2
-
-**Atenção:** o PHP 7.2 tem atualizações de segurança apenas até 30 de Novembro de 2020. Por motivos de segurança, recomendamos que atualize a versão
-seu PHP para a versão mais recente disponível. Veja mais sobre as versões suportadas em [Suportted Versions](https://www.php.net/supported-versions.php).
+* PHP >= 8.1
 
 ## Instalando o SDK
 
@@ -340,7 +337,17 @@ $transaction = (new Transaction(25, 'pedido' . time()))->debitCard(
 );
 
 // Configura o 3dSecure para autenticação
-$transaction->threeDSecure(ThreeDSecure::DECLINE_ON_FAILURE);
+$transaction->threeDSecure(
+    new Device(
+        ColorDepth: 1,
+        DeviceType3ds: 'BROWSER',
+        JavaEnabled: false,
+        Language: 'BR',
+        ScreenHeight: 500,
+        ScreenWidth: 500,
+        TimeZoneOffset: 3
+    )
+);
 $transaction->addUrl('https://redirecturl.com/3ds/success', Url::THREE_D_SECURE_SUCCESS);
 $transaction->addUrl('https://redirecturl.com/3ds/failure', Url::THREE_D_SECURE_FAILURE);
 

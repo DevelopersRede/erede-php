@@ -10,6 +10,9 @@ class ThreeDSecure implements RedeSerializable
     public const CONTINUE_ON_FAILURE = 'continue';
     public const DECLINE_ON_FAILURE = 'decline';
 
+    public const MPI_REDE = 'mpi_rede';
+    public const MPI_THIRD_PARTY = 'mpi_third_party';
+
     /**
      * @var string|null
      */
@@ -41,26 +44,73 @@ class ThreeDSecure implements RedeSerializable
     private ?string $DirectoryServerTransactionId = null;
 
     /**
+     * @var string
+     */
+    private string $userAgent;
+
+    /**
+     * @var bool
+     */
+    private bool $embedded;
+
+    /**
+     * @var string|null
+     */
+    private ?string $returnCode = null;
+
+    /**
+     * @var string?null
+     */
+    private ?string $returnMessage = null;
+
+    /**
      * ThreeDSecure constructor.
      *
-     * @param bool        $embedded
-     * @param string      $onFailure
-     * @param string|null $userAgent
+     * @param Device|null $Device    User device data.
+     * @param string      $onFailure What to do in case of failure.
+     * @param string      $mpi       The MPI is from Rede or third party.
+     * @param string|null $userAgent The user' user-agent.
      */
     public function __construct(
-        private bool $embedded = true,
+        private readonly ?Device $Device = null,
         private string $onFailure = self::DECLINE_ON_FAILURE,
-        private ?string $userAgent = null
+        string $mpi = ThreeDSecure::MPI_REDE,
+        string $userAgent = null
     ) {
-        if ($this->userAgent === null) {
+        if ($userAgent === null) {
             $userAgent = eRede::USER_AGENT;
 
             if (isset($_SERVER['HTTP_USER_AGENT'])) {
                 $userAgent = $_SERVER['HTTP_USER_AGENT'];
             }
-
-            $this->userAgent = $userAgent;
         }
+
+        $this->embedded = $mpi === ThreeDSecure::MPI_REDE;
+        $this->userAgent = $userAgent;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getReturnCode(): ?string
+    {
+        return $this->returnCode;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getReturnMessage(): ?string
+    {
+        return $this->returnMessage;
+    }
+
+    /**
+     * @return Device
+     */
+    public function getDevice(): Device
+    {
+        return $this->Device;
     }
 
     /**

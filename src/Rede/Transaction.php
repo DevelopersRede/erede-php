@@ -908,20 +908,24 @@ class Transaction implements RedeSerializable, RedeUnserializable
     }
 
     /**
-     * @param string $onFailure
-     * @param bool   $embed
-     * @param string $directoryServerTransactionId
-     * @param int    $threeDIndicator
+     * @param Device      $device
+     * @param string      $onFailure
+     * @param string      $mpi
+     * @param string      $directoryServerTransactionId
+     * @param string|null $userAgent
+     * @param int         $threeDIndicator
      *
      * @return $this
      */
     public function threeDSecure(
+        Device $device,
         string $onFailure = ThreeDSecure::DECLINE_ON_FAILURE,
-        bool $embed = true,
+        string $mpi = ThreeDSecure::MPI_REDE,
         string $directoryServerTransactionId = '',
+        ?string $userAgent = null,
         int $threeDIndicator = 2
     ): static {
-        $threeDSecure = new ThreeDSecure($embed, $onFailure);
+        $threeDSecure = new ThreeDSecure($device, $onFailure, $mpi, $userAgent);
         $threeDSecure->setThreeDIndicator($threeDIndicator);
         $threeDSecure->setDirectoryServerTransactionId($directoryServerTransactionId);
 

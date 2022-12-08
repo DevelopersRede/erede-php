@@ -4,7 +4,15 @@ SDK de integração eRede
 
 # Funcionalidades
 
-Esse SDK possui as funcionalidades de autorização, captura, consulta, cancelamento, 3DS2, Zero dollar, iata e MCC dinâmico.
+Este SDK possui as seguintes funcionalidades:
+* Autorização
+* Captura
+* Consultas
+* Cancelamento
+* 3DS2
+* Zero dollar
+* iata
+* MCC dinâmico.
 
 # Instalação
 

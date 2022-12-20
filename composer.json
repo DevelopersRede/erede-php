@@ -9,7 +9,7 @@
     "php": "^8.1",
     "ext-curl": "*",
     "ext-json": "*",
-    "psr/log": "^3.0.0",
+    "psr/log": "*",
     "monolog/monolog": "*"
   },
   "require-dev": {

@@ -7,6 +7,8 @@ class ThreeDSecure implements RedeSerializable
     use CreateTrait;
     use SerializeTrait;
 
+    public const DATA_ONLY = 'DATA_ONLY';
+
     public const CONTINUE_ON_FAILURE = 'continue';
     public const DECLINE_ON_FAILURE = 'decline';
 
@@ -59,9 +61,14 @@ class ThreeDSecure implements RedeSerializable
     private ?string $returnCode = null;
 
     /**
-     * @var string?null
+     * @var string|null
      */
     private ?string $returnMessage = null;
+
+    /**
+     * @var string|null
+     */
+    private ?string $challengePreference = null;
 
     /**
      * ThreeDSecure constructor.
@@ -292,6 +299,24 @@ class ThreeDSecure implements RedeSerializable
     public function setEmbedded(bool $embedded): static
     {
         $this->embedded = $embedded;
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getChallengePreference(): ?string
+    {
+        return $this->challengePreference;
+    }
+
+    /**
+     * @param string|null $challengePreference
+     * @return ThreeDSecure
+     */
+    public function setChallengePreference(?string $challengePreference): ThreeDSecure
+    {
+        $this->challengePreference = $challengePreference;
         return $this;
     }
 }

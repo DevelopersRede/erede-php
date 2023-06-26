@@ -4,6 +4,8 @@
   "description": "e.Rede integration SDK",
   "license": "MIT",
   "type": "library",
+  "minimum-stability": "dev",
+  "prefer-stable" : true
   "require": {
     "php": "^8.1",
     "ext-curl": "*",

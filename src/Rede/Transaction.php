@@ -382,7 +382,7 @@ class Transaction implements RedeSerializable, RedeUnserializable
                 'additional' => $this->additional
             ],
             function ($value) {
-                return !is_null($value);
+                return !empty($value);
             }
         );
     }
